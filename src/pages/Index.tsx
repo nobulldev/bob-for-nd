@@ -4,6 +4,7 @@ import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
 import logoImg from "@/assets/logo.png";
 import bobQuoteImg from "@/assets/bob-quote.jpg";
+import bobIssuesImg from "@/assets/bob-issues.png";
 
 const STYLES = `
 :root{
@@ -200,9 +201,11 @@ section{padding:96px 36px;position:relative}
 }
 .quote-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .quote-card{
+  position:relative;
   background:var(--navy);color:var(--cream);
   padding:42px 38px;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
+  border-right:6px solid var(--gold);
 }
 .quote-card .qmark{
   font-family:'Playfair Display',serif;color:var(--gold);
@@ -216,6 +219,15 @@ section{padding:96px 36px;position:relative}
   display:block;margin-top:22px;font-style:normal;
   font-family:'Oswald',sans-serif;text-transform:uppercase;
   font-size:12px;letter-spacing:.22em;color:var(--gold);
+}
+/* Reusable Bob quote (blue plate + yellow right line) */
+.quote-blue{
+  background:var(--navy);color:var(--cream);
+  border-right:6px solid var(--gold);
+  padding:28px 30px;margin-top:28px;
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.35;
+  box-shadow:0 20px 40px -24px rgba(10,34,64,.4);
 }
 .bio h3{
   font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
@@ -286,6 +298,25 @@ section{padding:96px 36px;position:relative}
 
 /* ---------- Issues ---------- */
 #issues{background:var(--cream-3)}
+.issues-hero{
+  position:relative;width:100%;aspect-ratio:21/9;max-height:520px;
+  overflow:hidden;display:flex;align-items:flex-end;
+  box-shadow:0 30px 60px -30px rgba(10,34,64,.35);
+}
+.issues-hero img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;
+}
+.issues-hero-overlay{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(180deg,rgba(3,31,81,.45) 0%,rgba(3,31,81,.7) 100%);
+}
+.issues-hero-content{
+  position:relative;z-index:3;padding:42px 48px;width:100%;
+}
+.issues-hero-eyebrow{color:var(--gold)!important}
+.issues-hero-eyebrow .dash{background:var(--gold)!important}
+.issues-hero-title{color:var(--cream)!important;margin:14px 0 0!important}
+.issues-hero-title em{color:var(--gold)!important}
 .issues-grid{
   display:grid;grid-template-columns:repeat(2,1fr);gap:48px 56px;margin-top:54px;
 }
@@ -360,10 +391,11 @@ section{padding:96px 36px;position:relative}
 }
 .field input:focus{border-color:var(--red);background:#fff}
 .checks{
-  margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 22px;
+  margin-top:24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 22px;
 }
-.check{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink)}
-.check input{accent-color:var(--red);width:16px;height:16px}
+.check{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink);line-height:1.3;min-width:0}
+.check input{accent-color:var(--red);width:16px;height:16px;flex:0 0 16px;margin:0}
+.check span{flex:1;min-width:0}
 .action-form .submit-row{margin-top:28px;display:flex;justify-content:flex-end}
 
 /* ---------- Media ---------- */
@@ -477,13 +509,14 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 /* ---------- Why I'm Running (Video) ---------- */
 #why{background:var(--cream-2)}
 .why-grid{
-  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:54px;align-items:center;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:54px;align-items:start;
 }
 .why-text p{margin-bottom:18px;color:#3a3a3a;font-size:17px;line-height:1.75}
 .why-text .signoff{
   margin-top:22px;font-family:'Playfair Display',serif;font-style:italic;
   color:var(--navy);font-size:22px;line-height:1.3;
 }
+.why-video-wrap{position:relative;padding-top:160px}
 .video-frame{
   position:relative;aspect-ratio:16/9;background:var(--placeholder);
   border-top:6px solid var(--gold);
@@ -530,16 +563,16 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-content > .eyebrow{order:1;margin-top:-56px;padding-top:0;white-space:nowrap;font-size:11px;letter-spacing:.18em;flex-wrap:nowrap}
   .hero-content > .eyebrow .dash{width:18px;flex-shrink:0}
   .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
-  .hero-content > .tagline{order:3;margin:14px 0 0;width:100vw;max-width:100vw;padding:0 20px;display:block}
+  .hero-content > .tagline{order:3;margin:14px 0 0;width:100%;max-width:100%;padding:0 20px;display:block}
   .hero-content > .tagline::after{display:none}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:100vw;max-width:100vw;max-height:none;margin:18px 0 0;display:block;order:4;
+    height:auto;width:calc(100% - 40px);max-width:none;max-height:none;margin:18px 20px 0;display:block;order:4;
     z-index:4;
   }
   .hero-candidate::after{
-    content:"";position:absolute;left:50%;top:100%;width:100vw;height:10px;
-    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;transform:translateX(-50%);
+    content:"";position:absolute;left:0;right:0;top:100%;height:8px;
+    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;
   }
   .hero-candidate img{width:100%;height:auto;display:block}
   .hero-content > .lede{order:6;padding:0 20px;margin-top:20px}
@@ -550,7 +583,14 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .quote-stack{position:static}
-  .why-grid{grid-template-columns:1fr;gap:36px}
+  .why-grid{grid-template-columns:1fr;gap:24px}
+  .why-grid .why-text{display:contents}
+  .why-grid .why-text > .section-eyebrow{order:1}
+  .why-grid .why-text > h2{order:2}
+  .why-grid .why-text > div{order:4}
+  .why-video-wrap{order:3;padding-top:0}
+  .issues-hero{aspect-ratio:4/3;max-height:none}
+  .issues-hero-content{padding:24px 20px}
   .cards{grid-template-columns:repeat(2,1fr)}
   .issues-grid{grid-template-columns:1fr;gap:36px}
   .action-cards{grid-template-columns:repeat(2,1fr)}
@@ -866,11 +906,27 @@ const Index = () => {
       {/* NAV */}
       <header className="nav" id="home">
         <div className="wrap">
-          <a href="#home" className="brand" aria-label="Bob Heitkamp for Senate">
+          <a
+            href="#home"
+            className="brand"
+            aria-label="Bob Heitkamp for Senate"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             <img src={logoImg} alt="Bob Heitkamp for Senate" className="brand-logo" />
           </a>
           <nav id="menu" className="menu" aria-label="Primary">
-            <a href="#home">Home</a>
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              Home
+            </a>
             <a href="#about">About</a>
             <a href="#issues">Issues</a>
             <a href="#action">Take Action</a>
@@ -994,39 +1050,44 @@ const Index = () => {
       {/* WHY I'M RUNNING (video placeholder) */}
       <section id="why">
         <div className="container">
-          <span className="section-eyebrow fade-up">
-            <span className="dash" /> Why I'm Running
-          </span>
-          <h2 className="section-title fade-up delay-1">
-            For the Extraordinary People of <em>District 25</em>
-          </h2>
           <div className="why-grid">
-            <div className="why-text fade-up">
-              <p>
-                I care deeply about what happens here. I've heard from farmers facing rising costs and uncertainty. I've
-                talked with small business owners working every day to keep their doors open and create jobs. I've met
-                families who want their children to have every opportunity to succeed and stay here to build a life.
-              </p>
-              <p>
-                I'm running to help keep small towns strong, protect local schools, maintain roads, improve
-                infrastructure, and make sure District 25 has a strong voice.
-              </p>
-              <p>
-                I'll listen carefully, treat people with respect and focus on common-sense solutions that help our
-                communities thrive.
-              </p>
-              <p className="signoff">
-                For the extraordinary people of District 25, I'm here for you.
-                <br />— Your friend, Bob
-              </p>
-            </div>
-            <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
-              <span className="play-btn" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+            <div className="why-text">
+              <span className="section-eyebrow fade-up">
+                <span className="dash" /> Why I'm Running
               </span>
-              <span className="video-cap">Campaign Video — Coming Soon</span>
+              <h2 className="section-title fade-up delay-1" style={{ marginBottom: 32 }}>
+                For the Extraordinary People of <em>District 25</em>
+              </h2>
+              <div className="fade-up delay-2">
+                <p>
+                  I care deeply about what happens here. I've heard from farmers facing rising costs and uncertainty.
+                  I've talked with small business owners working every day to keep their doors open and create jobs.
+                  I've met families who want their children to have every opportunity to succeed and stay here to build
+                  a life.
+                </p>
+                <p>
+                  I'm running to help keep small towns strong, protect local schools, maintain roads, improve
+                  infrastructure, and make sure District 25 has a strong voice.
+                </p>
+                <p>
+                  I'll listen carefully, treat people with respect and focus on common-sense solutions that help our
+                  communities thrive.
+                </p>
+                <p className="quote-blue">
+                  For the extraordinary people of District 25, I'm here for you.
+                  <br />— Your friend, Bob
+                </p>
+              </div>
+            </div>
+            <div className="why-video-wrap">
+              <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
+                <span className="play-btn" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+                <span className="video-cap">Campaign Video — Coming Soon</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1064,12 +1125,18 @@ const Index = () => {
       {/* ISSUES */}
       <section id="issues">
         <div className="container">
-          <span className="section-eyebrow fade-up">
-            <span className="dash" /> Issues
-          </span>
-          <h2 className="section-title fade-up delay-1">
-            Community Leadership. <em>Responsible Government.</em>
-          </h2>
+          <div className="issues-hero fade-up">
+            <img src={bobIssuesImg} alt="Bob Heitkamp at Marketplace for Kids" />
+            <div className="issues-hero-overlay" />
+            <div className="issues-hero-content">
+              <span className="section-eyebrow issues-hero-eyebrow">
+                <span className="dash" /> Issues
+              </span>
+              <h2 className="section-title issues-hero-title">
+                Community Leadership. <em>Responsible Government.</em>
+              </h2>
+            </div>
+          </div>
           <div className="issues-grid">
             {ISSUES.map((it, i) => (
               <div key={it.t} className={`issue fade-up delay-${(i % 5) + 1}`}>
@@ -1133,7 +1200,7 @@ const Index = () => {
               {ACTIONS.map((a) => (
                 <label key={a.t} className="check">
                   <input type="checkbox" />
-                  {a.t}
+                  <span>{a.t}</span>
                 </label>
               ))}
             </div>

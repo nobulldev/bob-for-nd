@@ -520,16 +520,25 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .nav .wrap{padding:12px 20px}
-  .hero{min-height:auto;padding-bottom:0;display:flex;flex-direction:column}
-  .hero-content{padding:48px 20px 24px;order:1}
-  .hero h1{font-size:clamp(40px,9vw,64px)}
+  .hero{min-height:auto;padding-bottom:0;display:flex;flex-direction:column;position:relative}
+  .hero-bg{inset:-20px}
+  .hero-content{padding:48px 20px 0;display:contents}
+  .hero-content > .eyebrow,
+  .hero-content > h1,
+  .hero-content > .tagline{padding-left:20px;padding-right:20px}
+  .hero-content > .eyebrow{order:1;margin-top:48px}
+  .hero-content > h1{order:2}
+  .hero-content > .tagline{order:3;margin-bottom:18px}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:90vw;max-height:none;margin:0 auto;display:block;order:2;
+    height:auto;width:90vw;max-height:none;margin:0 auto;display:block;order:4;
     padding-bottom:14vw;
   }
   .hero-candidate img{width:100%;height:auto}
-  .hero-overlay{position:absolute;left:0;right:0;bottom:0;width:100vw;margin:0;z-index:5}
+  .hero-content > .lede{order:5;padding:0 20px;margin-top:24px}
+  .hero-content > .cta-row{order:6;padding:0 20px;margin-bottom:32px}
+  .hero-overlay{position:relative;order:7;left:0;right:0;width:100vw;margin-top:-12vw;display:block}
+  .hero h1{font-size:clamp(40px,9vw,64px)}
   .cta-row{flex-wrap:nowrap}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}

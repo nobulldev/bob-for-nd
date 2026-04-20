@@ -469,11 +469,8 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   max-width:1280px;margin:0 auto;
   display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:46px;
 }
-.foot-brand .b-mark{
-  width:46px;height:46px;border-radius:50%;background:var(--red);
-  display:inline-flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-style:italic;font-weight:900;
-  font-size:30px;color:var(--cream);margin-bottom:18px;
+.foot-brand .foot-logo{
+  height:72px;width:auto;display:block;margin-bottom:18px;
 }
 .foot-brand h4{
   font-family:'Playfair Display',serif;font-weight:800;font-size:24px;color:var(--cream);
@@ -1021,7 +1018,7 @@ const Index = () => {
       <footer>
         <div className="foot-grid">
           <div className="foot-brand">
-            <span className="b-mark">B</span>
+            <img src={logoImg} alt="Bob Heitkamp for Senate" className="foot-logo" />
             <h4>Bob Heitkamp</h4>
             <p>Proven Experience · Local Leadership · Forward Together</p>
           </div>

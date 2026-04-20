@@ -3,6 +3,7 @@ import heroBg from "@/assets/hero-bg.png";
 import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
 import logoImg from "@/assets/logo.png";
+import bobQuoteImg from "@/assets/bob-quote.jpg";
 
 const STYLES = `
 :root{

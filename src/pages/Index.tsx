@@ -675,6 +675,9 @@ const MEDIA = [
 ];
 
 const Index = () => {
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  const candidateRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Nav shadow on scroll
     const nav = document.querySelector(".nav");

@@ -117,8 +117,8 @@ a{color:inherit;text-decoration:none}
 }
 .hero-content{
   position:relative;z-index:4;
-  max-width:1280px;margin:0 auto;
-  padding:80px 28px 18vh;
+  max-width:1440px;margin:0 auto;
+  padding:80px 36px 18vh;
   pointer-events:none;
 }
 .hero-content > *{pointer-events:auto}

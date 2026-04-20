@@ -520,15 +520,16 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .nav .wrap{padding:12px 20px}
-  .hero{min-height:auto;padding-bottom:0}
-  .hero-content{padding:48px 20px 40px}
+  .hero{min-height:auto;padding-bottom:0;display:flex;flex-direction:column}
+  .hero-content{padding:48px 20px 24px;order:1}
   .hero h1{font-size:clamp(40px,9vw,64px)}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:90vw;max-height:none;margin:20px auto 0;display:block;
+    height:auto;width:90vw;max-height:none;margin:0 auto;display:block;order:2;
+    padding-bottom:14vw;
   }
   .hero-candidate img{width:100%;height:auto}
-  .hero-overlay{position:relative;margin-top:-2px}
+  .hero-overlay{position:absolute;left:0;right:0;bottom:0;width:100vw;margin:0;z-index:5}
   .cta-row{flex-wrap:nowrap}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}

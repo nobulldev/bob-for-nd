@@ -530,7 +530,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-content > .eyebrow{order:1;margin-top:-56px;padding-top:0;white-space:nowrap;font-size:11px;letter-spacing:.18em;flex-wrap:nowrap}
   .hero-content > .eyebrow .dash{width:18px;flex-shrink:0}
   .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
-  .hero-content > .tagline{order:3;margin:0 20px;padding-bottom:0}
+  .hero-content > .tagline{order:5;margin:0;width:100vw;max-width:100vw;padding:0;display:block}
   .hero-content > .tagline::after{display:none}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
@@ -538,8 +538,8 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
     z-index:4;
   }
   .hero-candidate::after{
-    content:"";position:absolute;left:0;right:0;bottom:14%;height:10px;
-    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;
+    content:"";position:absolute;left:50%;top:100%;width:100vw;height:10px;
+    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;transform:translateX(-50%);
   }
   .hero-candidate img{width:100%;height:auto;display:block}
   .hero-content > .lede{order:5;padding:0 20px;margin-top:20px}

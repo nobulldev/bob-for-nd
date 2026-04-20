@@ -479,13 +479,14 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 /* ---------- Why I'm Running (Video) ---------- */
 #why{background:var(--cream-2)}
 .why-grid{
-  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:54px;align-items:center;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:54px;align-items:start;
 }
 .why-text p{margin-bottom:18px;color:#3a3a3a;font-size:17px;line-height:1.75}
 .why-text .signoff{
   margin-top:22px;font-family:'Playfair Display',serif;font-style:italic;
   color:var(--navy);font-size:22px;line-height:1.3;
 }
+.why-video-wrap{position:relative;padding-top:160px}
 .video-frame{
   position:relative;aspect-ratio:16/9;background:var(--placeholder);
   border-top:6px solid var(--gold);

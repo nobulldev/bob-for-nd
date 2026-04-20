@@ -171,8 +171,8 @@ a{color:inherit;text-decoration:none}
 .btn:hover .arrow{transform:translateX(4px)}
 
 /* ---------- Section base ---------- */
-section{padding:96px 28px;position:relative}
-.container{max-width:1280px;margin:0 auto}
+section{padding:96px 36px;position:relative}
+.container{max-width:1440px;margin:0 auto}
 .section-eyebrow{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
   color:var(--red);font-size:12.5px;letter-spacing:.3em;

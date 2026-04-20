@@ -19,6 +19,8 @@ const STYLES = `
   --placeholder-ink:#7a7a7a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{margin:0;padding:0;background:var(--navy)}
+#root{margin:0;padding:0;min-height:100vh;background:var(--cream)}
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter',system-ui,sans-serif;

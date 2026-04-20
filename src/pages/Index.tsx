@@ -1135,7 +1135,7 @@ const Index = () => {
               {ACTIONS.map((a) => (
                 <label key={a.t} className="check">
                   <input type="checkbox" />
-                  {a.t}
+                  <span>{a.t}</span>
                 </label>
               ))}
             </div>

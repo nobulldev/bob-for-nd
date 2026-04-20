@@ -138,9 +138,10 @@ a{color:inherit;text-decoration:none}
   margin:22px 0 18px;
   text-shadow:0 4px 30px rgba(0,0,0,.4);
 }
+.hero h1 .name{display:block;white-space:nowrap}
 .hero h1 em{
   display:block;font-style:italic;font-weight:800;
-  color:var(--gold);margin-top:6px;
+  color:var(--gold);margin-top:6px;white-space:nowrap;
 }
 .tagline{
   font-family:'Oswald',sans-serif;text-transform:uppercase;

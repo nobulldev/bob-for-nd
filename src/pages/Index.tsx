@@ -361,10 +361,11 @@ section{padding:96px 36px;position:relative}
 }
 .field input:focus{border-color:var(--red);background:#fff}
 .checks{
-  margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 22px;
+  margin-top:24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 22px;
 }
-.check{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink)}
-.check input{accent-color:var(--red);width:16px;height:16px}
+.check{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink);line-height:1.3;min-width:0}
+.check input{accent-color:var(--red);width:16px;height:16px;flex:0 0 16px;margin:0}
+.check span{flex:1;min-width:0}
 .action-form .submit-row{margin-top:28px;display:flex;justify-content:flex-end}
 
 /* ---------- Media ---------- */

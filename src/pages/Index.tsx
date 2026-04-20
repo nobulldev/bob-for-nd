@@ -727,8 +727,24 @@ const Index = () => {
       requestAnimationFrame(() => el.classList.add("in"));
     });
 
+    // Hero parallax on mouse move
+    const onMouseMove = (e: MouseEvent) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const x = (e.clientX / w - 0.5) * 2; // -1 .. 1
+      const y = (e.clientY / h - 0.5) * 2;
+      if (heroBgRef.current) {
+        heroBgRef.current.style.transform = `translate3d(${-x * 18}px, ${-y * 14}px, 0) scale(1.04)`;
+      }
+      if (candidateRef.current) {
+        candidateRef.current.style.transform = `translate3d(${x * 10}px, ${y * 6}px, 0)`;
+      }
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMouseMove);
       ham?.removeEventListener("click", onHam);
       menu?.removeEventListener("click", closeMenu);
       amounts.forEach((b) => b.removeEventListener("click", onAmount));
@@ -760,11 +776,7 @@ const Index = () => {
       <header className="nav" id="home">
         <div className="wrap">
           <a href="#home" className="brand" aria-label="Bob Heitkamp for Senate">
-            <span className="b-mark">B</span>
-            <span className="b-text">
-              <span className="b-name">Bob Heitkamp</span>
-              <span className="b-sub">For Senate · Dist 25</span>
-            </span>
+            <img src={logoImg} alt="Bob Heitkamp for Senate" className="brand-logo" />
           </a>
           <nav id="menu" className="menu" aria-label="Primary">
             <a href="#home">Home</a>

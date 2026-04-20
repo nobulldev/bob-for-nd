@@ -201,9 +201,11 @@ section{padding:96px 36px;position:relative}
 }
 .quote-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .quote-card{
+  position:relative;
   background:var(--navy);color:var(--cream);
   padding:42px 38px;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
+  border-right:6px solid var(--gold);
 }
 .quote-card .qmark{
   font-family:'Playfair Display',serif;color:var(--gold);
@@ -217,6 +219,15 @@ section{padding:96px 36px;position:relative}
   display:block;margin-top:22px;font-style:normal;
   font-family:'Oswald',sans-serif;text-transform:uppercase;
   font-size:12px;letter-spacing:.22em;color:var(--gold);
+}
+/* Reusable Bob quote (blue plate + yellow right line) */
+.quote-blue{
+  background:var(--navy);color:var(--cream);
+  border-right:6px solid var(--gold);
+  padding:28px 30px;margin-top:28px;
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.35;
+  box-shadow:0 20px 40px -24px rgba(10,34,64,.4);
 }
 .bio h3{
   font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);

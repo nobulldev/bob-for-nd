@@ -298,6 +298,25 @@ section{padding:96px 36px;position:relative}
 
 /* ---------- Issues ---------- */
 #issues{background:var(--cream-3)}
+.issues-hero{
+  position:relative;width:100%;aspect-ratio:21/9;max-height:520px;
+  overflow:hidden;display:flex;align-items:flex-end;
+  box-shadow:0 30px 60px -30px rgba(10,34,64,.35);
+}
+.issues-hero img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;
+}
+.issues-hero-overlay{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(180deg,rgba(3,31,81,.45) 0%,rgba(3,31,81,.7) 100%);
+}
+.issues-hero-content{
+  position:relative;z-index:3;padding:42px 48px;width:100%;
+}
+.issues-hero-eyebrow{color:var(--gold)!important}
+.issues-hero-eyebrow .dash{background:var(--gold)!important}
+.issues-hero-title{color:var(--cream)!important;margin:14px 0 0!important}
+.issues-hero-title em{color:var(--gold)!important}
 .issues-grid{
   display:grid;grid-template-columns:repeat(2,1fr);gap:48px 56px;margin-top:54px;
 }

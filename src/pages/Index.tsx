@@ -583,7 +583,14 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .quote-stack{position:static}
-  .why-grid{grid-template-columns:1fr;gap:36px}
+  .why-grid{grid-template-columns:1fr;gap:24px}
+  .why-grid .why-text{display:contents}
+  .why-grid .why-text > .section-eyebrow{order:1}
+  .why-grid .why-text > h2{order:2}
+  .why-grid .why-text > div{order:4}
+  .why-video-wrap{order:3;padding-top:0}
+  .issues-hero{aspect-ratio:4/3;max-height:none}
+  .issues-hero-content{padding:24px 20px}
   .cards{grid-template-columns:repeat(2,1fr)}
   .issues-grid{grid-template-columns:1fr;gap:36px}
   .action-cards{grid-template-columns:repeat(2,1fr)}

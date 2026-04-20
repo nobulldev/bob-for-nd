@@ -885,6 +885,44 @@ const Index = () => {
         </div>
       </section>
 
+      {/* WHY I'M RUNNING (video placeholder) */}
+      <section id="why">
+        <div className="container">
+          <span className="section-eyebrow fade-up"><span className="dash" /> Why I'm Running</span>
+          <h2 className="section-title fade-up delay-1">
+            For the Extraordinary People of <em>District 25</em>
+          </h2>
+          <div className="why-grid">
+            <div className="why-text fade-up">
+              <p>
+                I care deeply about what happens here. I've heard from farmers facing rising
+                costs and uncertainty. I've talked with small business owners working every day
+                to keep their doors open and create jobs. I've met families who want their
+                children to have every opportunity to succeed and stay here to build a life.
+              </p>
+              <p>
+                I'm running to help keep small towns strong, protect local schools, maintain
+                roads, improve infrastructure, and make sure District 25 has a strong voice.
+              </p>
+              <p>
+                I'll listen carefully, treat people with respect and focus on common-sense
+                solutions that help our communities thrive.
+              </p>
+              <p className="signoff">
+                For the extraordinary people of District 25, I'm here for you.
+                <br />— Your friend, Bob
+              </p>
+            </div>
+            <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
+              <span className="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span className="video-cap">Campaign Video — Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PRIORITIES */}
       <section id="priorities">
         <div className="container">

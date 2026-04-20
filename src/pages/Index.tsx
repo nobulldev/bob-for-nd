@@ -520,25 +520,24 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .nav .wrap{padding:12px 20px}
-  .hero{min-height:auto;padding-bottom:0;display:flex;flex-direction:column;position:relative}
+  .hero{min-height:auto;padding-bottom:0;display:flex;flex-direction:column;position:relative;overflow:hidden}
   .hero-bg{inset:-20px}
-  .hero-content{padding:48px 20px 0;display:contents}
+  .hero-content{padding:0;display:contents}
   .hero-content > *{position:relative;z-index:4}
   .hero-content > .eyebrow,
-  .hero-content > h1,
-  .hero-content > .tagline{padding-left:20px;padding-right:20px}
-  .hero-content > .eyebrow{order:1;margin-top:48px}
-  .hero-content > h1{order:2}
-  .hero-content > .tagline{order:3;margin-bottom:18px}
+  .hero-content > h1{padding-left:20px;padding-right:20px}
+  .hero-content > .eyebrow{order:1;margin-top:14px}
+  .hero-content > h1{order:2;margin-top:10px;margin-bottom:0}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:90vw;max-height:none;margin:0 auto;display:block;order:4;
+    height:auto;width:90vw;max-height:none;margin:0 auto;display:block;order:3;
     z-index:4;
   }
   .hero-candidate img{width:100%;height:auto}
-  .hero-content > .lede{order:5;padding:0 20px;margin-top:24px}
+  .hero-content > .tagline{order:4;align-self:center;margin:-8px auto 0;padding:0 20px}
+  .hero-content > .lede{order:5;padding:0 20px;margin-top:20px}
   .hero-content > .cta-row{order:6;padding:0 20px;margin:24px 20px 32px;display:flex}
-  .hero-overlay{position:relative;order:7;left:0;right:0;width:100vw;margin-top:-12vw;display:block;z-index:3}
+  .hero-overlay{position:relative;order:7;left:50%;right:auto;transform:translateX(-50%);width:100vw;max-width:100vw;margin-top:-8vw;display:block;z-index:3}
   .hero h1{font-size:clamp(40px,9vw,64px)}
   .cta-row{flex-wrap:nowrap}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
@@ -888,7 +887,7 @@ const Index = () => {
         <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
           <span className="eyebrow fade-up">
-            <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" />{" "}
+            <span className="dash" /> <Star className="star" /> North Dakota · Dist 25 <Star className="star" />{" "}
             <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">

@@ -205,7 +205,6 @@ section{padding:96px 36px;position:relative}
   background:var(--navy);color:var(--cream);
   padding:42px 38px;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
-  border-right:6px solid var(--gold);
 }
 .quote-card .qmark{
   font-family:'Playfair Display',serif;color:var(--gold);
@@ -299,7 +298,7 @@ section{padding:96px 36px;position:relative}
 /* ---------- Issues ---------- */
 #issues{background:var(--cream-3)}
 .issues-hero{
-  position:relative;width:100%;aspect-ratio:21/9;max-height:520px;
+  position:relative;width:70%;margin:0 auto;aspect-ratio:3/4;max-height:none;
   overflow:hidden;display:flex;align-items:flex-end;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.35);
 }

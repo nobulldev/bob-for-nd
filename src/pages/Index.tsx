@@ -540,8 +540,8 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
     z-index:4;
   }
   .hero-candidate::after{
-    content:"";position:absolute;left:50%;top:100%;width:100vw;height:10px;
-    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;transform:translateX(-50%);
+    content:"";position:absolute;left:20px;right:20px;top:100%;height:8px;
+    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;
   }
   .hero-candidate img{width:100%;height:auto;display:block}
   .hero-content > .lede{order:6;padding:0 20px;margin-top:20px}

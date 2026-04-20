@@ -390,32 +390,69 @@ section{padding:96px 36px;position:relative}
 }
 .field input:focus{border-color:var(--red);background:#fff}
 .checks{
-  margin-top:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(280px,1fr));
+  gap:12px 24px;
+  align-items:start;
 }
 .check{
-  position:relative;display:flex;align-items:center;gap:10px;
-  padding:14px 16px;background:#fff;
-  border:1px solid rgba(10,34,64,.18);border-radius:4px;
-  font-family:'Inter',sans-serif;font-size:14px;line-height:1.3;color:var(--ink);
-  cursor:pointer;transition:border-color .2s, background .2s, box-shadow .2s, transform .2s;
-  writing-mode:horizontal-tb;text-orientation:mixed;transform:none;white-space:normal;
+  position:relative;
+  display:grid;
+  grid-template-columns:18px minmax(0,1fr);
+  align-items:start;
+  column-gap:12px;
+  row-gap:0;
+  padding:8px 0;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.3;
+  color:var(--ink);
+  cursor:pointer;
+  writing-mode:horizontal-tb;
+  text-orientation:mixed;
+  transform:none;
+  white-space:normal;
   min-width:0;
 }
-.check:hover{border-color:var(--navy);box-shadow:0 6px 18px -10px rgba(10,34,64,.35);transform:translateY(-1px)}
+.check:hover{color:var(--navy)}
 .check input{
-  appearance:none;-webkit-appearance:none;
-  width:18px;height:18px;flex:0 0 18px;margin:0;
-  border:1.5px solid rgba(10,34,64,.35);border-radius:3px;background:#fff;
-  display:inline-flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:background .2s, border-color .2s;
+  appearance:none;
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  margin:2px 0 0;
+  border:1.5px solid rgba(10,34,64,.35);
+  border-radius:3px;
+  background:#fff;
+  display:block;
+  transition:background .2s,border-color .2s,box-shadow .2s;
 }
-.check input:checked{background:var(--red);border-color:var(--red)}
+.check input:checked{background:var(--red);border-color:var(--red);box-shadow:0 0 0 2px rgba(191,30,46,.12)}
 .check input:checked::after{
-  content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;
-  transform:rotate(45deg) translate(-1px,-1px);
+  content:"";
+  display:block;
+  width:5px;
+  height:9px;
+  margin:2px 0 0 5px;
+  border:solid #fff;
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg);
 }
-.check:has(input:checked){border-color:var(--red);background:#fff5f0}
-.check span{flex:1;min-width:0;writing-mode:horizontal-tb;transform:none;display:block}
+.check span{
+  display:block;
+  min-width:0;
+  max-width:22ch;
+  writing-mode:horizontal-tb;
+  text-orientation:mixed;
+  transform:none;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
 .action-form .submit-row{margin-top:28px;display:flex;justify-content:flex-end}
 
 /* ---------- Media ---------- */
@@ -635,7 +672,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .closing-band{padding:34px 28px}
   .action-form{padding:32px 24px}
   .form-grid{grid-template-columns:1fr}
-  .checks{grid-template-columns:1fr 1fr}
+  .checks{grid-template-columns:1fr 1fr;gap:10px 18px}
   .foot-bottom{padding-left:20px;padding-right:20px}
 }
 @media (max-width:640px){
@@ -647,6 +684,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .fact{border-right:0;border-bottom:1px solid rgba(10,34,64,.15)}
   .fact:last-child{border-bottom:0}
   .checks{grid-template-columns:1fr}
+  .check span{max-width:none}
   .quote-card blockquote{font-size:20px}
   .closing-band p{font-size:19px}
   #donate{padding:70px 22px}

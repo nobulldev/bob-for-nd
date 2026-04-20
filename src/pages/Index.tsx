@@ -536,11 +536,11 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-content > .tagline::after{display:none}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:100vw;max-width:100vw;max-height:none;margin:18px 0 0;display:block;order:4;
+    height:auto;width:calc(100% - 40px);max-width:none;max-height:none;margin:18px 20px 0;display:block;order:4;
     z-index:4;
   }
   .hero-candidate::after{
-    content:"";position:absolute;left:20px;right:20px;top:100%;height:8px;
+    content:"";position:absolute;left:0;right:0;top:100%;height:8px;
     background:var(--gold);opacity:.95;z-index:6;pointer-events:none;
   }
   .hero-candidate img{width:100%;height:auto;display:block}

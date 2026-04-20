@@ -773,6 +773,8 @@ const Index = () => {
     };
   }, []);
 
+
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />

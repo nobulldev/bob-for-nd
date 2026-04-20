@@ -192,10 +192,15 @@ section{padding:96px 36px;position:relative}
   display:grid;grid-template-columns:.85fr 1.4fr;gap:64px;margin-top:54px;
   align-items:start;
 }
+.quote-stack{position:sticky;top:120px;display:flex;flex-direction:column}
+.quote-stack .gold-bar{height:8px;background:var(--gold)}
+.quote-photo{
+  width:100%;aspect-ratio:1/1;overflow:hidden;display:block;background:var(--navy);
+}
+.quote-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .quote-card{
-  position:sticky;top:120px;
   background:var(--navy);color:var(--cream);
-  padding:46px 38px;border-top:4px solid var(--gold);
+  padding:42px 38px;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
 }
 .quote-card .qmark{

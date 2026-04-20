@@ -1,8 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import heroBg from "@/assets/hero-bg.png";
+import heroOverlay from "@/assets/hero-overlay.png";
+import candidateImg from "@/assets/candidate.png";
+import logoImg from "@/assets/logo.png";
 
 const STYLES = `
 :root{
-  --navy:#0a2240;
+  --navy:#031f51;
   --red:#bf1e2e;
   --cream:#f5efe4;
   --cream-2:#faf5ea;

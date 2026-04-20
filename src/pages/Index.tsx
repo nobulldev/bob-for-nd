@@ -525,16 +525,18 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-content{padding:0;display:contents}
   .hero-content > *{position:relative;z-index:4}
   .hero-content > .eyebrow,
-  .hero-content > h1{padding-left:20px;padding-right:20px}
-  .hero-content > .eyebrow{order:1;margin-top:14px}
-  .hero-content > h1{order:2;margin-top:10px;margin-bottom:0}
+  .hero-content > h1,
+  .hero-content > .tagline{padding-left:20px;padding-right:20px}
+  .hero-content > .eyebrow{order:1;margin-top:14px;white-space:nowrap;font-size:11px;letter-spacing:.18em;flex-wrap:nowrap}
+  .hero-content > .eyebrow .dash{width:18px;flex-shrink:0}
+  .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
+  .hero-content > .tagline{order:3;margin:0 20px}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:90vw;max-height:none;margin:0 auto;display:block;order:3;
+    height:auto;width:90vw;max-height:none;margin:-6px auto 0;display:block;order:4;
     z-index:4;
   }
   .hero-candidate img{width:100%;height:auto}
-  .hero-content > .tagline{order:4;align-self:center;margin:-8px auto 0;padding:0 20px}
   .hero-content > .lede{order:5;padding:0 20px;margin-top:20px}
   .hero-content > .cta-row{order:6;padding:0 20px;margin:24px 20px 32px;display:flex}
   .hero-overlay{position:relative;order:7;left:50%;right:auto;transform:translateX(-50%);width:100vw;max-width:100vw;margin-top:-8vw;display:block;z-index:3}

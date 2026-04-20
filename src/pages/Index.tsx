@@ -530,7 +530,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-content > .eyebrow{order:1;margin-top:-56px;padding-top:0;white-space:nowrap;font-size:11px;letter-spacing:.18em;flex-wrap:nowrap}
   .hero-content > .eyebrow .dash{width:18px;flex-shrink:0}
   .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
-  .hero-content > .tagline{order:5;margin:0;width:100vw;max-width:100vw;padding:0;display:block}
+  .hero-content > .tagline{order:3;margin:14px 0 0;width:100vw;max-width:100vw;padding:0 20px;display:block}
   .hero-content > .tagline::after{display:none}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;

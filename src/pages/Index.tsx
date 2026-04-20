@@ -508,9 +508,10 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
-  .hero{padding-top:54px}
-  .hero .wrap{grid-template-columns:1fr;gap:54px;padding-bottom:60px}
-  .hero-portrait{max-width:380px}
+  .hero{min-height:auto;padding-bottom:0}
+  .hero-content{padding:54px 24px 60vw}
+  .hero-candidate{height:auto;width:80vw;right:0;left:0;margin:0 auto;bottom:6vw;max-height:none}
+  .hero-candidate img{width:100%;height:auto}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .quote-card{position:static}
   .cards{grid-template-columns:repeat(2,1fr)}
@@ -523,9 +524,9 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid rgba(10,34,64,.15)}
   .menu{
     display:none;position:absolute;top:100%;left:0;right:0;
-    background:var(--cream);flex-direction:column;align-items:stretch;
-    padding:14px 20px 20px;box-shadow:0 20px 40px -20px rgba(10,34,64,.2);
-    border-top:1px solid rgba(10,34,64,.08);
+    background:var(--navy);flex-direction:column;align-items:stretch;
+    padding:14px 20px 20px;box-shadow:0 20px 40px -20px rgba(0,0,0,.4);
+    border-top:1px solid rgba(254,214,72,.18);
   }
   .menu.open{display:flex}
   .menu a{padding:14px 6px}
@@ -778,40 +779,31 @@ const Index = () => {
 
       {/* HERO */}
       <section className="hero">
-        <HeroStars />
-        <div className="wrap">
-          <div>
-            <span className="eyebrow fade-up">
-              <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
-            </span>
-            <h1 className="fade-up delay-1">
-              Bob Heitkamp
-              <em>for State Senate</em>
-            </h1>
-            <span className="tagline fade-up delay-2">
-              Proven Experience · Local Leadership · Forward Together
-            </span>
-            <p className="lede fade-up delay-3">
-              A lifetime of building businesses, helping people, and serving our community.
-              Your neighbor, ready to represent District 25 with experienced leadership and
-              a strong voice for local families, farms, and small towns.
-            </p>
-            <div className="cta-row fade-up delay-4">
-              <a href="#donate" className="btn btn-red">Donate <span className="arrow">→</span></a>
-              <a href="#action" className="btn btn-outline">Take Action</a>
-            </div>
-          </div>
-          <div className="hero-portrait fade-up delay-2">
-            <span className="layer-red" />
-            <span className="layer-navy" />
-            <div className="frame">Candidate Portrait<br/>(4:5 photo placeholder)</div>
-          </div>
+        <div className="hero-bg" ref={heroBgRef} aria-hidden="true" />
+        <div className="hero-candidate" ref={candidateRef}>
+          <img src={candidateImg} alt="Bob Heitkamp, candidate for North Dakota State Senate District 25" />
         </div>
-        <div className="flag-band" aria-hidden="true">
-          <span className="navy" /><span className="cream" /><span className="red" />
-          <span className="cream" /><span className="navy" /><span className="gold" />
-          <span className="navy" /><span className="cream" /><span className="red" />
-          <span className="cream" /><span className="navy" />
+        <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
+        <div className="hero-content">
+          <span className="eyebrow fade-up">
+            <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
+          </span>
+          <h1 className="fade-up delay-1">
+            Bob Heitkamp
+            <em>for State Senate</em>
+          </h1>
+          <span className="tagline fade-up delay-2">
+            Proven Experience · Local Leadership · Forward Together
+          </span>
+          <p className="lede fade-up delay-3">
+            A lifetime of building businesses, helping people, and serving our community.
+            Your neighbor, ready to represent District 25 with experienced leadership and
+            a strong voice for local families, farms, and small towns.
+          </p>
+          <div className="cta-row fade-up delay-4">
+            <a href="#donate" className="btn btn-red">Donate <span className="arrow">→</span></a>
+            <a href="#action" className="btn btn-outline">Take Action</a>
+          </div>
         </div>
       </section>
 

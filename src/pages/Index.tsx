@@ -773,21 +773,7 @@ const Index = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const nav = document.querySelector("header.nav") as HTMLElement | null;
-    const root = document.getElementById("root");
-    // eslint-disable-next-line no-console
-    console.log("DEBUG_GAP", JSON.stringify({
-      navTop: nav?.getBoundingClientRect().top,
-      navOffsetTop: nav?.offsetTop,
-      bodyMT: getComputedStyle(document.body).marginTop,
-      bodyPT: getComputedStyle(document.body).paddingTop,
-      rootPT: root && getComputedStyle(root).paddingTop,
-      rootMT: root && getComputedStyle(root).marginTop,
-      bodyChildren: Array.from(document.body.children).map((c) => `${c.tagName}#${(c as HTMLElement).id}.${(c as HTMLElement).className}|h=${c.getBoundingClientRect().height}|t=${c.getBoundingClientRect().top}`),
-      rootChildren: root && Array.from(root.children).map((c) => `${c.tagName}#${(c as HTMLElement).id}.${(c as HTMLElement).className}|h=${c.getBoundingClientRect().height}|t=${c.getBoundingClientRect().top}`),
-    }));
-  }, []);
+
 
   return (
     <>

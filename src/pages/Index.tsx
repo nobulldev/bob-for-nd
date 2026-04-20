@@ -3,6 +3,7 @@ import heroBg from "@/assets/hero-bg.png";
 import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
 import logoImg from "@/assets/logo.png";
+import bobQuoteImg from "@/assets/bob-quote.jpg";
 
 const STYLES = `
 :root{
@@ -30,33 +31,6 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
-/* ---------- Top Bar ---------- */
-.topbar{
-  background:var(--navy);
-  color:#e8e3d6;
-  font-family:'Oswald',sans-serif;
-  font-size:11.5px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  border-bottom:2px solid var(--gold);
-}
-.topbar .wrap{
-  max-width:1280px;margin:0 auto;
-  padding:9px 28px;
-  display:flex;justify-content:space-between;align-items:center;gap:18px;
-  flex-wrap:wrap;
-}
-.topbar .left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.topbar .star{color:var(--gold)}
-.topbar .paid{opacity:.65;font-size:10.5px;letter-spacing:.12em}
-.topbar .socials{display:flex;gap:14px}
-.topbar .socials a{
-  width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;
-  color:#e8e3d6;opacity:.85;transition:color .2s, opacity .2s;
-}
-.topbar .socials a:hover{color:var(--gold);opacity:1}
-.topbar .socials svg{width:14px;height:14px;fill:currentColor}
-
 /* ---------- Nav ---------- */
 .nav{
   position:sticky;top:0;z-index:50;
@@ -68,8 +42,8 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 6px 22px rgba(0,0,0,.35);
 }
 .nav .wrap{
-  max-width:1280px;margin:0 auto;
-  padding:14px 28px;
+  max-width:1440px;margin:0 auto;
+  padding:14px 36px;
   display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:12px}
@@ -143,8 +117,8 @@ a{color:inherit;text-decoration:none}
 }
 .hero-content{
   position:relative;z-index:4;
-  max-width:1280px;margin:0 auto;
-  padding:80px 28px 18vh;
+  max-width:1440px;margin:0 auto;
+  padding:80px 36px 18vh;
   pointer-events:none;
 }
 .hero-content > *{pointer-events:auto}
@@ -164,9 +138,10 @@ a{color:inherit;text-decoration:none}
   margin:22px 0 18px;
   text-shadow:0 4px 30px rgba(0,0,0,.4);
 }
+.hero h1 .name{display:block;white-space:nowrap}
 .hero h1 em{
   display:block;font-style:italic;font-weight:800;
-  color:var(--gold);margin-top:6px;
+  color:var(--gold);margin-top:6px;white-space:nowrap;
 }
 .tagline{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
@@ -197,8 +172,8 @@ a{color:inherit;text-decoration:none}
 .btn:hover .arrow{transform:translateX(4px)}
 
 /* ---------- Section base ---------- */
-section{padding:96px 28px;position:relative}
-.container{max-width:1280px;margin:0 auto}
+section{padding:96px 36px;position:relative}
+.container{max-width:1440px;margin:0 auto}
 .section-eyebrow{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
   color:var(--red);font-size:12.5px;letter-spacing:.3em;
@@ -218,10 +193,15 @@ section{padding:96px 28px;position:relative}
   display:grid;grid-template-columns:.85fr 1.4fr;gap:64px;margin-top:54px;
   align-items:start;
 }
+.quote-stack{position:sticky;top:120px;display:flex;flex-direction:column}
+.quote-stack .gold-bar{height:8px;background:var(--gold)}
+.quote-photo{
+  width:100%;aspect-ratio:1/1;overflow:hidden;display:block;background:var(--navy);
+}
+.quote-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .quote-card{
-  position:sticky;top:120px;
   background:var(--navy);color:var(--cream);
-  padding:46px 38px;border-top:4px solid var(--gold);
+  padding:42px 38px;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
 }
 .quote-card .qmark{
@@ -487,11 +467,45 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 .foot-col a{color:rgba(245,239,228,.78);font-size:14.5px;transition:color .2s}
 .foot-col a:hover{color:var(--cream)}
 .foot-bottom{
-  max-width:1280px;margin:54px auto 0;padding-top:24px;
+  max-width:1440px;margin:54px auto 0;padding-top:24px;
   border-top:1px solid rgba(245,239,228,.15);
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
   font-size:12.5px;color:rgba(245,239,228,.6);
   font-family:'Oswald',sans-serif;letter-spacing:.18em;text-transform:uppercase;
+}
+
+/* ---------- Why I'm Running (Video) ---------- */
+#why{background:var(--cream-2)}
+.why-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:54px;align-items:center;
+}
+.why-text p{margin-bottom:18px;color:#3a3a3a;font-size:17px;line-height:1.75}
+.why-text .signoff{
+  margin-top:22px;font-family:'Playfair Display',serif;font-style:italic;
+  color:var(--navy);font-size:22px;line-height:1.3;
+}
+.video-frame{
+  position:relative;aspect-ratio:16/9;background:var(--placeholder);
+  border-top:6px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
+  overflow:hidden;
+}
+.video-frame::after{
+  content:"";position:absolute;left:-14px;bottom:-14px;width:60%;height:30%;
+  background:var(--navy);z-index:-1;
+}
+.play-btn{
+  width:84px;height:84px;border-radius:50%;background:var(--red);
+  display:flex;align-items:center;justify-content:center;color:var(--cream);
+  box-shadow:0 14px 30px rgba(0,0,0,.3);
+}
+.play-btn svg{width:30px;height:30px;margin-left:5px;fill:currentColor}
+.video-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:14px 20px;
+  background:linear-gradient(to top,rgba(3,31,81,.92),transparent);
+  font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;
+  letter-spacing:.22em;color:var(--cream);
 }
 
 /* ---------- Fade up ---------- */
@@ -505,17 +519,26 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
+  .nav .wrap{padding:12px 20px}
   .hero{min-height:auto;padding-bottom:0}
-  .hero-content{padding:54px 24px 60vw}
-  .hero-candidate{height:auto;width:80vw;right:0;left:0;margin:0 auto;bottom:6vw;max-height:none}
+  .hero-content{padding:48px 20px 40px}
+  .hero h1{font-size:clamp(40px,9vw,64px)}
+  .hero-candidate{
+    position:relative;right:auto;left:auto;bottom:auto;
+    height:auto;width:90vw;max-height:none;margin:20px auto 0;display:block;
+  }
   .hero-candidate img{width:100%;height:auto}
+  .hero-overlay{position:relative;margin-top:-2px}
+  .cta-row{flex-wrap:nowrap}
+  .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}
-  .quote-card{position:static}
+  .quote-stack{position:static}
+  .why-grid{grid-template-columns:1fr;gap:36px}
   .cards{grid-template-columns:repeat(2,1fr)}
   .issues-grid{grid-template-columns:1fr;gap:36px}
   .action-cards{grid-template-columns:repeat(2,1fr)}
   .media-grid{grid-template-columns:repeat(2,1fr)}
-  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px;padding:0 20px}
   .facts{grid-template-columns:repeat(2,1fr)}
   .fact:nth-child(2){border-right:0}
   .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid rgba(10,34,64,.15)}
@@ -531,14 +554,14 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .menu .donate-btn{margin:8px 0 0;text-align:center}
   .hamburger{display:inline-flex;align-items:center;justify-content:center}
   .nav .wrap{position:relative}
-  section{padding:72px 24px}
+  section{padding:72px 20px}
   .closing-band{padding:34px 28px}
   .action-form{padding:32px 24px}
   .form-grid{grid-template-columns:1fr}
   .checks{grid-template-columns:1fr 1fr}
+  .foot-bottom{padding-left:20px;padding-right:20px}
 }
 @media (max-width:640px){
-  .hero h1{font-size:48px}
   .cards{grid-template-columns:1fr}
   .action-cards{grid-template-columns:1fr}
   .media-grid{grid-template-columns:1fr}
@@ -547,7 +570,6 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .fact{border-right:0;border-bottom:1px solid rgba(10,34,64,.15)}
   .fact:last-child{border-bottom:0}
   .checks{grid-template-columns:1fr}
-  .topbar .paid{display:none}
   .quote-card blockquote{font-size:20px}
   .closing-band p{font-size:19px}
   #donate{padding:70px 22px}
@@ -753,22 +775,6 @@ const Index = () => {
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
-      {/* TOP BAR */}
-      <div className="topbar">
-        <div className="wrap">
-          <div className="left">
-            <span><span className="star">★</span> North Dakota Senate · District 25</span>
-            <span className="paid">Paid for by Bob Heitkamp for Senate</span>
-          </div>
-          <div className="socials" aria-label="Social media">
-            <a href="#" aria-label="Facebook">{SOCIAL_ICONS.facebook}</a>
-            <a href="#" aria-label="Instagram">{SOCIAL_ICONS.instagram}</a>
-            <a href="#" aria-label="YouTube">{SOCIAL_ICONS.youtube}</a>
-            <a href="#" aria-label="TikTok">{SOCIAL_ICONS.tiktok}</a>
-          </div>
-        </div>
-      </div>
-
       {/* NAV */}
       <header className="nav" id="home">
         <div className="wrap">
@@ -801,7 +807,7 @@ const Index = () => {
             <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">
-            Bob Heitkamp
+            <span className="name">Bob Heitkamp</span>
             <em>for State Senate</em>
           </h1>
           <span className="tagline fade-up delay-2">
@@ -827,12 +833,18 @@ const Index = () => {
             A Leader Shaped by Real <em>Experience</em>, Faith, and Service
           </h2>
           <div className="about-grid">
-            <aside className="quote-card fade-up">
-              <span className="qmark">“</span>
-              <blockquote>
-                I love our corner of North Dakota and the people who make it strong.
-              </blockquote>
-              <cite>— Your friend, Bob</cite>
+            <aside className="quote-stack fade-up">
+              <div className="gold-bar" aria-hidden="true" />
+              <div className="quote-photo">
+                <img src={bobQuoteImg} alt="Bob Heitkamp speaking with the community" />
+              </div>
+              <div className="quote-card">
+                <span className="qmark">“</span>
+                <blockquote>
+                  I love our corner of North Dakota and the people who make it strong.
+                </blockquote>
+                <cite>— Your friend, Bob</cite>
+              </div>
             </aside>
             <div className="bio fade-up delay-1">
               <h3>Meet Bob</h3>
@@ -869,6 +881,44 @@ const Index = () => {
             <div className="fact"><div className="num">10<em>+</em></div><div className="lbl">Years at Marketplace for Kids</div></div>
             <div className="fact"><div className="num">25</div><div className="lbl">Senate District</div></div>
             <div className="fact"><div className="num">1</div><div className="lbl">Neighbor Running for You</div></div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY I'M RUNNING (video placeholder) */}
+      <section id="why">
+        <div className="container">
+          <span className="section-eyebrow fade-up"><span className="dash" /> Why I'm Running</span>
+          <h2 className="section-title fade-up delay-1">
+            For the Extraordinary People of <em>District 25</em>
+          </h2>
+          <div className="why-grid">
+            <div className="why-text fade-up">
+              <p>
+                I care deeply about what happens here. I've heard from farmers facing rising
+                costs and uncertainty. I've talked with small business owners working every day
+                to keep their doors open and create jobs. I've met families who want their
+                children to have every opportunity to succeed and stay here to build a life.
+              </p>
+              <p>
+                I'm running to help keep small towns strong, protect local schools, maintain
+                roads, improve infrastructure, and make sure District 25 has a strong voice.
+              </p>
+              <p>
+                I'll listen carefully, treat people with respect and focus on common-sense
+                solutions that help our communities thrive.
+              </p>
+              <p className="signoff">
+                For the extraordinary people of District 25, I'm here for you.
+                <br />— Your friend, Bob
+              </p>
+            </div>
+            <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
+              <span className="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span className="video-cap">Campaign Video — Coming Soon</span>
+            </div>
           </div>
         </div>
       </section>

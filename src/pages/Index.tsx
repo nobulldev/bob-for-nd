@@ -807,7 +807,7 @@ const Index = () => {
             <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">
-            Bob Heitkamp
+            <span className="name">Bob Heitkamp</span>
             <em>for State Senate</em>
           </h1>
           <span className="tagline fade-up delay-2">
@@ -833,12 +833,18 @@ const Index = () => {
             A Leader Shaped by Real <em>Experience</em>, Faith, and Service
           </h2>
           <div className="about-grid">
-            <aside className="quote-card fade-up">
-              <span className="qmark">“</span>
-              <blockquote>
-                I love our corner of North Dakota and the people who make it strong.
-              </blockquote>
-              <cite>— Your friend, Bob</cite>
+            <aside className="quote-stack fade-up">
+              <div className="gold-bar" aria-hidden="true" />
+              <div className="quote-photo">
+                <img src={bobQuoteImg} alt="Bob Heitkamp speaking with the community" />
+              </div>
+              <div className="quote-card">
+                <span className="qmark">“</span>
+                <blockquote>
+                  I love our corner of North Dakota and the people who make it strong.
+                </blockquote>
+                <cite>— Your friend, Bob</cite>
+              </div>
             </aside>
             <div className="bio fade-up delay-1">
               <h3>Meet Bob</h3>

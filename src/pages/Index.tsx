@@ -1099,12 +1099,18 @@ const Index = () => {
       {/* ISSUES */}
       <section id="issues">
         <div className="container">
-          <span className="section-eyebrow fade-up">
-            <span className="dash" /> Issues
-          </span>
-          <h2 className="section-title fade-up delay-1">
-            Community Leadership. <em>Responsible Government.</em>
-          </h2>
+          <div className="issues-hero fade-up">
+            <img src={bobIssuesImg} alt="Bob Heitkamp at Marketplace for Kids" />
+            <div className="issues-hero-overlay" />
+            <div className="issues-hero-content">
+              <span className="section-eyebrow issues-hero-eyebrow">
+                <span className="dash" /> Issues
+              </span>
+              <h2 className="section-title issues-hero-title">
+                Community Leadership. <em>Responsible Government.</em>
+              </h2>
+            </div>
+          </div>
           <div className="issues-grid">
             {ISSUES.map((it, i) => (
               <div key={it.t} className={`issue fade-up delay-${(i % 5) + 1}`}>

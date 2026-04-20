@@ -4,6 +4,7 @@ import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
 import logoImg from "@/assets/logo.png";
 import bobQuoteImg from "@/assets/bob-quote.jpg";
+import bobIssuesImg from "@/assets/bob-issues.png";
 
 const STYLES = `
 :root{

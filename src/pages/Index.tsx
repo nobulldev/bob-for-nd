@@ -224,7 +224,7 @@ section{padding:96px 36px;position:relative}
   background:var(--navy);color:var(--cream);
   border-right:6px solid var(--gold);
   padding:28px 30px;margin-top:28px;
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:300;
   font-size:22px;line-height:1.35;
   box-shadow:0 20px 40px -24px rgba(10,34,64,.4);
 }

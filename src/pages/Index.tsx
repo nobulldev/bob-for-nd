@@ -868,11 +868,27 @@ const Index = () => {
       {/* NAV */}
       <header className="nav" id="home">
         <div className="wrap">
-          <a href="#home" className="brand" aria-label="Bob Heitkamp for Senate">
+          <a
+            href="#home"
+            className="brand"
+            aria-label="Bob Heitkamp for Senate"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             <img src={logoImg} alt="Bob Heitkamp for Senate" className="brand-logo" />
           </a>
           <nav id="menu" className="menu" aria-label="Primary">
-            <a href="#home">Home</a>
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              Home
+            </a>
             <a href="#about">About</a>
             <a href="#issues">Issues</a>
             <a href="#action">Take Action</a>

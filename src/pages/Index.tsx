@@ -205,7 +205,6 @@ section{padding:96px 36px;position:relative}
   background:var(--navy);color:var(--cream);
   padding:42px 38px;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
-  border-right:6px solid var(--gold);
 }
 .quote-card .qmark{
   font-family:'Playfair Display',serif;color:var(--gold);
@@ -299,7 +298,7 @@ section{padding:96px 36px;position:relative}
 /* ---------- Issues ---------- */
 #issues{background:var(--cream-3)}
 .issues-hero{
-  position:relative;width:100%;aspect-ratio:21/9;max-height:520px;
+  position:relative;width:70%;margin:0 auto;aspect-ratio:3/4;max-height:none;
   overflow:hidden;display:flex;align-items:flex-end;
   box-shadow:0 30px 60px -30px rgba(10,34,64,.35);
 }
@@ -589,7 +588,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .why-grid .why-text > h2{order:2}
   .why-grid .why-text > div{order:4}
   .why-video-wrap{order:3;padding-top:0}
-  .issues-hero{aspect-ratio:4/3;max-height:none}
+  .issues-hero{aspect-ratio:4/3;width:100%;max-height:none}
   .issues-hero-content{padding:24px 20px}
   .cards{grid-template-columns:repeat(2,1fr)}
   .issues-grid{grid-template-columns:1fr;gap:36px}

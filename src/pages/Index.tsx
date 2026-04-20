@@ -832,8 +832,10 @@ const Index = () => {
       requestAnimationFrame(() => el.classList.add("in"));
     });
 
-    // Hero parallax on mouse move
+    // Hero parallax on mouse move (disabled on mobile/touch)
+    const isTouch = window.matchMedia("(max-width: 960px)").matches || window.matchMedia("(hover: none)").matches;
     const onMouseMove = (e: MouseEvent) => {
+      if (isTouch) return;
       const w = window.innerWidth;
       const h = window.innerHeight;
       const x = (e.clientX / w - 0.5) * 2; // -1 .. 1
@@ -845,7 +847,7 @@ const Index = () => {
         candidateRef.current.style.transform = `translate3d(${x * 10}px, ${y * 6}px, 0)`;
       }
     };
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    if (!isTouch) window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);

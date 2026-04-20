@@ -530,15 +530,20 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-content > .eyebrow{order:1;margin-top:-56px;padding-top:0;white-space:nowrap;font-size:11px;letter-spacing:.18em;flex-wrap:nowrap}
   .hero-content > .eyebrow .dash{width:18px;flex-shrink:0}
   .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
-  .hero-content > .tagline{order:3;margin:0 20px}
+  .hero-content > .tagline{order:3;margin:0 20px;padding-bottom:0}
+  .hero-content > .tagline::after{display:none}
   .hero-candidate{
     position:relative;right:auto;left:auto;bottom:auto;
-    height:auto;width:90vw;max-height:none;margin:-6px auto 0;display:block;order:4;
+    height:auto;width:100vw;max-width:100vw;max-height:none;margin:18px 0 0;display:block;order:4;
     z-index:4;
   }
-  .hero-candidate img{width:100%;height:auto}
+  .hero-candidate::after{
+    content:"";position:absolute;left:0;right:0;bottom:14%;height:10px;
+    background:var(--gold);opacity:.95;z-index:6;pointer-events:none;
+  }
+  .hero-candidate img{width:100%;height:auto;display:block}
   .hero-content > .lede{order:5;padding:0 20px;margin-top:20px}
-  .hero-content > .cta-row{order:6;padding:0 20px;margin:24px 20px 32px;display:flex}
+  .hero-content > .cta-row{order:6;padding:0 10px;margin:24px 10px 32px;display:flex}
   .hero-overlay{position:relative;order:7;left:50%;right:auto;transform:translateX(-50%);width:100vw;max-width:100vw;margin-top:-8vw;display:block;z-index:3}
   .hero h1{font-size:clamp(40px,9vw,64px)}
   .cta-row{flex-wrap:nowrap}
@@ -827,8 +832,10 @@ const Index = () => {
       requestAnimationFrame(() => el.classList.add("in"));
     });
 
-    // Hero parallax on mouse move
+    // Hero parallax on mouse move (disabled on mobile/touch)
+    const isTouch = window.matchMedia("(max-width: 960px)").matches || window.matchMedia("(hover: none)").matches;
     const onMouseMove = (e: MouseEvent) => {
+      if (isTouch) return;
       const w = window.innerWidth;
       const h = window.innerHeight;
       const x = (e.clientX / w - 0.5) * 2; // -1 .. 1
@@ -840,7 +847,7 @@ const Index = () => {
         candidateRef.current.style.transform = `translate3d(${x * 10}px, ${y * 6}px, 0)`;
       }
     };
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    if (!isTouch) window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);

@@ -588,7 +588,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .why-grid .why-text > h2{order:2}
   .why-grid .why-text > div{order:4}
   .why-video-wrap{order:3;padding-top:0}
-  .issues-hero{aspect-ratio:4/3;max-height:none}
+  .issues-hero{aspect-ratio:4/3;width:100%;max-height:none}
   .issues-hero-content{padding:24px 20px}
   .cards{grid-template-columns:repeat(2,1fr)}
   .issues-grid{grid-template-columns:1fr;gap:36px}

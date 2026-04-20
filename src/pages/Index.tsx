@@ -887,7 +887,7 @@ const Index = () => {
         <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
           <span className="eyebrow fade-up">
-            <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" />{" "}
+            <span className="dash" /> <Star className="star" /> North Dakota · Dist 25 <Star className="star" />{" "}
             <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">

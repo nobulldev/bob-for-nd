@@ -1,8 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import heroBg from "@/assets/hero-bg.png";
+import heroOverlay from "@/assets/hero-overlay.png";
+import candidateImg from "@/assets/candidate.png";
+import logoImg from "@/assets/logo.png";
 
 const STYLES = `
 :root{
-  --navy:#0a2240;
+  --navy:#031f51;
   --red:#bf1e2e;
   --cream:#f5efe4;
   --cream-2:#faf5ea;
@@ -56,49 +60,34 @@ a{color:inherit;text-decoration:none}
 /* ---------- Nav ---------- */
 .nav{
   position:sticky;top:0;z-index:50;
-  background:var(--cream);
+  background:var(--navy);
   transition:box-shadow .25s ease, background .25s ease;
-  border-bottom:1px solid transparent;
+  border-bottom:1px solid rgba(254,214,72,.18);
 }
 .nav.scrolled{
-  box-shadow:0 6px 22px rgba(10,34,64,.08);
-  border-bottom-color:rgba(10,34,64,.08);
+  box-shadow:0 6px 22px rgba(0,0,0,.35);
 }
 .nav .wrap{
   max-width:1280px;margin:0 auto;
-  padding:18px 28px;
+  padding:14px 28px;
   display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:12px}
-.brand .b-mark{
-  width:46px;height:46px;border-radius:50%;
-  background:var(--red);color:var(--cream);
-  font-family:'Playfair Display',serif;font-style:italic;font-weight:900;
-  font-size:30px;line-height:1;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.18);
-}
-.brand .b-text{display:flex;flex-direction:column;line-height:1.1}
-.brand .b-name{
-  font-family:'Playfair Display',serif;font-weight:800;
-  color:var(--navy);font-size:20px;letter-spacing:.01em;
-}
-.brand .b-sub{
-  font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:10.5px;letter-spacing:.22em;color:var(--red);margin-top:2px;
+.brand img.brand-logo{
+  height:54px;width:auto;display:block;
 }
 .menu{display:flex;align-items:center;gap:6px}
 .menu a{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:13px;letter-spacing:.18em;color:var(--navy);
+  font-size:13px;letter-spacing:.18em;color:var(--cream);
   padding:10px 14px;position:relative;transition:color .2s;
 }
 .menu a::after{
   content:"";position:absolute;left:14px;right:14px;bottom:4px;
-  height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;
+  height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;
   transition:transform .25s ease;
 }
-.menu a:hover{color:var(--red)}
+.menu a:hover{color:var(--gold)}
 .menu a:hover::after{transform:scaleX(1)}
 .menu .donate-btn{
   margin-left:10px;background:var(--red);color:var(--cream);
@@ -106,46 +95,82 @@ a{color:inherit;text-decoration:none}
   transition:background .2s, transform .2s;
 }
 .menu .donate-btn::after{display:none}
-.menu .donate-btn:hover{background:#a51a27;color:var(--cream)}
+.menu .donate-btn:hover{background:var(--gold);color:var(--navy)}
 .hamburger{
   display:none;background:transparent;border:0;cursor:pointer;
-  width:42px;height:42px;color:var(--navy);
+  width:42px;height:42px;color:var(--cream);
 }
 .hamburger svg{width:26px;height:26px}
 
 /* ---------- Hero ---------- */
 .hero{
-  position:relative;background:var(--cream);overflow:hidden;
-  padding:80px 28px 0;
+  position:relative;
+  min-height:100vh;
+  width:100%;
+  overflow:hidden;
+  background:#031f51;
+  isolation:isolate;
 }
-.hero .stars{position:absolute;inset:0;pointer-events:none;opacity:.55}
-.hero .wrap{
+.hero-bg{
+  position:absolute;inset:-40px;
+  background-image:url(${heroBg});
+  background-size:cover;
+  background-position:center;
+  z-index:1;
+  will-change:transform;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1);
+}
+.hero-candidate{
+  position:absolute;
+  right:4vw;
+  bottom:0;
+  height:96vh;
+  max-height:1000px;
+  z-index:2;
+  pointer-events:none;
+  will-change:transform;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.45));
+}
+.hero-candidate img{height:100%;width:auto;display:block}
+.hero-overlay{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  width:100%;
+  z-index:3;
+  pointer-events:none;
+  display:block;
+}
+.hero-content{
+  position:relative;z-index:4;
   max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center;
-  position:relative;z-index:2;padding-bottom:80px;
+  padding:80px 28px 18vh;
+  pointer-events:none;
 }
+.hero-content > *{pointer-events:auto}
 .eyebrow{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
-  color:var(--red);font-size:13px;letter-spacing:.28em;
+  color:var(--gold);font-size:13px;letter-spacing:.28em;
   display:inline-flex;align-items:center;gap:12px;
 }
-.eyebrow .dash{width:36px;height:2px;background:var(--red)}
+.eyebrow .dash{width:36px;height:2px;background:var(--gold)}
 .eyebrow .star{color:var(--gold);font-size:14px}
 
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-weight:900;color:var(--navy);
+  font-weight:900;color:var(--cream);
   font-size:clamp(48px,6.6vw,92px);
   line-height:.98;letter-spacing:-.01em;
   margin:22px 0 18px;
+  text-shadow:0 4px 30px rgba(0,0,0,.4);
 }
 .hero h1 em{
   display:block;font-style:italic;font-weight:800;
-  color:var(--red);margin-top:6px;
+  color:var(--gold);margin-top:6px;
 }
 .tagline{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:15px;letter-spacing:.22em;color:var(--navy);
+  font-size:15px;letter-spacing:.22em;color:var(--cream);
   display:inline-block;position:relative;padding-bottom:10px;
 }
 .tagline::after{
@@ -153,7 +178,7 @@ a{color:inherit;text-decoration:none}
   background:var(--gold);opacity:.85;border-radius:1px;
 }
 .lede{
-  margin-top:26px;max-width:560px;color:var(--ink);
+  margin-top:26px;max-width:560px;color:rgba(245,239,228,.92);
   font-size:18px;line-height:1.7;
 }
 .cta-row{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
@@ -166,48 +191,10 @@ a{color:inherit;text-decoration:none}
 }
 .btn-red{background:var(--red);color:var(--cream);border-color:var(--red)}
 .btn-red:hover{background:#a51a27;border-color:#a51a27}
-.btn-outline{background:transparent;color:var(--navy);border-color:var(--navy)}
-.btn-outline:hover{background:var(--navy);color:var(--cream)}
+.btn-outline{background:transparent;color:var(--cream);border-color:var(--cream)}
+.btn-outline:hover{background:var(--cream);color:var(--navy)}
 .btn .arrow{transition:transform .2s}
 .btn:hover .arrow{transform:translateX(4px)}
-
-.hero-portrait{position:relative;justify-self:center;width:100%;max-width:440px}
-.hero-portrait .layer-red{
-  position:absolute;top:-22px;right:-22px;width:62%;height:34%;
-  background:var(--red);z-index:1;
-}
-.hero-portrait .layer-red::before{
-  content:"";position:absolute;left:0;right:0;top:14px;height:6px;background:var(--cream);
-}
-.hero-portrait .layer-navy{
-  position:absolute;bottom:-22px;left:-22px;width:46%;height:36%;
-  background:var(--navy);z-index:1;
-}
-.hero-portrait .frame{
-  position:relative;z-index:2;aspect-ratio:4/5;
-  background:var(--placeholder);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--placeholder-ink);
-  font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:12px;letter-spacing:.22em;text-align:center;padding:20px;
-  box-shadow:0 30px 60px -30px rgba(10,34,64,.35);
-}
-.hero-portrait .frame::after{
-  content:"";position:absolute;inset:10px;border:1px solid rgba(10,34,64,.18);
-  pointer-events:none;
-}
-
-/* flag stripe */
-.flag-band{
-  display:flex;height:18px;width:100%;
-  border-top:1px solid rgba(10,34,64,.15);
-  border-bottom:1px solid rgba(10,34,64,.15);
-}
-.flag-band span{flex:1}
-.flag-band .navy{background:var(--navy)}
-.flag-band .cream{background:var(--cream-2)}
-.flag-band .red{background:var(--red)}
-.flag-band .gold{background:var(--gold);max-width:60px}
 
 /* ---------- Section base ---------- */
 section{padding:96px 28px;position:relative}
@@ -482,11 +469,8 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   max-width:1280px;margin:0 auto;
   display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:46px;
 }
-.foot-brand .b-mark{
-  width:46px;height:46px;border-radius:50%;background:var(--red);
-  display:inline-flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-style:italic;font-weight:900;
-  font-size:30px;color:var(--cream);margin-bottom:18px;
+.foot-brand .foot-logo{
+  height:72px;width:auto;display:block;margin-bottom:18px;
 }
 .foot-brand h4{
   font-family:'Playfair Display',serif;font-weight:800;font-size:24px;color:var(--cream);
@@ -521,9 +505,10 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
-  .hero{padding-top:54px}
-  .hero .wrap{grid-template-columns:1fr;gap:54px;padding-bottom:60px}
-  .hero-portrait{max-width:380px}
+  .hero{min-height:auto;padding-bottom:0}
+  .hero-content{padding:54px 24px 60vw}
+  .hero-candidate{height:auto;width:80vw;right:0;left:0;margin:0 auto;bottom:6vw;max-height:none}
+  .hero-candidate img{width:100%;height:auto}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .quote-card{position:static}
   .cards{grid-template-columns:repeat(2,1fr)}
@@ -536,9 +521,9 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid rgba(10,34,64,.15)}
   .menu{
     display:none;position:absolute;top:100%;left:0;right:0;
-    background:var(--cream);flex-direction:column;align-items:stretch;
-    padding:14px 20px 20px;box-shadow:0 20px 40px -20px rgba(10,34,64,.2);
-    border-top:1px solid rgba(10,34,64,.08);
+    background:var(--navy);flex-direction:column;align-items:stretch;
+    padding:14px 20px 20px;box-shadow:0 20px 40px -20px rgba(0,0,0,.4);
+    border-top:1px solid rgba(254,214,72,.18);
   }
   .menu.open{display:flex}
   .menu a{padding:14px 6px}
@@ -687,6 +672,9 @@ const MEDIA = [
 ];
 
 const Index = () => {
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  const candidateRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Nav shadow on scroll
     const nav = document.querySelector(".nav");
@@ -736,8 +724,24 @@ const Index = () => {
       requestAnimationFrame(() => el.classList.add("in"));
     });
 
+    // Hero parallax on mouse move
+    const onMouseMove = (e: MouseEvent) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const x = (e.clientX / w - 0.5) * 2; // -1 .. 1
+      const y = (e.clientY / h - 0.5) * 2;
+      if (heroBgRef.current) {
+        heroBgRef.current.style.transform = `translate3d(${-x * 18}px, ${-y * 14}px, 0) scale(1.04)`;
+      }
+      if (candidateRef.current) {
+        candidateRef.current.style.transform = `translate3d(${x * 10}px, ${y * 6}px, 0)`;
+      }
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMouseMove);
       ham?.removeEventListener("click", onHam);
       menu?.removeEventListener("click", closeMenu);
       amounts.forEach((b) => b.removeEventListener("click", onAmount));
@@ -769,11 +773,7 @@ const Index = () => {
       <header className="nav" id="home">
         <div className="wrap">
           <a href="#home" className="brand" aria-label="Bob Heitkamp for Senate">
-            <span className="b-mark">B</span>
-            <span className="b-text">
-              <span className="b-name">Bob Heitkamp</span>
-              <span className="b-sub">For Senate · Dist 25</span>
-            </span>
+            <img src={logoImg} alt="Bob Heitkamp for Senate" className="brand-logo" />
           </a>
           <nav id="menu" className="menu" aria-label="Primary">
             <a href="#home">Home</a>
@@ -791,40 +791,31 @@ const Index = () => {
 
       {/* HERO */}
       <section className="hero">
-        <HeroStars />
-        <div className="wrap">
-          <div>
-            <span className="eyebrow fade-up">
-              <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
-            </span>
-            <h1 className="fade-up delay-1">
-              Bob Heitkamp
-              <em>for State Senate</em>
-            </h1>
-            <span className="tagline fade-up delay-2">
-              Proven Experience · Local Leadership · Forward Together
-            </span>
-            <p className="lede fade-up delay-3">
-              A lifetime of building businesses, helping people, and serving our community.
-              Your neighbor, ready to represent District 25 with experienced leadership and
-              a strong voice for local families, farms, and small towns.
-            </p>
-            <div className="cta-row fade-up delay-4">
-              <a href="#donate" className="btn btn-red">Donate <span className="arrow">→</span></a>
-              <a href="#action" className="btn btn-outline">Take Action</a>
-            </div>
-          </div>
-          <div className="hero-portrait fade-up delay-2">
-            <span className="layer-red" />
-            <span className="layer-navy" />
-            <div className="frame">Candidate Portrait<br/>(4:5 photo placeholder)</div>
-          </div>
+        <div className="hero-bg" ref={heroBgRef} aria-hidden="true" />
+        <div className="hero-candidate" ref={candidateRef}>
+          <img src={candidateImg} alt="Bob Heitkamp, candidate for North Dakota State Senate District 25" />
         </div>
-        <div className="flag-band" aria-hidden="true">
-          <span className="navy" /><span className="cream" /><span className="red" />
-          <span className="cream" /><span className="navy" /><span className="gold" />
-          <span className="navy" /><span className="cream" /><span className="red" />
-          <span className="cream" /><span className="navy" />
+        <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
+        <div className="hero-content">
+          <span className="eyebrow fade-up">
+            <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
+          </span>
+          <h1 className="fade-up delay-1">
+            Bob Heitkamp
+            <em>for State Senate</em>
+          </h1>
+          <span className="tagline fade-up delay-2">
+            Proven Experience · Local Leadership · Forward Together
+          </span>
+          <p className="lede fade-up delay-3">
+            A lifetime of building businesses, helping people, and serving our community.
+            Your neighbor, ready to represent District 25 with experienced leadership and
+            a strong voice for local families, farms, and small towns.
+          </p>
+          <div className="cta-row fade-up delay-4">
+            <a href="#donate" className="btn btn-red">Donate <span className="arrow">→</span></a>
+            <a href="#action" className="btn btn-outline">Take Action</a>
+          </div>
         </div>
       </section>
 
@@ -1027,7 +1018,7 @@ const Index = () => {
       <footer>
         <div className="foot-grid">
           <div className="foot-brand">
-            <span className="b-mark">B</span>
+            <img src={logoImg} alt="Bob Heitkamp for Senate" className="foot-logo" />
             <h4>Bob Heitkamp</h4>
             <p>Proven Experience · Local Leadership · Forward Together</p>
           </div>

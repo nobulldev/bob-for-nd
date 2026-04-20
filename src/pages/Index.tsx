@@ -31,33 +31,6 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
-/* ---------- Top Bar ---------- */
-.topbar{
-  background:var(--navy);
-  color:#e8e3d6;
-  font-family:'Oswald',sans-serif;
-  font-size:11.5px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  border-bottom:2px solid var(--gold);
-}
-.topbar .wrap{
-  max-width:1280px;margin:0 auto;
-  padding:9px 28px;
-  display:flex;justify-content:space-between;align-items:center;gap:18px;
-  flex-wrap:wrap;
-}
-.topbar .left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.topbar .star{color:var(--gold)}
-.topbar .paid{opacity:.65;font-size:10.5px;letter-spacing:.12em}
-.topbar .socials{display:flex;gap:14px}
-.topbar .socials a{
-  width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;
-  color:#e8e3d6;opacity:.85;transition:color .2s, opacity .2s;
-}
-.topbar .socials a:hover{color:var(--gold);opacity:1}
-.topbar .socials svg{width:14px;height:14px;fill:currentColor}
-
 /* ---------- Nav ---------- */
 .nav{
   position:sticky;top:0;z-index:50;
@@ -69,8 +42,8 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 6px 22px rgba(0,0,0,.35);
 }
 .nav .wrap{
-  max-width:1280px;margin:0 auto;
-  padding:14px 28px;
+  max-width:1440px;margin:0 auto;
+  padding:14px 36px;
   display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:12px}

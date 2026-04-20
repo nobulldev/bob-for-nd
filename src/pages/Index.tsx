@@ -896,7 +896,7 @@ const Index = () => {
             <span className="name">Bob Heitkamp</span>
             <em>for State Senate</em>
           </h1>
-          <span className="tagline fade-up delay-2">Proven Experience · Local Leadership · Forward Together</span>
+          <span className="tagline fade-up delay-2 px-0">Proven Experience · Local Leadership · Forward Together</span>
           <p className="lede fade-up delay-3">
             A lifetime of building businesses, helping people, and serving our community. Your neighbor, ready to
             represent District 25 with experienced leadership and a strong voice for local families, farms, and small

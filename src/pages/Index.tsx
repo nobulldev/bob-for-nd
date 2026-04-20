@@ -466,11 +466,45 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 .foot-col a{color:rgba(245,239,228,.78);font-size:14.5px;transition:color .2s}
 .foot-col a:hover{color:var(--cream)}
 .foot-bottom{
-  max-width:1280px;margin:54px auto 0;padding-top:24px;
+  max-width:1440px;margin:54px auto 0;padding-top:24px;
   border-top:1px solid rgba(245,239,228,.15);
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
   font-size:12.5px;color:rgba(245,239,228,.6);
   font-family:'Oswald',sans-serif;letter-spacing:.18em;text-transform:uppercase;
+}
+
+/* ---------- Why I'm Running (Video) ---------- */
+#why{background:var(--cream-2)}
+.why-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:54px;align-items:center;
+}
+.why-text p{margin-bottom:18px;color:#3a3a3a;font-size:17px;line-height:1.75}
+.why-text .signoff{
+  margin-top:22px;font-family:'Playfair Display',serif;font-style:italic;
+  color:var(--navy);font-size:22px;line-height:1.3;
+}
+.video-frame{
+  position:relative;aspect-ratio:16/9;background:var(--placeholder);
+  border-top:6px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 30px 60px -30px rgba(10,34,64,.4);
+  overflow:hidden;
+}
+.video-frame::after{
+  content:"";position:absolute;left:-14px;bottom:-14px;width:60%;height:30%;
+  background:var(--navy);z-index:-1;
+}
+.play-btn{
+  width:84px;height:84px;border-radius:50%;background:var(--red);
+  display:flex;align-items:center;justify-content:center;color:var(--cream);
+  box-shadow:0 14px 30px rgba(0,0,0,.3);
+}
+.play-btn svg{width:30px;height:30px;margin-left:5px;fill:currentColor}
+.video-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:14px 20px;
+  background:linear-gradient(to top,rgba(3,31,81,.92),transparent);
+  font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;
+  letter-spacing:.22em;color:var(--cream);
 }
 
 /* ---------- Fade up ---------- */
@@ -484,17 +518,26 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
+  .nav .wrap{padding:12px 20px}
   .hero{min-height:auto;padding-bottom:0}
-  .hero-content{padding:54px 24px 60vw}
-  .hero-candidate{height:auto;width:80vw;right:0;left:0;margin:0 auto;bottom:6vw;max-height:none}
+  .hero-content{padding:48px 20px 40px}
+  .hero h1{font-size:clamp(40px,9vw,64px)}
+  .hero-candidate{
+    position:relative;right:auto;left:auto;bottom:auto;
+    height:auto;width:90vw;max-height:none;margin:20px auto 0;display:block;
+  }
   .hero-candidate img{width:100%;height:auto}
+  .hero-overlay{position:relative;margin-top:-2px}
+  .cta-row{flex-wrap:nowrap}
+  .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}
-  .quote-card{position:static}
+  .quote-stack{position:static}
+  .why-grid{grid-template-columns:1fr;gap:36px}
   .cards{grid-template-columns:repeat(2,1fr)}
   .issues-grid{grid-template-columns:1fr;gap:36px}
   .action-cards{grid-template-columns:repeat(2,1fr)}
   .media-grid{grid-template-columns:repeat(2,1fr)}
-  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px;padding:0 20px}
   .facts{grid-template-columns:repeat(2,1fr)}
   .fact:nth-child(2){border-right:0}
   .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid rgba(10,34,64,.15)}
@@ -510,14 +553,14 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .menu .donate-btn{margin:8px 0 0;text-align:center}
   .hamburger{display:inline-flex;align-items:center;justify-content:center}
   .nav .wrap{position:relative}
-  section{padding:72px 24px}
+  section{padding:72px 20px}
   .closing-band{padding:34px 28px}
   .action-form{padding:32px 24px}
   .form-grid{grid-template-columns:1fr}
   .checks{grid-template-columns:1fr 1fr}
+  .foot-bottom{padding-left:20px;padding-right:20px}
 }
 @media (max-width:640px){
-  .hero h1{font-size:48px}
   .cards{grid-template-columns:1fr}
   .action-cards{grid-template-columns:1fr}
   .media-grid{grid-template-columns:1fr}
@@ -526,7 +569,6 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .fact{border-right:0;border-bottom:1px solid rgba(10,34,64,.15)}
   .fact:last-child{border-bottom:0}
   .checks{grid-template-columns:1fr}
-  .topbar .paid{display:none}
   .quote-card blockquote{font-size:20px}
   .closing-band p{font-size:19px}
   #donate{padding:70px 22px}

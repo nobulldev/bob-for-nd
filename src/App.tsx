@@ -1,9 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// Sonner removed: it injects a top-of-DOM <section> that pushed the navbar down
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
+import SiteLayout from "@/components/site/SiteLayout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Issues from "./pages/Issues";
+import TakeAction from "./pages/TakeAction";
+import Media from "./pages/Media";
+import Donate from "./pages/Donate";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -14,7 +19,14 @@ const App = () => (
       <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route element={<SiteLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/issues" element={<Issues />} />
+            <Route path="/take-action" element={<TakeAction />} />
+            <Route path="/media" element={<Media />} />
+            <Route path="/donate" element={<Donate />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

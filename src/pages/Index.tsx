@@ -542,9 +542,9 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
     background:var(--gold);opacity:.95;z-index:6;pointer-events:none;transform:translateX(-50%);
   }
   .hero-candidate img{width:100%;height:auto;display:block}
-  .hero-content > .lede{order:5;padding:0 20px;margin-top:20px}
-  .hero-content > .cta-row{order:6;padding:0 10px;margin:24px 10px 32px;display:flex}
-  .hero-overlay{position:relative;order:7;left:50%;right:auto;transform:translateX(-50%);width:100vw;max-width:100vw;margin-top:-8vw;display:block;z-index:3}
+  .hero-content > .lede{order:6;padding:0 20px;margin-top:20px}
+  .hero-content > .cta-row{order:7;padding:0 10px;margin:24px 10px 32px;display:flex}
+  .hero-overlay{position:relative;order:8;left:50%;right:auto;transform:translateX(-50%);width:100vw;max-width:100vw;margin-top:-8vw;display:block;z-index:3}
   .hero h1{font-size:clamp(40px,9vw,64px)}
   .cta-row{flex-wrap:nowrap}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}

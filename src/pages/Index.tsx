@@ -774,22 +774,6 @@ const Index = () => {
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
-      {/* TOP BAR */}
-      <div className="topbar">
-        <div className="wrap">
-          <div className="left">
-            <span><span className="star">★</span> North Dakota Senate · District 25</span>
-            <span className="paid">Paid for by Bob Heitkamp for Senate</span>
-          </div>
-          <div className="socials" aria-label="Social media">
-            <a href="#" aria-label="Facebook">{SOCIAL_ICONS.facebook}</a>
-            <a href="#" aria-label="Instagram">{SOCIAL_ICONS.instagram}</a>
-            <a href="#" aria-label="YouTube">{SOCIAL_ICONS.youtube}</a>
-            <a href="#" aria-label="TikTok">{SOCIAL_ICONS.tiktok}</a>
-          </div>
-        </div>
-      </div>
-
       {/* NAV */}
       <header className="nav" id="home">
         <div className="wrap">

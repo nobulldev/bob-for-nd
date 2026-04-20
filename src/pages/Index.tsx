@@ -19,8 +19,6 @@ const STYLES = `
   --placeholder-ink:#7a7a7a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{margin:0;padding:0;background:var(--navy)}
-#root{margin:0;padding:0;min-height:100vh;background:var(--cream)}
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter',system-ui,sans-serif;
@@ -581,21 +579,31 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 
 const SOCIAL_ICONS = {
   facebook: (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.3-1.9 2-1.9h2V2.1C16.6 2 15.4 2 14.2 2 11.5 2 9.7 3.7 9.7 6.7V10H7v4h2.7v8H13z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.3-1.9 2-1.9h2V2.1C16.6 2 15.4 2 14.2 2 11.5 2 9.7 3.7 9.7 6.7V10H7v4h2.7v8H13z" />
+    </svg>
   ),
   instagram: (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.5 1s.8.9 1 1.5c.2.4.3 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-1 1.5s-.9.8-1.5 1c-.4.2-1.1.3-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.5-1s-.8-.9-1-1.5c-.2-.4-.3-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 1-1.5s.9-.8 1.5-1c.4-.2 1.1-.3 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-1.9.3-.5.2-.8.4-1.2.8s-.6.7-.8 1.2c-.1.3-.3.9-.3 1.9-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.3 1.9.2.5.4.8.8 1.2s.7.6 1.2.8c.3.1.9.3 1.9.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 1.9-.3.5-.2.8-.4 1.2-.8s.6-.7.8-1.2c.1-.3.3-.9.3-1.9.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.3-1.9-.2-.5-.4-.8-.8-1.2s-.7-.6-1.2-.8c-.3-.1-.9-.3-1.9-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm5.1-8.3a1.1 1.1 0 1 1 0-2.3 1.1 1.1 0 0 1 0 2.3z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.5 1s.8.9 1 1.5c.2.4.3 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-1 1.5s-.9.8-1.5 1c-.4.2-1.1.3-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.5-1s-.8-.9-1-1.5c-.2-.4-.3-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 1-1.5s.9-.8 1.5-1c.4-.2 1.1-.3 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-1.9.3-.5.2-.8.4-1.2.8s-.6.7-.8 1.2c-.1.3-.3.9-.3 1.9-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.3 1.9.2.5.4.8.8 1.2s.7.6 1.2.8c.3.1.9.3 1.9.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 1.9-.3.5-.2.8-.4 1.2-.8s.6-.7.8-1.2c.1-.3.3-.9.3-1.9.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.3-1.9-.2-.5-.4-.8-.8-1.2s-.7-.6-1.2-.8c-.3-.1-.9-.3-1.9-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm5.1-8.3a1.1 1.1 0 1 1 0-2.3 1.1 1.1 0 0 1 0 2.3z" />
+    </svg>
   ),
   youtube: (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z" />
+    </svg>
   ),
   tiktok: (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 6.7a5.3 5.3 0 0 1-3.2-1.1 5.3 5.3 0 0 1-2-3H11v12.7a2.6 2.6 0 1 1-1.9-2.5V8.6a5.7 5.7 0 1 0 5 5.6V9.7a8.3 8.3 0 0 0 5.5 2v-5z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M19.6 6.7a5.3 5.3 0 0 1-3.2-1.1 5.3 5.3 0 0 1-2-3H11v12.7a2.6 2.6 0 1 1-1.9-2.5V8.6a5.7 5.7 0 1 0 5 5.6V9.7a8.3 8.3 0 0 0 5.5 2v-5z" />
+    </svg>
   ),
 };
 
 const Star = ({ className = "" }: { className?: string }) => (
-  <span className={className} aria-hidden="true">★</span>
+  <span className={className} aria-hidden="true">
+    ★
+  </span>
 );
 
 const HeroStars = () => {
@@ -625,7 +633,9 @@ const HeroStars = () => {
           fill={s.c === "navy" ? "#0a2240" : "#bf1e2e"}
           opacity="0.18"
           fontFamily="serif"
-        >★</text>
+        >
+          ★
+        </text>
       ))}
     </svg>
   );
@@ -635,7 +645,11 @@ const PRIORITIES = [
   { n: "01", t: "Strong Communities", d: "Support the local institutions and volunteers that keep our towns strong." },
   { n: "02", t: "Agriculture & Rural Prosperity", d: "Stand with farmers and strengthen rural economies." },
   { n: "03", t: "Business Growth", d: "Support local employers and expand opportunity." },
-  { n: "04", t: "Infrastructure & Essential Services", d: "Improve roads, strengthen infrastructure, and expand reliable internet access." },
+  {
+    n: "04",
+    t: "Infrastructure & Essential Services",
+    d: "Improve roads, strengthen infrastructure, and expand reliable internet access.",
+  },
   { n: "05", t: "Opportunity for the Next Generation", d: "Help young people build their future right here at home." },
 ];
 
@@ -678,16 +692,69 @@ const ISSUES = [
 ];
 
 const ACTIONS = [
-  { t: "Donate", d: "Every contribution helps reach voters, grow the campaign, and share Bob's message across District 25.", icon: <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg> },
-  { t: "Volunteer", d: "Dedicate any amount of time for an activity of your choice: community events, phone calls, door knocking, sign delivery, or administrative help.", icon: <svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM3 21a9 9 0 0 1 18 0"/></svg> },
-  { t: "Host an Event", d: "Invite Bob to meet your neighbors, friends, business, church, organization, or community group.", icon: <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M16 3v4M8 3v4M3 11h18"/></svg> },
-  { t: "Request a Yard Sign", d: "Show your support and help neighbors learn more about Bob.", icon: <svg viewBox="0 0 24 24"><path d="M4 4h12l4 5-4 5H4zM4 14v7"/></svg> },
-  { t: "Stay Updated", d: "Receive campaign news, event updates, and important reminders.", icon: <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 6l8 7 8-7"/></svg> },
-  { t: "Have an Idea? Let's Hear It", d: "Great ideas often come from the people who live and work here every day. Share your thoughts, concerns, or ideas for District 25.", icon: <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3a7 7 0 0 0-4-12z"/></svg> },
+  {
+    t: "Donate",
+    d: "Every contribution helps reach voters, grow the campaign, and share Bob's message across District 25.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+    ),
+  },
+  {
+    t: "Volunteer",
+    d: "Dedicate any amount of time for an activity of your choice: community events, phone calls, door knocking, sign delivery, or administrative help.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM3 21a9 9 0 0 1 18 0" />
+      </svg>
+    ),
+  },
+  {
+    t: "Host an Event",
+    d: "Invite Bob to meet your neighbors, friends, business, church, organization, or community group.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="1" />
+        <path d="M16 3v4M8 3v4M3 11h18" />
+      </svg>
+    ),
+  },
+  {
+    t: "Request a Yard Sign",
+    d: "Show your support and help neighbors learn more about Bob.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 4h12l4 5-4 5H4zM4 14v7" />
+      </svg>
+    ),
+  },
+  {
+    t: "Stay Updated",
+    d: "Receive campaign news, event updates, and important reminders.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 6h16v12H4zM4 6l8 7 8-7" />
+      </svg>
+    ),
+  },
+  {
+    t: "Have an Idea? Let's Hear It",
+    d: "Great ideas often come from the people who live and work here every day. Share your thoughts, concerns, or ideas for District 25.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3a7 7 0 0 0-4-12z" />
+      </svg>
+    ),
+  },
 ];
 
 const MEDIA = [
-  { t: "Press Releases", d: "Official announcements and statements from the campaign.", note: "Press release thumbnail" },
+  {
+    t: "Press Releases",
+    d: "Official announcements and statements from the campaign.",
+    note: "Press release thumbnail",
+  },
   { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview" },
   { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail" },
   { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview" },
@@ -739,7 +806,7 @@ const Index = () => {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.12 },
     );
     document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
 
@@ -773,8 +840,6 @@ const Index = () => {
     };
   }, []);
 
-
-
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
@@ -791,10 +856,14 @@ const Index = () => {
             <a href="#issues">Issues</a>
             <a href="#action">Take Action</a>
             <a href="#media">Media</a>
-            <a href="#donate" className="donate-btn">Donate</a>
+            <a href="#donate" className="donate-btn">
+              Donate
+            </a>
           </nav>
           <button id="hamburger" className="hamburger" aria-label="Toggle menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
           </button>
         </div>
       </header>
@@ -808,23 +877,26 @@ const Index = () => {
         <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
           <span className="eyebrow fade-up">
-            <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" /> <span className="dash" />
+            <span className="dash" /> <Star className="star" /> North Dakota · District 25 <Star className="star" />{" "}
+            <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">
             <span className="name">Bob Heitkamp</span>
             <em>for State Senate</em>
           </h1>
-          <span className="tagline fade-up delay-2">
-            Proven Experience · Local Leadership · Forward Together
-          </span>
+          <span className="tagline fade-up delay-2">Proven Experience · Local Leadership · Forward Together</span>
           <p className="lede fade-up delay-3">
-            A lifetime of building businesses, helping people, and serving our community.
-            Your neighbor, ready to represent District 25 with experienced leadership and
-            a strong voice for local families, farms, and small towns.
+            A lifetime of building businesses, helping people, and serving our community. Your neighbor, ready to
+            represent District 25 with experienced leadership and a strong voice for local families, farms, and small
+            towns.
           </p>
           <div className="cta-row fade-up delay-4">
-            <a href="#donate" className="btn btn-red">Donate <span className="arrow">→</span></a>
-            <a href="#action" className="btn btn-outline">Take Action</a>
+            <a href="#donate" className="btn btn-red">
+              Donate <span className="arrow">→</span>
+            </a>
+            <a href="#action" className="btn btn-outline">
+              Take Action
+            </a>
           </div>
         </div>
       </section>
@@ -832,7 +904,9 @@ const Index = () => {
       {/* ABOUT */}
       <section id="about">
         <div className="container">
-          <span className="section-eyebrow fade-up"><span className="dash" /> About Bob</span>
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> About Bob
+          </span>
           <h2 className="section-title fade-up delay-1">
             A Leader Shaped by Real <em>Experience</em>, Faith, and Service
           </h2>
@@ -844,47 +918,56 @@ const Index = () => {
               </div>
               <div className="quote-card">
                 <span className="qmark">“</span>
-                <blockquote>
-                  I love our corner of North Dakota and the people who make it strong.
-                </blockquote>
+                <blockquote>I love our corner of North Dakota and the people who make it strong.</blockquote>
                 <cite>— Your friend, Bob</cite>
               </div>
             </aside>
             <div className="bio fade-up delay-1">
               <h3>Meet Bob</h3>
               <p>
-                Bob Heitkamp is a familiar face across the prairies and small towns of North Dakota.
-                A lifelong entrepreneur who started his first business at just sixteen years old,
-                Bob understands the grit, determination, and long hours it takes to build something
-                from the ground up.
+                Bob Heitkamp is a familiar face across the prairies and small towns of North Dakota. A lifelong
+                entrepreneur who started his first business at just sixteen years old, Bob understands the grit,
+                determination, and long hours it takes to build something from the ground up.
               </p>
               <p>
-                After studying at North Dakota State College of Science and Valley City State
-                University, Bob went on to build and operate several local businesses in
-                construction, retail, hospitality, and product development. He knows firsthand
-                the challenges facing small businesses, the importance of strong infrastructure,
-                and what it means to meet payroll, manage costs, and create jobs.
+                After studying at North Dakota State College of Science and Valley City State University, Bob went on to
+                build and operate several local businesses in construction, retail, hospitality, and product
+                development. He knows firsthand the challenges facing small businesses, the importance of strong
+                infrastructure, and what it means to meet payroll, manage costs, and create jobs.
               </p>
               <div className="pull">
-                Many people across the state know Bob through his work as Executive Director of
-                Marketplace for Kids, where he has spent the last decade helping young people
-                build confidence, leadership skills, and belief in their future.
+                Many people across the state know Bob through his work as Executive Director of Marketplace for Kids,
+                where he has spent the last decade helping young people build confidence, leadership skills, and belief
+                in their future.
               </div>
               <p>
-                Bob is not a career politician; he is a neighbor who wants to make a difference.
-                He is ready to bring his business mindset and community heart to Bismarck to
-                ensure District 25 remains a place where families and businesses can thrive for
-                generations to come.
+                Bob is not a career politician; he is a neighbor who wants to make a difference. He is ready to bring
+                his business mindset and community heart to Bismarck to ensure District 25 remains a place where
+                families and businesses can thrive for generations to come.
               </p>
               <p>Bob is your friend, neighbor and will be your faithful senator.</p>
             </div>
           </div>
 
           <div className="facts fade-up">
-            <div className="fact"><div className="num">16</div><div className="lbl">Years Old at First Business</div></div>
-            <div className="fact"><div className="num">10<em>+</em></div><div className="lbl">Years at Marketplace for Kids</div></div>
-            <div className="fact"><div className="num">25</div><div className="lbl">Senate District</div></div>
-            <div className="fact"><div className="num">1</div><div className="lbl">Neighbor Running for You</div></div>
+            <div className="fact">
+              <div className="num">16</div>
+              <div className="lbl">Years Old at First Business</div>
+            </div>
+            <div className="fact">
+              <div className="num">
+                10<em>+</em>
+              </div>
+              <div className="lbl">Years at Marketplace for Kids</div>
+            </div>
+            <div className="fact">
+              <div className="num">25</div>
+              <div className="lbl">Senate District</div>
+            </div>
+            <div className="fact">
+              <div className="num">1</div>
+              <div className="lbl">Neighbor Running for You</div>
+            </div>
           </div>
         </div>
       </section>
@@ -892,25 +975,26 @@ const Index = () => {
       {/* WHY I'M RUNNING (video placeholder) */}
       <section id="why">
         <div className="container">
-          <span className="section-eyebrow fade-up"><span className="dash" /> Why I'm Running</span>
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> Why I'm Running
+          </span>
           <h2 className="section-title fade-up delay-1">
             For the Extraordinary People of <em>District 25</em>
           </h2>
           <div className="why-grid">
             <div className="why-text fade-up">
               <p>
-                I care deeply about what happens here. I've heard from farmers facing rising
-                costs and uncertainty. I've talked with small business owners working every day
-                to keep their doors open and create jobs. I've met families who want their
-                children to have every opportunity to succeed and stay here to build a life.
+                I care deeply about what happens here. I've heard from farmers facing rising costs and uncertainty. I've
+                talked with small business owners working every day to keep their doors open and create jobs. I've met
+                families who want their children to have every opportunity to succeed and stay here to build a life.
               </p>
               <p>
-                I'm running to help keep small towns strong, protect local schools, maintain
-                roads, improve infrastructure, and make sure District 25 has a strong voice.
+                I'm running to help keep small towns strong, protect local schools, maintain roads, improve
+                infrastructure, and make sure District 25 has a strong voice.
               </p>
               <p>
-                I'll listen carefully, treat people with respect and focus on common-sense
-                solutions that help our communities thrive.
+                I'll listen carefully, treat people with respect and focus on common-sense solutions that help our
+                communities thrive.
               </p>
               <p className="signoff">
                 For the extraordinary people of District 25, I'm here for you.
@@ -919,7 +1003,9 @@ const Index = () => {
             </div>
             <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
               <span className="play-btn" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
               </span>
               <span className="video-cap">Campaign Video — Coming Soon</span>
             </div>
@@ -932,14 +1018,16 @@ const Index = () => {
         <div className="container">
           <div className="priorities-head">
             <div>
-              <span className="section-eyebrow fade-up"><span className="dash" /> Priorities</span>
+              <span className="section-eyebrow fade-up">
+                <span className="dash" /> Priorities
+              </span>
               <h2 className="section-title fade-up delay-1">
                 Priorities for <em>District 25</em>
               </h2>
             </div>
             <p className="fade-up delay-2">
-              Five focused commitments to keep our towns strong, our farms thriving, and our
-              families forward — together.
+              Five focused commitments to keep our towns strong, our farms thriving, and our families forward —
+              together.
             </p>
           </div>
           <div className="cards">
@@ -957,7 +1045,9 @@ const Index = () => {
       {/* ISSUES */}
       <section id="issues">
         <div className="container">
-          <span className="section-eyebrow fade-up"><span className="dash" /> Issues</span>
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> Issues
+          </span>
           <h2 className="section-title fade-up delay-1">
             Community Leadership. <em>Responsible Government.</em>
           </h2>
@@ -965,14 +1055,16 @@ const Index = () => {
             {ISSUES.map((it, i) => (
               <div key={it.t} className={`issue fade-up delay-${(i % 5) + 1}`}>
                 <h4>{it.t}</h4>
-                {it.p.map((para, j) => <p key={j}>{para}</p>)}
+                {it.p.map((para, j) => (
+                  <p key={j}>{para}</p>
+                ))}
               </div>
             ))}
           </div>
           <div className="closing-band fade-up">
             <p>
-              Bob brings a business mindset, a community heart, and a clear commitment to
-              common-sense leadership that moves District 25 forward.
+              Bob brings a business mindset, a community heart, and a clear commitment to common-sense leadership that
+              moves District 25 forward.
             </p>
           </div>
         </div>
@@ -981,7 +1073,9 @@ const Index = () => {
       {/* TAKE ACTION */}
       <section id="action">
         <div className="container">
-          <span className="section-eyebrow fade-up"><span className="dash" /> Take Action</span>
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> Take Action
+          </span>
           <h2 className="section-title fade-up delay-1">
             Join the <em>Campaign</em>
           </h2>
@@ -999,18 +1093,35 @@ const Index = () => {
             <h4>Get Involved</h4>
             <p className="sub">Tell us how you'd like to help and we'll be in touch.</p>
             <div className="form-grid">
-              <div className="field"><label htmlFor="n">Name</label><input id="n" type="text" placeholder="Your full name" /></div>
-              <div className="field"><label htmlFor="e">Email</label><input id="e" type="email" placeholder="you@example.com" /></div>
-              <div className="field"><label htmlFor="p">Phone</label><input id="p" type="tel" placeholder="(701) 555-0100" /></div>
-              <div className="field"><label htmlFor="z">ZIP Code</label><input id="z" type="text" placeholder="58000" /></div>
+              <div className="field">
+                <label htmlFor="n">Name</label>
+                <input id="n" type="text" placeholder="Your full name" />
+              </div>
+              <div className="field">
+                <label htmlFor="e">Email</label>
+                <input id="e" type="email" placeholder="you@example.com" />
+              </div>
+              <div className="field">
+                <label htmlFor="p">Phone</label>
+                <input id="p" type="tel" placeholder="(701) 555-0100" />
+              </div>
+              <div className="field">
+                <label htmlFor="z">ZIP Code</label>
+                <input id="z" type="text" placeholder="58000" />
+              </div>
             </div>
             <div className="checks">
               {ACTIONS.map((a) => (
-                <label key={a.t} className="check"><input type="checkbox" />{a.t}</label>
+                <label key={a.t} className="check">
+                  <input type="checkbox" />
+                  {a.t}
+                </label>
               ))}
             </div>
             <div className="submit-row">
-              <button type="submit" className="btn btn-red">Submit <span className="arrow">→</span></button>
+              <button type="submit" className="btn btn-red">
+                Submit <span className="arrow">→</span>
+              </button>
             </div>
           </form>
         </div>
@@ -1019,7 +1130,9 @@ const Index = () => {
       {/* MEDIA */}
       <section id="media">
         <div className="container">
-          <span className="section-eyebrow fade-up"><span className="dash" /> Media</span>
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> Media
+          </span>
           <h2 className="section-title fade-up delay-1">
             Press, Photos &amp; <em>Resources</em>
           </h2>
@@ -1029,16 +1142,26 @@ const Index = () => {
                 <div className="ph">{m.note}</div>
                 <h5>{m.t}</h5>
                 <p>{m.d}</p>
-                <a className="more" href="#">View <span>→</span></a>
+                <a className="more" href="#">
+                  View <span>→</span>
+                </a>
               </article>
             ))}
           </div>
 
           <div className="social-row fade-up">
-            <a href="#" aria-label="Facebook">{SOCIAL_ICONS.facebook}</a>
-            <a href="#" aria-label="Instagram">{SOCIAL_ICONS.instagram}</a>
-            <a href="#" aria-label="YouTube">{SOCIAL_ICONS.youtube}</a>
-            <a href="#" aria-label="TikTok">{SOCIAL_ICONS.tiktok}</a>
+            <a href="#" aria-label="Facebook">
+              {SOCIAL_ICONS.facebook}
+            </a>
+            <a href="#" aria-label="Instagram">
+              {SOCIAL_ICONS.instagram}
+            </a>
+            <a href="#" aria-label="YouTube">
+              {SOCIAL_ICONS.youtube}
+            </a>
+            <a href="#" aria-label="TikTok">
+              {SOCIAL_ICONS.tiktok}
+            </a>
           </div>
         </div>
       </section>
@@ -1046,24 +1169,33 @@ const Index = () => {
       {/* DONATE */}
       <section id="donate">
         <div className="star-strip top" aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => <span key={i}>★</span>)}
+          {Array.from({ length: 22 }).map((_, i) => (
+            <span key={i}>★</span>
+          ))}
         </div>
         <div className="star-strip bot" aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => <span key={i}>★</span>)}
+          {Array.from({ length: 22 }).map((_, i) => (
+            <span key={i}>★</span>
+          ))}
         </div>
         <div className="container fade-up">
-          <h2>Donate to <em>Bob</em></h2>
+          <h2>
+            Donate to <em>Bob</em>
+          </h2>
           <p className="blurb">
-            Your contribution helps reach voters, grow the campaign, and share Bob's
-            message across District 25.
+            Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
           </p>
           <div className="amounts">
-            {["$25","$50","$100","$250","$500","Other"].map((a) => (
-              <button key={a} className={`amount ${a === "$100" ? "active" : ""}`}>{a}</button>
+            {["$25", "$50", "$100", "$250", "$500", "Other"].map((a) => (
+              <button key={a} className={`amount ${a === "$100" ? "active" : ""}`}>
+                {a}
+              </button>
             ))}
           </div>
           <div>
-            <button className="donate-cta">Donate Now <span className="star">★</span></button>
+            <button className="donate-cta">
+              Donate Now <span className="star">★</span>
+            </button>
           </div>
         </div>
       </section>
@@ -1079,28 +1211,52 @@ const Index = () => {
           <div className="foot-col">
             <h5>Campaign</h5>
             <ul>
-              <li><a href="#about">About Bob</a></li>
-              <li><a href="#issues">Issues</a></li>
-              <li><a href="#priorities">Priorities</a></li>
-              <li><a href="#action">Take Action</a></li>
+              <li>
+                <a href="#about">About Bob</a>
+              </li>
+              <li>
+                <a href="#issues">Issues</a>
+              </li>
+              <li>
+                <a href="#priorities">Priorities</a>
+              </li>
+              <li>
+                <a href="#action">Take Action</a>
+              </li>
             </ul>
           </div>
           <div className="foot-col">
             <h5>Resources</h5>
             <ul>
-              <li><a href="#media">Press Releases</a></li>
-              <li><a href="#media">Images & Logos</a></li>
-              <li><a href="#media">Bio</a></li>
-              <li><a href="#media">Platform</a></li>
+              <li>
+                <a href="#media">Press Releases</a>
+              </li>
+              <li>
+                <a href="#media">Images & Logos</a>
+              </li>
+              <li>
+                <a href="#media">Bio</a>
+              </li>
+              <li>
+                <a href="#media">Platform</a>
+              </li>
             </ul>
           </div>
           <div className="foot-col">
             <h5>Follow</h5>
             <ul>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">YouTube</a></li>
-              <li><a href="#">TikTok</a></li>
+              <li>
+                <a href="#">Facebook</a>
+              </li>
+              <li>
+                <a href="#">Instagram</a>
+              </li>
+              <li>
+                <a href="#">YouTube</a>
+              </li>
+              <li>
+                <a href="#">TikTok</a>
+              </li>
             </ul>
           </div>
         </div>

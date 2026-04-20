@@ -537,7 +537,8 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-candidate img{width:100%;height:auto}
   .hero-content > .lede{order:5;padding:0 20px;margin-top:24px}
   .hero-content > .cta-row{order:6;padding:0 20px;margin-bottom:32px}
-  .hero-overlay{position:relative;order:7;left:0;right:0;width:100vw;margin:0;display:block}
+  .hero-overlay{position:relative;order:7;left:0;right:0;width:100vw;margin-top:-12vw;display:block}
+  .hero h1{font-size:clamp(40px,9vw,64px)}
   .cta-row{flex-wrap:nowrap}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}

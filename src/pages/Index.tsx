@@ -1131,7 +1131,7 @@ const Index = () => {
                   I'll listen carefully, treat people with respect and focus on common-sense solutions that help our
                   communities thrive.
                 </p>
-                <p className="quote-blue text-white">
+                <p className="quote-blue text-white bg-secondary-foreground">
                   For the extraordinary people of District 25, I'm here for you.
                   <br />— Your friend, Bob
                 </p>

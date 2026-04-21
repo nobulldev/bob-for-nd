@@ -221,13 +221,14 @@ section{padding:96px 36px;position:relative}
 }
 /* Reusable Bob quote (blue plate + yellow right line) */
 .quote-blue{
-  background:var(--navy);color:var(--cream);
+  background:var(--navy);color:#ffffff;
   border-right:6px solid var(--gold);
   padding:28px 30px;margin-top:28px;
   font-family:'Playfair Display',serif;font-style:italic;font-weight:300;
   font-size:22px;line-height:1.35;
   box-shadow:0 20px 40px -24px rgba(10,34,64,.4);
 }
+.quote-blue.text-white{color:#ffffff !important}
 .bio h3{
   font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
   font-size:36px;margin-bottom:22px;
@@ -671,11 +672,33 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .fact{border-right:0;border-bottom:1px solid rgba(10,34,64,.15)}
   .fact:last-child{border-bottom:0}
   .checks{gap:8px}
-  .quote-card blockquote{font-size:20px}
-  .closing-band p{font-size:19px}
-  #donate{padding:70px 22px}
-  .amount{padding:12px 18px;font-size:13px}
+  .quote-card blockquote{font-size:21px}
+  .closing-band p{font-size:20px}
+  #donate{padding:70px 14px}
+  .amount{padding:12px 18px;font-size:14px}
 }
+/* Wider content + slightly larger text on mobile */
+@media (max-width:960px){
+  body{font-size:18px}
+  section{padding:72px 12px !important}
+  .nav .wrap{padding:12px 12px}
+  .hero-content > .eyebrow,
+  .hero-content > h1,
+  .hero-content > .tagline{padding-left:12px;padding-right:12px}
+  .hero-content > .lede{padding:0 12px}
+  .hero-content > .cta-row{padding:0 6px;margin:24px 6px 32px}
+  .hero-candidate{width:calc(100% - 24px);margin:18px 12px 0}
+  .closing-band{padding:34px 18px}
+  .action-form{padding:32px 16px}
+  .foot-grid{padding:0 12px}
+  .foot-bottom{padding-left:12px;padding-right:12px}
+  .bio p{font-size:18px}
+  .why-text p{font-size:18px}
+  #donate .blurb{font-size:18px}
+  .quote-blue{font-size:23px;padding:28px 24px}
+  .menu a{font-size:14px}
+}
+
 `;
 
 const SOCIAL_ICONS = {

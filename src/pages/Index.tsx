@@ -221,13 +221,14 @@ section{padding:96px 36px;position:relative}
 }
 /* Reusable Bob quote (blue plate + yellow right line) */
 .quote-blue{
-  background:var(--navy);color:var(--cream);
+  background:var(--navy);color:#ffffff;
   border-right:6px solid var(--gold);
   padding:28px 30px;margin-top:28px;
   font-family:'Playfair Display',serif;font-style:italic;font-weight:300;
   font-size:22px;line-height:1.35;
   box-shadow:0 20px 40px -24px rgba(10,34,64,.4);
 }
+.quote-blue.text-white{color:#ffffff !important}
 .bio h3{
   font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
   font-size:36px;margin-bottom:22px;

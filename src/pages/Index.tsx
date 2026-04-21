@@ -1050,7 +1050,6 @@ const Index = () => {
               <div className="quote-card">
                 <span className="qmark">“</span>
                 <blockquote>I love our corner of North Dakota and the people who make it strong.</blockquote>
-                <cite>— Your friend, Bob</cite>
               </div>
             </aside>
             <div className="bio fade-up delay-1">

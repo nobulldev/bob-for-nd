@@ -391,67 +391,54 @@ section{padding:96px 36px;position:relative}
 .field input:focus{border-color:var(--red);background:#fff}
 .checks{
   margin-top:28px;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(280px,1fr));
-  gap:12px 24px;
-  align-items:start;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
 }
-.check{
-  position:relative;
-  display:grid;
-  grid-template-columns:18px minmax(0,1fr);
-  align-items:start;
-  column-gap:12px;
-  row-gap:0;
-  padding:8px 0;
-  background:transparent;
-  border:0;
-  border-radius:0;
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  background:#fff;
+  border:1.5px solid rgba(10,34,64,.2);
+  border-radius:999px;
   font-family:'Inter',sans-serif;
-  font-size:15px;
-  line-height:1.3;
+  font-size:14px;
+  font-weight:500;
+  line-height:1;
   color:var(--ink);
   cursor:pointer;
-  writing-mode:horizontal-tb;
-  text-orientation:mixed;
-  transform:none;
-  white-space:normal;
-  min-width:0;
+  transition:background .2s,border-color .2s,color .2s,box-shadow .2s,transform .15s;
+  white-space:nowrap;
+  user-select:none;
 }
-.check:hover{color:var(--navy)}
-.check input{
-  appearance:none;
-  -webkit-appearance:none;
-  width:18px;
-  height:18px;
-  margin:2px 0 0;
-  border:1.5px solid rgba(10,34,64,.35);
-  border-radius:3px;
+.chip:hover{border-color:var(--navy);color:var(--navy)}
+.chip[aria-pressed="true"]{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+  box-shadow:0 4px 12px rgba(191,30,46,.25);
+}
+.chip[aria-pressed="true"]:hover{color:#fff}
+.chip .chip-check{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  border:1.5px solid currentColor;
+  font-size:9px;
+  line-height:1;
+  opacity:.5;
+}
+.chip[aria-pressed="true"] .chip-check{
   background:#fff;
-  display:block;
-  transition:background .2s,border-color .2s,box-shadow .2s;
-}
-.check input:checked{background:var(--red);border-color:var(--red);box-shadow:0 0 0 2px rgba(191,30,46,.12)}
-.check input:checked::after{
-  content:"";
-  display:block;
-  width:5px;
-  height:9px;
-  margin:2px 0 0 5px;
-  border:solid #fff;
-  border-width:0 2px 2px 0;
-  transform:rotate(45deg);
-}
-.check span{
-  display:block;
-  min-width:0;
-  max-width:22ch;
-  writing-mode:horizontal-tb;
-  text-orientation:mixed;
-  transform:none;
-  white-space:normal;
-  overflow-wrap:anywhere;
-  word-break:normal;
+  color:var(--red);
+  border-color:#fff;
+  opacity:1;
 }
 .action-form .submit-row{margin-top:28px;display:flex;justify-content:flex-end}
 
@@ -672,7 +659,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .closing-band{padding:34px 28px}
   .action-form{padding:32px 24px}
   .form-grid{grid-template-columns:1fr}
-  .checks{grid-template-columns:1fr 1fr;gap:10px 18px}
+  .checks{gap:8px}
   .foot-bottom{padding-left:20px;padding-right:20px}
 }
 @media (max-width:640px){
@@ -683,8 +670,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .facts{grid-template-columns:1fr}
   .fact{border-right:0;border-bottom:1px solid rgba(10,34,64,.15)}
   .fact:last-child{border-bottom:0}
-  .checks{grid-template-columns:1fr}
-  .check span{max-width:none}
+  .checks{gap:8px}
   .quote-card blockquote{font-size:20px}
   .closing-band p{font-size:19px}
   #donate{padding:70px 22px}
@@ -1226,13 +1212,26 @@ const Index = () => {
                 <input id="z" type="text" placeholder="58000" />
               </div>
             </div>
-            <div className="checks">
-              {ACTIONS.map((a) => (
-                <label key={a.t} className="check">
-                  <input type="checkbox" />
-                  <span>{a.t}</span>
-                </label>
-              ))}
+            <div className="checks" role="group" aria-label="How would you like to help?">
+              {ACTIONS.map((a) => {
+                const active = selectedActions.includes(a.t);
+                return (
+                  <button
+                    type="button"
+                    key={a.t}
+                    className="chip"
+                    aria-pressed={active}
+                    onClick={() =>
+                      setSelectedActions((prev) =>
+                        prev.includes(a.t) ? prev.filter((x) => x !== a.t) : [...prev, a.t],
+                      )
+                    }
+                  >
+                    <span className="chip-check" aria-hidden="true">{active ? "✓" : ""}</span>
+                    <span>{a.t}</span>
+                  </button>
+                );
+              })}
             </div>
             <div className="submit-row">
               <button type="submit" className="btn btn-red">

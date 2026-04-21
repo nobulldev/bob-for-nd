@@ -799,9 +799,7 @@ const ISSUES = [
   {
     t: "Schools, Opportunity & the Next Generation",
     p: [
-      "Bob believes District 25 grows when young people can see a future here, when employers can find workers, and when families can afford to build a life and stay.",
-      "He supports strong schools, workforce development, job training, housing growth, child care support, and practical policies that help communities recruit and retain the people they need.",
-      "His years leading Marketplace for Kids reflect a deep belief in the next generation and the importance of creating real pathways into farming, the trades, business ownership, manufacturing, health care, education, and community leadership. District 25's future depends on giving people real reasons to build that future here.",
+      "Bob believes District 25 grows when young people can see a future here, when employers can find workers, and when families can afford to build a life and stay. He supports strong schools, workforce development, job training, housing growth, child care support, and practical policies that help communities recruit and retain the people they need.",
     ],
   },
 ];
@@ -1082,26 +1080,6 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="facts fade-up">
-            <div className="fact">
-              <div className="num">16</div>
-              <div className="lbl">Years Old at First Business</div>
-            </div>
-            <div className="fact">
-              <div className="num">
-                10<em>+</em>
-              </div>
-              <div className="lbl">Years at Marketplace for Kids</div>
-            </div>
-            <div className="fact">
-              <div className="num">25</div>
-              <div className="lbl">Senate District</div>
-            </div>
-            <div className="fact">
-              <div className="num">1</div>
-              <div className="lbl">Neighbor Running for You</div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1133,7 +1111,6 @@ const Index = () => {
                 </p>
                 <p className="quote-blue text-white bg-secondary-foreground">
                   For the extraordinary people of District 25, I'm here for you.
-                  <br />— Your friend, Bob
                 </p>
               </div>
             </div>
@@ -1171,7 +1148,6 @@ const Index = () => {
           <div className="cards">
             {PRIORITIES.map((p, i) => (
               <article key={p.n} className={`card fade-up delay-${(i % 5) + 1}`}>
-                <span className="num">{p.n}</span>
                 <h4>{p.t}</h4>
                 <p>{p.d}</p>
               </article>
@@ -1187,11 +1163,8 @@ const Index = () => {
             <img src={bobIssuesImg} alt="Bob Heitkamp at Marketplace for Kids" />
             <div className="issues-hero-overlay" />
             <div className="issues-hero-content">
-              <span className="section-eyebrow issues-hero-eyebrow">
-                <span className="dash" /> Issues
-              </span>
               <h2 className="section-title issues-hero-title">
-                Community Leadership. <em>Responsible Government.</em>
+                <em>Issues</em>
               </h2>
             </div>
           </div>
@@ -1330,8 +1303,8 @@ const Index = () => {
             Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
           </p>
           <div className="amounts">
-            {["$25", "$50", "$100", "$250", "$500", "Other"].map((a) => (
-              <button key={a} className={`amount ${a === "$100" ? "active" : ""}`}>
+            {["$10", "$25", "$50", "$100", "$200"].map((a) => (
+              <button key={a} className={`amount ${a === "$50" ? "active" : ""}`}>
                 {a}
               </button>
             ))}

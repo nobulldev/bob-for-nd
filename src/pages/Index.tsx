@@ -888,7 +888,7 @@ const MEDIA: { t: string; d: string; note: string; img?: string }[] = [
     img: mediaPressImg,
   },
   { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg },
-  { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail" },
+  { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail", img: videoThumbImg },
   { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg },
   { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg },
   { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg },
@@ -1135,12 +1135,6 @@ const Index = () => {
             </div>
             <div className="why-video-wrap">
               <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
-                <img
-                  src={videoThumbImg}
-                  alt="Campaign video preview"
-                  loading="lazy"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                />
                 <span className="play-btn" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />

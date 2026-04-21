@@ -5,6 +5,9 @@ import candidateImg from "@/assets/candidate.png";
 import logoImg from "@/assets/logo.png";
 import bobQuoteImg from "@/assets/bob-quote.jpg";
 import bobIssuesImg from "@/assets/bob-issues.png";
+import mediaPressImg from "@/assets/media-press.png";
+import mediaImagesImg from "@/assets/media-images.png";
+import mediaLogosImg from "@/assets/media-logos.png";
 
 const STYLES = `
 :root{
@@ -872,15 +875,16 @@ const ACTIONS = [
   },
 ];
 
-const MEDIA = [
+const MEDIA: { t: string; d: string; note: string; img?: string }[] = [
   {
     t: "Press Releases",
     d: "Official announcements and statements from the campaign.",
     note: "Press release thumbnail",
+    img: mediaPressImg,
   },
-  { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview" },
+  { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg },
   { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail" },
-  { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview" },
+  { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg },
   { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview" },
   { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview" },
 ];
@@ -1275,7 +1279,13 @@ const Index = () => {
           <div className="media-grid">
             {MEDIA.map((m, i) => (
               <article key={m.t} className={`media-card fade-up delay-${(i % 5) + 1}`}>
-                <div className="ph">{m.note}</div>
+                <div className="ph">
+                  {m.img ? (
+                    <img src={m.img} alt={m.t} loading="lazy" />
+                  ) : (
+                    m.note
+                  )}
+                </div>
                 <h5>{m.t}</h5>
                 <p>{m.d}</p>
                 <a className="more" href="#">

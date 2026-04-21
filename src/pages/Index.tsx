@@ -459,7 +459,9 @@ section{padding:96px 36px;position:relative}
   display:flex;align-items:center;justify-content:center;
   color:var(--placeholder-ink);font-family:'Oswald',sans-serif;
   text-transform:uppercase;font-size:11px;letter-spacing:.22em;
+  overflow:hidden;
 }
+.media-card .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .media-card h5{
   font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);font-size:22px;
 }

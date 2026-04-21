@@ -1120,7 +1120,7 @@ const Index = () => {
                   communities thrive.
                 </p>
                 <p className="quote-blue bg-secondary-foreground text-white">
-                  For the extraordinary people of District 25, I'm here for you.
+                  I'm running to listen, work hard, and protect the future of our communities.
                 </p>
               </div>
             </div>
@@ -1150,10 +1150,6 @@ const Index = () => {
                 Priorities for <em>District 25</em>
               </h2>
             </div>
-            <p className="fade-up delay-2">
-              Five focused commitments to keep our towns strong, our farms thriving, and our families forward —
-              together.
-            </p>
           </div>
           <div className="cards">
             {PRIORITIES.map((p, i) => (

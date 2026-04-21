@@ -1027,7 +1027,7 @@ const Index = () => {
             <em>for State Senate</em>
           </h1>
           <span className="tagline fade-up delay-2 in px-0">Proven Experience · Local Leadership · Forward Together</span>
-          <p className="lede fade-up delay-3">
+          <p className="lede fade-up delay-3 font-semibold">
             A lifetime of building businesses, helping people, and serving our community. Your neighbor, ready to
             represent District 25 with experienced leadership and a strong voice for local families, farms, and small
             towns.

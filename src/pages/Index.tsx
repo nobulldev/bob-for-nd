@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroBg from "@/assets/hero-bg.png";
 import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
@@ -864,6 +864,7 @@ const MEDIA = [
 const Index = () => {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const candidateRef = useRef<HTMLDivElement>(null);
+  const [selectedActions, setSelectedActions] = useState<string[]>([]);
 
   useEffect(() => {
     // Nav shadow on scroll

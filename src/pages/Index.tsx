@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.png";
 import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
@@ -473,6 +474,9 @@ section{padding:96px 36px;position:relative}
   font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.22em;
   color:var(--red);display:inline-flex;align-items:center;gap:8px;
 }
+.media-card--compact{gap:14px;padding-bottom:22px}
+.media-card--compact h5{text-align:center}
+.media-cta{margin-top:48px;display:flex;justify-content:center}
 
 .social-row{
   margin-top:64px;display:flex;justify-content:center;gap:18px;
@@ -1303,7 +1307,7 @@ const Index = () => {
           </h2>
           <div className="media-grid">
             {MEDIA.map((m, i) => (
-              <article key={m.t} className={`media-card fade-up delay-${(i % 5) + 1}`}>
+              <article key={m.t} className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
                 <div className="ph">
                   {m.img ? (
                     <img src={m.img} alt={m.t} loading="lazy" />
@@ -1312,12 +1316,14 @@ const Index = () => {
                   )}
                 </div>
                 <h5>{m.t}</h5>
-                <p>{m.d}</p>
-                <a className="more" href="#">
-                  View <span>→</span>
-                </a>
               </article>
             ))}
+          </div>
+
+          <div className="media-cta fade-up">
+            <Link to="/press" className="btn btn-red">
+              View All <span className="arrow">→</span>
+            </Link>
           </div>
 
           <div className="social-row fade-up">

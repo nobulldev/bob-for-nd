@@ -246,7 +246,7 @@ const VIDEOS: Item[] = [
 
 const LOGOS: Item[] = [
   { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: assetLogo },
-  { title: "Icon", desc: "Square icon mark for avatars and small placements.", img: mediaLogosImg },
+  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: mediaLogosImg },
   { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: assetYardSign },
 ];
 

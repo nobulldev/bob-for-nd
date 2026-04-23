@@ -726,11 +726,12 @@ const SOCIAL_ICONS = {
       <path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z" />
     </svg>
   ),
-  tiktok: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M19.6 6.7a5.3 5.3 0 0 1-3.2-1.1 5.3 5.3 0 0 1-2-3H11v12.7a2.6 2.6 0 1 1-1.9-2.5V8.6a5.7 5.7 0 1 0 5 5.6V9.7a8.3 8.3 0 0 0 5.5 2v-5z" />
-    </svg>
-  ),
+};
+
+const SOCIAL_LINKS = {
+  facebook: "https://www.facebook.com/profile.php?id=61576634976767",
+  instagram: "https://www.instagram.com/votebob26/",
+  youtube: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q",
 };
 
 const Star = ({ className = "" }: { className?: string }) => (
@@ -1221,28 +1222,47 @@ const Index = () => {
             ))}
           </div>
 
-          <form className="action-form fade-up" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="action-form fade-up"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const name = (form.elements.namedItem("n") as HTMLInputElement).value.trim();
+              const email = (form.elements.namedItem("e") as HTMLInputElement).value.trim();
+              const phone = (form.elements.namedItem("p") as HTMLInputElement).value.trim();
+              const zip = (form.elements.namedItem("z") as HTMLInputElement).value.trim();
+              if (selectedActions.length === 0) {
+                alert("Please select at least one way you'd like to help.");
+                return;
+              }
+              const subject = encodeURIComponent(`Get Involved — ${name}`);
+              const body = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nZIP Code: ${zip}\n\nInterested in:\n- ${selectedActions.join("\n- ")}`,
+              );
+              window.location.href = `mailto:votebob26@gmail.com?subject=${subject}&body=${body}`;
+            }}
+          >
             <h4>Get Involved</h4>
             <p className="sub">Tell us how you'd like to help and we'll be in touch.</p>
             <div className="form-grid">
               <div className="field">
-                <label htmlFor="n">Name</label>
-                <input id="n" type="text" placeholder="Your full name" />
+                <label htmlFor="n">Name *</label>
+                <input id="n" name="n" type="text" placeholder="Your full name" required />
               </div>
               <div className="field">
-                <label htmlFor="e">Email</label>
-                <input id="e" type="email" placeholder="you@example.com" />
+                <label htmlFor="e">Email *</label>
+                <input id="e" name="e" type="email" placeholder="you@example.com" required />
               </div>
               <div className="field">
-                <label htmlFor="p">Phone</label>
-                <input id="p" type="tel" placeholder="(701) 555-0100" />
+                <label htmlFor="p">Phone *</label>
+                <input id="p" name="p" type="tel" placeholder="(701) 555-0100" required />
               </div>
               <div className="field">
-                <label htmlFor="z">ZIP Code</label>
-                <input id="z" type="text" placeholder="58000" />
+                <label htmlFor="z">ZIP Code *</label>
+                <input id="z" name="z" type="text" placeholder="58000" required pattern="\d{5}(-\d{4})?" />
               </div>
             </div>
-            <div className="checks" role="group" aria-label="How would you like to help?">
+            <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
               {ACTIONS.map((a) => {
                 const active = selectedActions.includes(a.t);
                 return (
@@ -1301,17 +1321,14 @@ const Index = () => {
           </div>
 
           <div className="social-row fade-up">
-            <a href="#" aria-label="Facebook">
+            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               {SOCIAL_ICONS.facebook}
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               {SOCIAL_ICONS.instagram}
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
               {SOCIAL_ICONS.youtube}
-            </a>
-            <a href="#" aria-label="TikTok">
-              {SOCIAL_ICONS.tiktok}
             </a>
           </div>
         </div>
@@ -1397,22 +1414,19 @@ const Index = () => {
             <h5>Follow</h5>
             <ul>
               <li>
-                <a href="#">Facebook</a>
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
               </li>
               <li>
-                <a href="#">Instagram</a>
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
               </li>
               <li>
-                <a href="#">YouTube</a>
-              </li>
-              <li>
-                <a href="#">TikTok</a>
+                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
               </li>
             </ul>
           </div>
         </div>
         <div className="foot-bottom">
-          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25.</span>
+          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Julie Prochnow - Treasurer</span>
           <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
         </div>
       </footer>

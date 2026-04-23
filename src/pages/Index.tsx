@@ -1321,17 +1321,14 @@ const Index = () => {
           </div>
 
           <div className="social-row fade-up">
-            <a href="#" aria-label="Facebook">
+            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               {SOCIAL_ICONS.facebook}
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               {SOCIAL_ICONS.instagram}
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
               {SOCIAL_ICONS.youtube}
-            </a>
-            <a href="#" aria-label="TikTok">
-              {SOCIAL_ICONS.tiktok}
             </a>
           </div>
         </div>

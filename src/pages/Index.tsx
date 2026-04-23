@@ -1414,22 +1414,19 @@ const Index = () => {
             <h5>Follow</h5>
             <ul>
               <li>
-                <a href="#">Facebook</a>
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
               </li>
               <li>
-                <a href="#">Instagram</a>
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
               </li>
               <li>
-                <a href="#">YouTube</a>
-              </li>
-              <li>
-                <a href="#">TikTok</a>
+                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
               </li>
             </ul>
           </div>
         </div>
         <div className="foot-bottom">
-          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25.</span>
+          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Julie Prochnow - Treasurer</span>
           <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
         </div>
       </footer>

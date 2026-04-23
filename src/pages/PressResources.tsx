@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "@/assets/logo.png";
 import mediaPressImg from "@/assets/media-press.png";
@@ -130,6 +131,70 @@ section.page{padding:80px 36px 110px}
 @media (max-width:480px){
   .media-grid{grid-template-columns:1fr}
 }
+
+/* ---------- Back-home CTA ---------- */
+.back-home-wrap{
+  margin-top:80px;display:flex;justify-content:center;
+}
+.back-home{
+  font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-size:13px;letter-spacing:.22em;
+  color:var(--cream);background:var(--navy);
+  padding:16px 32px;border:0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:12px;
+  transition:background .2s,transform .2s;
+}
+.back-home:hover{background:var(--red);transform:translateY(-2px)}
+
+/* ---------- Footer ---------- */
+footer.pr-footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px;margin-top:40px}
+.foot-grid{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:46px;
+}
+.foot-brand .foot-logo{height:72px;width:auto;display:block;margin-bottom:18px}
+.foot-brand h4{font-family:'Playfair Display',serif;font-weight:800;font-size:24px;color:var(--cream)}
+.foot-brand p{
+  margin-top:10px;font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-size:12px;letter-spacing:.22em;color:var(--gold);
+}
+.foot-col h5{
+  font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;
+  letter-spacing:.24em;color:var(--gold);margin-bottom:18px;
+}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-col a{color:rgba(245,239,228,.78);font-size:14.5px;transition:color .2s}
+.foot-col a:hover{color:var(--cream)}
+.foot-bottom{
+  max-width:1440px;margin:54px auto 0;padding-top:24px;
+  border-top:1px solid rgba(245,239,228,.15);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  font-size:12.5px;color:rgba(245,239,228,.6);
+  font-family:'Oswald',sans-serif;letter-spacing:.18em;text-transform:uppercase;
+}
+@media (max-width:900px){
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media (max-width:520px){
+  .foot-grid{grid-template-columns:1fr}
+}
+
+/* ---------- Scroll-to-top ---------- */
+.scroll-top{
+  position:fixed;right:28px;bottom:28px;z-index:60;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--red);color:var(--cream);border:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 30px -8px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .25s,transform .25s,background .2s;
+}
+.scroll-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.scroll-top:hover{background:#a51a27}
+.scroll-top svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5}
+@media (max-width:720px){
+  .scroll-top{right:18px;bottom:18px;width:46px;height:46px}
+}
 `;
 
 type Item = {
@@ -217,7 +282,22 @@ const Group = ({
   </div>
 );
 
+const SOCIAL_LINKS = {
+  facebook: "https://www.facebook.com/profile.php?id=61576634976767",
+  instagram: "https://www.instagram.com/votebob26/",
+  youtube: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q",
+};
+
 const PressResources = () => {
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <style>{STYLES}</style>
@@ -250,8 +330,65 @@ const PressResources = () => {
           <Group title="Logos &" emTitle="Brand Assets" items={LOGOS} />
           <Group title="Bio" items={BIO} />
           <Group title="Platform" items={PLATFORM} />
+
+          <div className="back-home-wrap">
+            <Link to="/" className="back-home">
+              ← Back to Home
+            </Link>
+          </div>
         </div>
       </section>
+
+      <footer className="pr-footer">
+        <div className="foot-grid">
+          <div className="foot-brand">
+            <img src={logoImg} alt="Bob Heitkamp for Senate" className="foot-logo" />
+            <h4>Bob Heitkamp</h4>
+            <p>Proven Experience · Local Leadership · Forward Together</p>
+          </div>
+          <div className="foot-col">
+            <h5>Campaign</h5>
+            <ul>
+              <li><Link to="/#about">About Bob</Link></li>
+              <li><Link to="/#issues">Issues</Link></li>
+              <li><Link to="/#priorities">Priorities</Link></li>
+              <li><Link to="/#action">Take Action</Link></li>
+            </ul>
+          </div>
+          <div className="foot-col">
+            <h5>Resources</h5>
+            <ul>
+              <li><Link to="/press">Press Releases</Link></li>
+              <li><Link to="/press">Images & Logos</Link></li>
+              <li><Link to="/press">Bio</Link></li>
+              <li><Link to="/press">Platform</Link></li>
+            </ul>
+          </div>
+          <div className="foot-col">
+            <h5>Follow</h5>
+            <ul>
+              <li><a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li><a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="foot-bottom">
+          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Julie Prochnow - Treasurer</span>
+          <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
+        </div>
+      </footer>
+
+      <button
+        type="button"
+        className={`scroll-top${showTop ? " show" : ""}`}
+        aria-label="Scroll to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 19V5m0 0l-7 7m7-7l7 7" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </>
   );
 };

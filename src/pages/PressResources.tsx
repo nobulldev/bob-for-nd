@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "@/assets/logo.png";
 import mediaPressImg from "@/assets/media-press.png";
-import mediaImagesImg from "@/assets/media-images.png";
 import mediaLogosImg from "@/assets/media-logos.png";
 import mediaBioImg from "@/assets/section-bio.png";
 import mediaPlatformImg from "@/assets/section-platform.png";
 import videoThumbImg from "@/assets/section-video.png";
+import bobPhoto01 from "@/assets/bob-photo-01.png";
+import bobPhoto02 from "@/assets/bob-photo-02.png";
+import bobPhoto03 from "@/assets/bob-photo-03.png";
+import bobPhoto04 from "@/assets/bob-photo-04.png";
+import bobPhoto06 from "@/assets/bob-photo-06.png";
+import bobPhoto07 from "@/assets/bob-photo-07.png";
+import bobPhoto08 from "@/assets/bob-photo-08.png";
+import bobPhoto10 from "@/assets/bob-photo-10.png";
 
 const STYLES = `
 :root{
@@ -116,7 +123,7 @@ section.page{padding:80px 36px 110px}
   display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
   transition:gap .2s,color .2s;
 }
-.download:hover{color:#a51a27;gap:14px}
+.download:hover{color:#a51a27}
 .download svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
 @media (max-width:1100px){
@@ -213,10 +220,21 @@ const PRESS_RELEASES: Item[] = [
 ];
 
 
-const BOB_PHOTOS: Item[] = Array.from({ length: 8 }).map((_, i) => ({
+const BOB_PHOTO_IMAGES = [
+  bobPhoto01,
+  bobPhoto02,
+  bobPhoto03,
+  bobPhoto04,
+  bobPhoto06,
+  bobPhoto07,
+  bobPhoto08,
+  bobPhoto10,
+];
+
+const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
   title: `Bob Heitkamp Photo ${i + 1}`,
   desc: "Approved photos for media use and supporters.",
-  img: mediaImagesImg,
+  img,
 }));
 
 const VIDEOS: Item[] = [

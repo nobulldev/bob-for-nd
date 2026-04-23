@@ -457,7 +457,7 @@ section{padding:96px 36px;position:relative}
   padding:26px;display:flex;flex-direction:column;gap:18px;
   transition:transform .2s, box-shadow .2s, border-color .2s;
 }
-.media-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(10,34,64,.25);border-color:transparent}
+.media-card--compact:hover{transform:none;box-shadow:none;border-color:rgba(10,34,64,.1)}
 .media-card .ph{
   aspect-ratio:1/1;background:var(--placeholder);
   display:flex;align-items:center;justify-content:center;

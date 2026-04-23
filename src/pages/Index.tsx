@@ -1222,28 +1222,47 @@ const Index = () => {
             ))}
           </div>
 
-          <form className="action-form fade-up" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="action-form fade-up"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const name = (form.elements.namedItem("n") as HTMLInputElement).value.trim();
+              const email = (form.elements.namedItem("e") as HTMLInputElement).value.trim();
+              const phone = (form.elements.namedItem("p") as HTMLInputElement).value.trim();
+              const zip = (form.elements.namedItem("z") as HTMLInputElement).value.trim();
+              if (selectedActions.length === 0) {
+                alert("Please select at least one way you'd like to help.");
+                return;
+              }
+              const subject = encodeURIComponent(`Get Involved — ${name}`);
+              const body = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nZIP Code: ${zip}\n\nInterested in:\n- ${selectedActions.join("\n- ")}`,
+              );
+              window.location.href = `mailto:votebob26@gmail.com?subject=${subject}&body=${body}`;
+            }}
+          >
             <h4>Get Involved</h4>
             <p className="sub">Tell us how you'd like to help and we'll be in touch.</p>
             <div className="form-grid">
               <div className="field">
-                <label htmlFor="n">Name</label>
-                <input id="n" type="text" placeholder="Your full name" />
+                <label htmlFor="n">Name *</label>
+                <input id="n" name="n" type="text" placeholder="Your full name" required />
               </div>
               <div className="field">
-                <label htmlFor="e">Email</label>
-                <input id="e" type="email" placeholder="you@example.com" />
+                <label htmlFor="e">Email *</label>
+                <input id="e" name="e" type="email" placeholder="you@example.com" required />
               </div>
               <div className="field">
-                <label htmlFor="p">Phone</label>
-                <input id="p" type="tel" placeholder="(701) 555-0100" />
+                <label htmlFor="p">Phone *</label>
+                <input id="p" name="p" type="tel" placeholder="(701) 555-0100" required />
               </div>
               <div className="field">
-                <label htmlFor="z">ZIP Code</label>
-                <input id="z" type="text" placeholder="58000" />
+                <label htmlFor="z">ZIP Code *</label>
+                <input id="z" name="z" type="text" placeholder="58000" required pattern="\d{5}(-\d{4})?" />
               </div>
             </div>
-            <div className="checks" role="group" aria-label="How would you like to help?">
+            <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
               {ACTIONS.map((a) => {
                 const active = selectedActions.includes(a.t);
                 return (

@@ -14,6 +14,8 @@ import bobPhoto06 from "@/assets/bob-photo-06.png";
 import bobPhoto07 from "@/assets/bob-photo-07.png";
 import bobPhoto08 from "@/assets/bob-photo-08.png";
 import bobPhoto10 from "@/assets/bob-photo-10.png";
+import assetLogo from "@/assets/asset-logo.png";
+import assetYardSign from "@/assets/asset-yard-sign.png";
 
 const STYLES = `
 :root{
@@ -243,9 +245,9 @@ const VIDEOS: Item[] = [
 ];
 
 const LOGOS: Item[] = [
-  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: mediaLogosImg },
+  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: assetLogo },
   { title: "Icon", desc: "Square icon mark for avatars and small placements.", img: mediaLogosImg },
-  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: mediaLogosImg },
+  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: assetYardSign },
 ];
 
 const BIO: Item[] = [

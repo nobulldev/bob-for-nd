@@ -84,9 +84,6 @@ section.page{padding:80px 36px 110px}
 }
 
 .media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.media-grid.cols-3{grid-template-columns:repeat(3,1fr)}
-.media-grid.cols-2{grid-template-columns:repeat(2,1fr);gap:28px}
-.media-grid.cols-1{grid-template-columns:1fr;max-width:720px}
 
 .media-card{
   background:var(--cream-2);border:1px solid rgba(10,34,64,.1);
@@ -113,26 +110,25 @@ section.page{padding:80px 36px 110px}
   margin-top:4px;
   font-family:'Oswald',sans-serif;text-transform:uppercase;
   font-size:12px;letter-spacing:.22em;
-  color:var(--cream);background:var(--red);
-  padding:10px 16px;border:0;cursor:pointer;
+  color:var(--red);background:transparent;
+  padding:6px 0;border:0;cursor:pointer;
   display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
-  transition:background .2s,transform .2s;
+  transition:gap .2s,color .2s;
 }
-.download:hover{background:#a51a27;transform:translateY(-2px)}
+.download:hover{color:#a51a27;gap:14px}
 .download svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
 @media (max-width:1100px){
   .media-grid{grid-template-columns:repeat(3,1fr)}
-  .media-grid.cols-3{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:720px){
   section.page{padding:60px 20px 80px}
-  .media-grid,.media-grid.cols-3,.media-grid.cols-2{grid-template-columns:repeat(2,1fr);gap:16px}
+  .media-grid{grid-template-columns:repeat(2,1fr);gap:16px}
   .nav .wrap{padding:12px 20px}
   .brand img.brand-logo{height:44px}
 }
 @media (max-width:480px){
-  .media-grid,.media-grid.cols-3,.media-grid.cols-2{grid-template-columns:1fr}
+  .media-grid{grid-template-columns:1fr}
 }
 `;
 
@@ -151,11 +147,6 @@ const PRESS_RELEASES: Item[] = [
   },
 ];
 
-const PHOTOS: Item[] = Array.from({ length: 8 }).map((_, i) => ({
-  title: `Photo ${i + 1}`,
-  desc: "Approved photos for media use and supporters.",
-  img: mediaImagesImg,
-}));
 
 const BOB_PHOTOS: Item[] = Array.from({ length: 8 }).map((_, i) => ({
   title: `Bob Heitkamp Photo ${i + 1}`,
@@ -205,12 +196,10 @@ const Group = ({
   title,
   emTitle,
   items,
-  cols,
 }: {
   title: string;
   emTitle?: string;
   items: Item[];
-  cols?: 1 | 2 | 3 | 4;
 }) => (
   <div className="group">
     <div className="group-head">
@@ -220,7 +209,7 @@ const Group = ({
       </h3>
       <span className="group-count">{items.length} item{items.length === 1 ? "" : "s"}</span>
     </div>
-    <div className={`media-grid${cols && cols !== 4 ? ` cols-${cols}` : ""}`}>
+    <div className="media-grid">
       {items.map((it) => (
         <Card key={it.title} item={it} />
       ))}
@@ -255,13 +244,12 @@ const PressResources = () => {
             Download official campaign materials — press releases, photos, videos, logos, and platform documents.
           </p>
 
-          <Group title="Press" emTitle="Releases" items={PRESS_RELEASES} cols={1} />
-          <Group title="Photos" items={PHOTOS} />
+          <Group title="Press" emTitle="Releases" items={PRESS_RELEASES} />
           <Group title="Bob Heitkamp" emTitle="Photos" items={BOB_PHOTOS} />
-          <Group title="Videos" items={VIDEOS} cols={2} />
-          <Group title="Logos &" emTitle="Brand Assets" items={LOGOS} cols={3} />
-          <Group title="Bio" items={BIO} cols={1} />
-          <Group title="Platform" items={PLATFORM} cols={1} />
+          <Group title="Videos" items={VIDEOS} />
+          <Group title="Logos &" emTitle="Brand Assets" items={LOGOS} />
+          <Group title="Bio" items={BIO} />
+          <Group title="Platform" items={PLATFORM} />
         </div>
       </section>
     </>

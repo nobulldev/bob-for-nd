@@ -147,11 +147,6 @@ const PRESS_RELEASES: Item[] = [
   },
 ];
 
-const PHOTOS: Item[] = Array.from({ length: 8 }).map((_, i) => ({
-  title: `Photo ${i + 1}`,
-  desc: "Approved photos for media use and supporters.",
-  img: mediaImagesImg,
-}));
 
 const BOB_PHOTOS: Item[] = Array.from({ length: 8 }).map((_, i) => ({
   title: `Bob Heitkamp Photo ${i + 1}`,
@@ -201,12 +196,10 @@ const Group = ({
   title,
   emTitle,
   items,
-  cols,
 }: {
   title: string;
   emTitle?: string;
   items: Item[];
-  cols?: 1 | 2 | 3 | 4;
 }) => (
   <div className="group">
     <div className="group-head">

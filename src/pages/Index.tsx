@@ -509,28 +509,11 @@ section{padding:96px 36px;position:relative}
 #donate .blurb{
   max-width:620px;margin:18px auto 0;font-size:17px;color:rgba(245,239,228,.9);
 }
-.amounts{
-  margin:36px auto 0;display:flex;justify-content:center;flex-wrap:wrap;gap:12px;
+.donate-embed{
+  margin:36px auto 0;max-width:680px;
+  background:#fff;border-radius:4px;
+  box-shadow:0 24px 60px rgba(0,0,0,.25);
 }
-.amount{
-  background:transparent;color:var(--cream);
-  border:1.5px solid rgba(245,239,228,.6);
-  font-family:'Oswald',sans-serif;letter-spacing:.18em;font-size:14px;
-  padding:14px 26px;cursor:pointer;border-radius:2px;
-  transition:background .2s, color .2s, border-color .2s;
-}
-.amount:hover{border-color:var(--gold);color:var(--gold)}
-.amount.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.donate-cta{
-  margin-top:32px;background:var(--cream);color:var(--navy);
-  font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.22em;
-  font-size:14px;padding:18px 42px;border:0;cursor:pointer;border-radius:2px;
-  display:inline-flex;align-items:center;gap:12px;
-  transition:background .2s, color .2s;
-}
-.donate-cta:hover{background:var(--gold);color:var(--navy)}
-.donate-cta .star{color:var(--red)}
-.donate-cta:hover .star{color:var(--navy)}
 
 /* ---------- Footer ---------- */
 footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
@@ -926,14 +909,6 @@ const Index = () => {
     };
     menu?.addEventListener("click", closeMenu);
 
-    // Donate amount toggle
-    const amounts = document.querySelectorAll(".amount");
-    const onAmount = (e: Event) => {
-      amounts.forEach((b) => b.classList.remove("active"));
-      (e.currentTarget as HTMLElement).classList.add("active");
-    };
-    amounts.forEach((b) => b.addEventListener("click", onAmount));
-
     // Fade-up observer
     const io = new IntersectionObserver(
       (entries) => {
@@ -975,7 +950,6 @@ const Index = () => {
       window.removeEventListener("mousemove", onMouseMove);
       ham?.removeEventListener("click", onHam);
       menu?.removeEventListener("click", closeMenu);
-      amounts.forEach((b) => b.removeEventListener("click", onAmount));
       io.disconnect();
     };
   }, []);
@@ -1359,17 +1333,16 @@ const Index = () => {
           <p className="blurb">
             Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
           </p>
-          <div className="amounts">
-            {["$10", "$25", "$50", "$100", "$200"].map((a) => (
-              <button key={a} className={`amount ${a === "$50" ? "active" : ""}`}>
-                {a}
-              </button>
-            ))}
-          </div>
-          <div>
-            <button className="donate-cta">
-              Donate Now <span className="star">★</span>
-            </button>
+          <div className="donate-embed">
+            <iframe
+              src="https://goodchange.app/donate/bob-25"
+              title="Donate to Bob Heitkamp"
+              width="100%"
+              height="1500"
+              frameBorder={0}
+              scrolling="no"
+              style={{ border: "none", display: "block" }}
+            />
           </div>
         </div>
       </section>

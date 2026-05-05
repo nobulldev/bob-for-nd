@@ -885,10 +885,13 @@ const MEDIA: { t: string; d: string; note: string; img?: string }[] = [
   { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg },
 ];
 
+const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
+
 const Index = () => {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const candidateRef = useRef<HTMLDivElement>(null);
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   useEffect(() => {
     // Nav shadow on scroll
@@ -1205,70 +1208,119 @@ const Index = () => {
 
           <form
             className="action-form fade-up"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
+              if (selectedActions.length === 0) {
+                alert("Please select at least one way you'd like to help.");
+                return;
+              }
               const form = e.currentTarget;
               const name = (form.elements.namedItem("n") as HTMLInputElement).value.trim();
               const email = (form.elements.namedItem("e") as HTMLInputElement).value.trim();
               const phone = (form.elements.namedItem("p") as HTMLInputElement).value.trim();
               const zip = (form.elements.namedItem("z") as HTMLInputElement).value.trim();
-              if (selectedActions.length === 0) {
-                alert("Please select at least one way you'd like to help.");
-                return;
+              setFormStatus("sending");
+              try {
+                const res = await fetch("https://api.web3forms.com/submit", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json", Accept: "application/json" },
+                  body: JSON.stringify({
+                    access_key: WEB3FORMS_KEY,
+                    subject: `Get Involved — ${name}`,
+                    from_name: name,
+                    name,
+                    email,
+                    phone,
+                    zip_code: zip,
+                    interested_in: selectedActions.join(", "),
+                  }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                  setFormStatus("success");
+                  form.reset();
+                  setSelectedActions([]);
+                } else {
+                  setFormStatus("error");
+                }
+              } catch {
+                setFormStatus("error");
               }
-              const subject = encodeURIComponent(`Get Involved — ${name}`);
-              const body = encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nZIP Code: ${zip}\n\nInterested in:\n- ${selectedActions.join("\n- ")}`,
-              );
-              window.location.href = `mailto:votebob26@gmail.com?subject=${subject}&body=${body}`;
             }}
           >
             <h4>Get Involved</h4>
             <p className="sub">Tell us how you'd like to help and we'll be in touch.</p>
-            <div className="form-grid">
-              <div className="field">
-                <label htmlFor="n">Name *</label>
-                <input id="n" name="n" type="text" placeholder="Your full name" required />
+
+            {formStatus === "success" ? (
+              <div style={{ padding: "32px 0", textAlign: "center" }}>
+                <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, color: "var(--navy)", fontWeight: 800, marginBottom: 10 }}>
+                  Thank you!
+                </p>
+                <p style={{ color: "var(--muted)", fontSize: 16 }}>
+                  We received your message and will be in touch soon.
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  style={{ marginTop: 20, borderColor: "var(--navy)", color: "var(--navy)" }}
+                  onClick={() => setFormStatus("idle")}
+                >
+                  Submit Another
+                </button>
               </div>
-              <div className="field">
-                <label htmlFor="e">Email *</label>
-                <input id="e" name="e" type="email" placeholder="you@example.com" required />
-              </div>
-              <div className="field">
-                <label htmlFor="p">Phone *</label>
-                <input id="p" name="p" type="tel" placeholder="(701) 555-0100" required />
-              </div>
-              <div className="field">
-                <label htmlFor="z">ZIP Code *</label>
-                <input id="z" name="z" type="text" placeholder="58000" required pattern="\d{5}(-\d{4})?" />
-              </div>
-            </div>
-            <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
-              {ACTIONS.map((a) => {
-                const active = selectedActions.includes(a.t);
-                return (
-                  <button
-                    type="button"
-                    key={a.t}
-                    className="chip"
-                    aria-pressed={active}
-                    onClick={() =>
-                      setSelectedActions((prev) =>
-                        prev.includes(a.t) ? prev.filter((x) => x !== a.t) : [...prev, a.t],
-                      )
-                    }
-                  >
-                    <span className="chip-check" aria-hidden="true">{active ? "✓" : ""}</span>
-                    <span>{a.t}</span>
+            ) : (
+              <>
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="n">Name *</label>
+                    <input id="n" name="n" type="text" placeholder="Your full name" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="e">Email *</label>
+                    <input id="e" name="e" type="email" placeholder="you@example.com" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="p">Phone *</label>
+                    <input id="p" name="p" type="tel" placeholder="(701) 555-0100" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="z">ZIP Code *</label>
+                    <input id="z" name="z" type="text" placeholder="58000" required pattern="\d{5}(-\d{4})?" />
+                  </div>
+                </div>
+                <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
+                  {ACTIONS.map((a) => {
+                    const active = selectedActions.includes(a.t);
+                    return (
+                      <button
+                        type="button"
+                        key={a.t}
+                        className="chip"
+                        aria-pressed={active}
+                        onClick={() =>
+                          setSelectedActions((prev) =>
+                            prev.includes(a.t) ? prev.filter((x) => x !== a.t) : [...prev, a.t],
+                          )
+                        }
+                      >
+                        <span className="chip-check" aria-hidden="true">{active ? "✓" : ""}</span>
+                        <span>{a.t}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {formStatus === "error" && (
+                  <p style={{ color: "var(--red)", marginTop: 16, fontSize: 14 }}>
+                    Something went wrong. Please try again or email us directly at votebob26@gmail.com.
+                  </p>
+                )}
+                <div className="submit-row">
+                  <button type="submit" className="btn btn-red" disabled={formStatus === "sending"}>
+                    {formStatus === "sending" ? "Sending…" : "Submit"} <span className="arrow">→</span>
                   </button>
-                );
-              })}
-            </div>
-            <div className="submit-row">
-              <button type="submit" className="btn btn-red">
-                Submit <span className="arrow">→</span>
-              </button>
-            </div>
+                </div>
+              </>
+            )}
           </form>
         </div>
       </section>

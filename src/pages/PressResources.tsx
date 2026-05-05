@@ -14,6 +14,9 @@ import bobPhoto06 from "@/assets/bob-photo-06.png";
 import bobPhoto07 from "@/assets/bob-photo-07.png";
 import bobPhoto08 from "@/assets/bob-photo-08.png";
 import bobPhoto10 from "@/assets/bob-photo-10.png";
+import pressPhoto09 from "@/assets/09.png";
+import pressPhoto10 from "@/assets/10.png";
+import pressPhoto11 from "@/assets/11.png";
 import assetLogo from "@/assets/asset-logo.png";
 import assetYardSign from "@/assets/asset-yard-sign.png";
 
@@ -211,6 +214,8 @@ type Item = {
   desc: string;
   img?: string;
   isVideo?: boolean;
+  href?: string;
+  download?: boolean;
 };
 
 const PRESS_RELEASES: Item[] = [
@@ -218,6 +223,7 @@ const PRESS_RELEASES: Item[] = [
     title: "Press Releases",
     desc: "Official announcements and statements from the campaign.",
     img: mediaPressImg,
+    href: "https://votebob26.com/assets/presskit/release.pdf",
   },
 ];
 
@@ -231,12 +237,17 @@ const BOB_PHOTO_IMAGES = [
   bobPhoto07,
   bobPhoto08,
   bobPhoto10,
+  pressPhoto09,
+  pressPhoto10,
+  pressPhoto11,
 ];
 
 const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
   title: `Bob Heitkamp Photo ${i + 1}`,
   desc: "Approved photos for media use and supporters.",
   img,
+  href: `https://votebob26.com/assets/presskit/images/${String(i + 1).padStart(2, "0")}.png`,
+  download: true,
 }));
 
 const VIDEOS: Item[] = [
@@ -251,11 +262,11 @@ const LOGOS: Item[] = [
 ];
 
 const BIO: Item[] = [
-  { title: "Bob Heitkamp Bio", desc: "Bob's full biography for press and event organizers.", img: mediaBioImg },
+  { title: "Bob Heitkamp Bio", desc: "Bob's full biography for press and event organizers.", img: mediaBioImg, href: "https://votebob26.com/assets/presskit/bio.pdf" },
 ];
 
 const PLATFORM: Item[] = [
-  { title: "Campaign Platform", desc: "The full platform document outlining priorities for District 25.", img: mediaPlatformImg },
+  { title: "Campaign Platform", desc: "The full platform document outlining priorities for District 25.", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf" },
 ];
 
 const DownloadIcon = () => (
@@ -271,9 +282,15 @@ const Card = ({ item }: { item: Item }) => (
     </div>
     <h5>{item.title}</h5>
     <p>{item.desc}</p>
-    <button type="button" className="download" onClick={() => window.alert(`Download: ${item.title}`)}>
-      Download <DownloadIcon />
-    </button>
+    {item.href ? (
+      <a href={item.href} {...(item.download ? { download: true } : { target: "_blank", rel: "noopener noreferrer" })} className="download">
+        Download <DownloadIcon />
+      </a>
+    ) : (
+      <button type="button" className="download" onClick={() => window.alert(`Download: ${item.title}`)}>
+        Download <DownloadIcon />
+      </button>
+    )}
   </article>
 );
 

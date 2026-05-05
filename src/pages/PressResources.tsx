@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "@/assets/logo.png";
 import mediaPressImg from "@/assets/media-press.png";
-import mediaLogosImg from "@/assets/media-logos.png";
+// import mediaLogosImg from "@/assets/media-logos.png";
 import mediaBioImg from "@/assets/section-bio.png";
 import mediaPlatformImg from "@/assets/section-platform.png";
-import videoThumbImg from "@/assets/section-video.png";
+// import videoThumbImg from "@/assets/section-video.png";
 import bobPhoto01 from "@/assets/bob-photo-01.png";
 import bobPhoto02 from "@/assets/bob-photo-02.png";
 import bobPhoto03 from "@/assets/bob-photo-03.png";
@@ -17,8 +17,8 @@ import bobPhoto10 from "@/assets/bob-photo-10.png";
 import pressPhoto09 from "@/assets/09.png";
 import pressPhoto10 from "@/assets/10.png";
 import pressPhoto11 from "@/assets/11.png";
-import assetLogo from "@/assets/asset-logo.png";
-import assetYardSign from "@/assets/asset-yard-sign.png";
+// import assetLogo from "@/assets/asset-logo.png";
+// import assetYardSign from "@/assets/asset-yard-sign.png";
 
 const STYLES = `
 :root{
@@ -250,15 +250,15 @@ const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
   download: true,
 }));
 
-const VIDEOS: Item[] = [
-  { title: "Video 1", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
-  { title: "Video 2", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
-];
+// const VIDEOS: Item[] = [
+//   { title: "Video 1", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
+//   { title: "Video 2", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
+// ];
 
 const LOGOS: Item[] = [
-  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: assetLogo },
-  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: mediaLogosImg },
-  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: assetYardSign },
+  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", href: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", download: true },
+  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: "https://votebob26.com/assets/presskit/pin.png", href: "https://votebob26.com/assets/presskit/pin.png", download: true },
+  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: "https://votebob26.com/assets/presskit/Yard.png", href: "https://votebob26.com/assets/presskit/Yard.png", download: true },
 ];
 
 const BIO: Item[] = [
@@ -363,7 +363,7 @@ const PressResources = () => {
 
           <Group title="Press" emTitle="Releases" items={PRESS_RELEASES} />
           <Group title="Bob Heitkamp" emTitle="Photos" items={BOB_PHOTOS} />
-          <Group title="Videos" items={VIDEOS} />
+          {/* <Group title="Videos" items={VIDEOS} /> */}
           <Group title="Logos &" emTitle="Brand Assets" items={LOGOS} />
           <Group title="Bio" items={BIO} />
           <Group title="Platform" items={PLATFORM} />

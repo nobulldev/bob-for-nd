@@ -474,7 +474,7 @@ section{padding:96px 36px;position:relative}
   font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.22em;
   color:var(--red);display:inline-flex;align-items:center;gap:8px;
 }
-.media-card--compact{gap:14px;padding-bottom:22px}
+.media-card--compact{gap:14px;padding-bottom:22px;cursor:pointer}
 .media-card--compact h5{text-align:center}
 .media-cta{margin-top:48px;display:flex;justify-content:center}
 
@@ -871,18 +871,20 @@ const ACTIONS = [
   },
 ];
 
-const MEDIA: { t: string; d: string; note: string; img?: string }[] = [
+const MEDIA: { t: string; d: string; note: string; img?: string; href: string; external?: boolean }[] = [
   {
     t: "Press Releases",
     d: "Official announcements and statements from the campaign.",
     note: "Press release thumbnail",
     img: mediaPressImg,
+    href: "https://votebob26.com/assets/presskit/release.pdf",
+    external: true,
   },
-  { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg },
-  { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail", img: videoThumbImg },
-  { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg },
-  { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg },
-  { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg },
+  { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg, href: "/press" },
+  { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail", img: videoThumbImg, href: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q", external: true },
+  { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg, href: "/press" },
+  { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg, href: "https://votebob26.com/assets/presskit/bio.pdf", external: true },
+  { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf", external: true },
 ];
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
@@ -1336,16 +1338,29 @@ const Index = () => {
           </h2>
           <div className="media-grid">
             {MEDIA.map((m, i) => (
-              <article key={m.t} className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
-                <div className="ph">
-                  {m.img ? (
-                    <img src={m.img} alt={m.t} loading="lazy" />
-                  ) : (
-                    m.note
-                  )}
-                </div>
-                <h5>{m.t}</h5>
-              </article>
+              m.external ? (
+                <a key={m.t} href={m.href} target="_blank" rel="noopener noreferrer" className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
+                  <div className="ph">
+                    {m.img ? (
+                      <img src={m.img} alt={m.t} loading="lazy" />
+                    ) : (
+                      m.note
+                    )}
+                  </div>
+                  <h5>{m.t}</h5>
+                </a>
+              ) : (
+                <Link key={m.t} to={m.href} className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
+                  <div className="ph">
+                    {m.img ? (
+                      <img src={m.img} alt={m.t} loading="lazy" />
+                    ) : (
+                      m.note
+                    )}
+                  </div>
+                  <h5>{m.t}</h5>
+                </Link>
+              )
             ))}
           </div>
 

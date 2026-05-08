@@ -18,7 +18,7 @@ import pressPhoto09 from "@/assets/09.png";
 import pressPhoto10 from "@/assets/10.png";
 import pressPhoto11 from "@/assets/11.png";
 // import assetLogo from "@/assets/asset-logo.png";
-// import assetYardSign from "@/assets/asset-yard-sign.png";
+import yardImage from "@/assets/yard-image.png";
 
 const STYLES = `
 :root{
@@ -258,7 +258,7 @@ const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
 const LOGOS: Item[] = [
   { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", href: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", download: true },
   { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: "https://votebob26.com/assets/presskit/pin.png", href: "https://votebob26.com/assets/presskit/pin.png", download: true },
-  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: "https://votebob26.com/assets/presskit/Yard.png", href: "https://votebob26.com/assets/presskit/Yard.png", download: true },
+  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: yardImage, href: "https://votebob26.com/assets/presskit/yard.zip", download: true },
 ];
 
 const BIO: Item[] = [

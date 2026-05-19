@@ -272,7 +272,37 @@ section{padding:96px 36px;position:relative}
   font-size:11.5px;letter-spacing:.22em;color:var(--muted);
 }
 
+/* ---------- Timeline ---------- */
+#timeline{padding:90px 0;background:var(--cream-2,#f7f1e6)}
+#timeline .section-title{margin-bottom:8px}
+.timeline{
+  list-style:none;margin:20px 0 0;padding:0;position:relative;
+  max-width:820px;
+}
+.timeline::before{
+  content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;
+  background:rgba(10,34,64,.18);
+}
+.timeline-item{
+  position:relative;padding:14px 0 14px 44px;
+}
+.timeline-dot{
+  position:absolute;left:4px;top:22px;width:16px;height:16px;border-radius:50%;
+  background:var(--red);border:3px solid var(--cream,#fff);
+  box-shadow:0 0 0 2px rgba(10,34,64,.18);
+}
+.timeline-content h4{
+  font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;
+  font-size:18px;color:var(--navy,#0a2240);margin:0 0 4px;
+}
+.timeline-meta{
+  display:flex;align-items:center;gap:10px;color:var(--muted);
+  font-size:14px;letter-spacing:.04em;
+}
+.timeline-sep{opacity:.5}
+
 /* ---------- Priorities ---------- */
+
 .priorities-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
 .priorities-head p{max-width:420px;color:var(--muted);margin-top:14px}
 .cards{

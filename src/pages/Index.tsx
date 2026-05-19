@@ -12,6 +12,12 @@ import mediaLogosImg from "@/assets/media-logos.png";
 import mediaBioImg from "@/assets/section-bio.png";
 import mediaPlatformImg from "@/assets/section-platform.png";
 import videoThumbImg from "@/assets/section-video.png";
+import timeline01Img from "@/assets/timeline-01-cabinets.png";
+import timeline02Img from "@/assets/timeline-02-blazer.png";
+import timeline03Img from "@/assets/timeline-03-midwest.png";
+import timeline04Img from "@/assets/timeline-04-icecream.png";
+import timeline05Img from "@/assets/timeline-05-poets.png";
+import timeline06Img from "@/assets/timeline-06-kids.png";
 
 const STYLES = `
 :root{
@@ -673,6 +679,98 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   #donate{padding:70px 14px}
   .amount{padding:12px 18px;font-size:14px}
 }
+/* ---------- Business History ---------- */
+#history{background:var(--cream);padding:90px 0 !important;overflow:hidden;font-family:Arial,sans-serif}
+.history-layout{
+  display:flex;max-width:1600px;margin:0 auto;min-height:720px;
+  border:1px solid rgba(3,31,81,.12);background:var(--cream-3);
+  box-shadow:0 30px 70px rgba(0,0,0,.08);
+}
+.history-side{
+  width:390px;min-width:390px;padding:70px 44px;
+  background:var(--cream-3);border-right:1px solid rgba(3,31,81,.12);
+  display:flex;flex-direction:column;box-sizing:border-box;
+}
+.history-side h2{
+  font-family:'Playfair Display',Georgia,serif;font-size:62px;line-height:.95;
+  margin:0 0 34px;color:var(--navy);font-weight:900;
+}
+.history-side>p{font-size:22px;line-height:1.6;margin:0;color:var(--muted)}
+.history-side-arrows{display:flex;gap:14px;margin-top:34px}
+.history-main{position:relative;flex:1 1 0;min-width:0;background:var(--cream-3)}
+.history-scroll{height:100%;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
+.history-scroll::-webkit-scrollbar{height:8px}
+.history-scroll::-webkit-scrollbar-track{background:rgba(3,31,81,.08)}
+.history-scroll::-webkit-scrollbar-thumb{background:var(--navy)}
+.history-track{display:flex;height:100%;min-width:max-content}
+.history-card{
+  width:360px;padding:70px 36px 38px;border-right:1px solid rgba(3,31,81,.12);
+  position:relative;background:var(--cream-3);
+  transition:background .35s,color .35s;
+  box-sizing:border-box;display:flex;flex-direction:column;
+}
+.history-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:7px;
+  background:transparent;transition:background .35s;
+}
+.history-card:hover{background:var(--red);color:#fff}
+.history-card:hover::before{background:var(--gold)}
+.history-card:hover h3,.history-card:hover>p,
+.history-card:hover .history-duration,.history-card:hover .history-year{color:#fff}
+.history-year{
+  font-size:46px;font-weight:900;color:var(--navy);
+  margin-bottom:38px;line-height:1;transition:color .35s;
+}
+.history-card h3{
+  font-family:'Playfair Display',Georgia,serif;font-size:36px;line-height:1;
+  margin:0 0 20px;color:var(--navy);transition:color .35s;
+}
+.history-duration{
+  font-size:21px;font-weight:700;margin-bottom:20px;
+  color:var(--red);transition:color .35s;
+}
+.history-card>p{
+  font-size:18px;line-height:1.55;color:var(--muted);
+  margin:0 0 34px;transition:color .35s;
+}
+.history-image{
+  margin-top:auto;width:100%;aspect-ratio:1/1;
+  background:rgba(3,31,81,.08);box-sizing:border-box;overflow:hidden;
+}
+.history-image img{width:100%;height:100%;display:block;object-fit:cover}
+.history-arrow{
+  width:54px;height:54px;border-radius:50%;
+  border:1px solid rgba(3,31,81,.2);background:var(--cream);
+  color:var(--navy);cursor:pointer;
+  box-shadow:0 12px 28px rgba(0,0,0,.12);
+  transition:background .25s,color .25s,border-color .25s;
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.history-arrow span{display:block;font-size:38px;line-height:1;transform:translateY(-2px)}
+.history-arrow:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media(max-width:1200px){
+  .history-layout{flex-direction:column}
+  .history-side{width:100%;min-width:100%;padding:50px 30px;border-right:none;border-bottom:1px solid rgba(3,31,81,.12)}
+  .history-side h2{font-size:52px;max-width:900px}
+  .history-side>p{max-width:900px}
+  .history-main{min-height:640px}
+}
+@media(max-width:640px){
+  #history{padding:50px 0 !important}
+  .history-side{padding:35px 24px}
+  .history-side h2{font-size:42px;margin-bottom:24px}
+  .history-side>p{font-size:18px}
+  .history-side-arrows{margin-top:28px}
+  .history-main{min-height:560px}
+  .history-card{width:300px;padding:48px 26px 28px}
+  .history-year{font-size:36px;margin-bottom:30px}
+  .history-card h3{font-size:30px}
+  .history-duration{font-size:19px}
+  .history-card>p{font-size:16px;margin-bottom:28px}
+  .history-arrow{width:44px;height:44px}
+  .history-arrow span{font-size:32px}
+}
+
 /* Wider content + slightly larger text on mobile */
 @media (max-width:960px){
   body{font-size:18px}
@@ -887,11 +985,21 @@ const MEDIA: { t: string; d: string; note: string; img?: string; href: string; e
   { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf", external: true },
 ];
 
+const HISTORY = [
+  { years: "1982–2022", dur: "40 years", t: "Bob Heitkamp Cabinets & Construction", d: "Construction, cabinetry, and workforce leadership", img: timeline01Img },
+  { years: "1994–2017", dur: "23 years", t: "Blazer Express", d: "Transportation and logistics business", img: timeline02Img },
+  { years: "2010–2016", dur: "6 years", t: "Midwest Applied Technologies", d: "Technology and applied business operations", img: timeline03Img },
+  { years: "2013–2023", dur: "10 years", t: "Beyond Ice Cream", d: "Consumer retail and food business", img: timeline04Img },
+  { years: "2015–2017", dur: "2 years", t: "Poet's Warehouse Liquors", d: "Retail and liquor operations", img: timeline05Img },
+  { years: "2016–2026", dur: "10 years", t: "Executive Director — Marketplace for Kids", d: "Statewide education and youth leadership organization", img: timeline06Img },
+];
+
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
 
 const Index = () => {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const candidateRef = useRef<HTMLDivElement>(null);
+  const historyScrollRef = useRef<HTMLDivElement>(null);
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
@@ -1086,6 +1194,49 @@ const Index = () => {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* BUSINESS HISTORY */}
+      <section id="history">
+        <div className="history-layout">
+          <div className="history-side">
+            <h2>BUSINESS HISTORY</h2>
+            <p>I spent my entire life building businesses, creating jobs, and helping communities across North Dakota.</p>
+            <div className="history-side-arrows">
+              <button
+                className="history-arrow"
+                aria-label="Scroll left"
+                onClick={() => { if (historyScrollRef.current) historyScrollRef.current.scrollLeft -= 380; }}
+              >
+                <span>‹</span>
+              </button>
+              <button
+                className="history-arrow"
+                aria-label="Scroll right"
+                onClick={() => { if (historyScrollRef.current) historyScrollRef.current.scrollLeft += 380; }}
+              >
+                <span>›</span>
+              </button>
+            </div>
+          </div>
+          <div className="history-main">
+            <div className="history-scroll" ref={historyScrollRef}>
+              <div className="history-track">
+                {HISTORY.map((h) => (
+                  <div key={h.t} className="history-card">
+                    <div className="history-year">{h.years}</div>
+                    <h3>{h.t}</h3>
+                    <div className="history-duration">{h.dur}</div>
+                    <p>{h.d}</p>
+                    <div className="history-image">
+                      <img src={h.img} alt={h.t} loading="lazy" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

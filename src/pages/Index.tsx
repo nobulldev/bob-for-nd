@@ -272,7 +272,37 @@ section{padding:96px 36px;position:relative}
   font-size:11.5px;letter-spacing:.22em;color:var(--muted);
 }
 
+/* ---------- Timeline ---------- */
+#timeline{padding:90px 0;background:var(--cream-2,#f7f1e6)}
+#timeline .section-title{margin-bottom:8px}
+.timeline{
+  list-style:none;margin:20px 0 0;padding:0;position:relative;
+  max-width:820px;
+}
+.timeline::before{
+  content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;
+  background:rgba(10,34,64,.18);
+}
+.timeline-item{
+  position:relative;padding:14px 0 14px 44px;
+}
+.timeline-dot{
+  position:absolute;left:4px;top:22px;width:16px;height:16px;border-radius:50%;
+  background:var(--red);border:3px solid var(--cream,#fff);
+  box-shadow:0 0 0 2px rgba(10,34,64,.18);
+}
+.timeline-content h4{
+  font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;
+  font-size:18px;color:var(--navy,#0a2240);margin:0 0 4px;
+}
+.timeline-meta{
+  display:flex;align-items:center;gap:10px;color:var(--muted);
+  font-size:14px;letter-spacing:.04em;
+}
+.timeline-sep{opacity:.5}
+
 /* ---------- Priorities ---------- */
+
 .priorities-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
 .priorities-head p{max-width:420px;color:var(--muted);margin-top:14px}
 .cards{
@@ -1106,6 +1136,45 @@ const Index = () => {
 
         </div>
       </section>
+
+      {/* TIMELINE */}
+      <section id="timeline">
+        <div className="container">
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> Timeline
+          </span>
+          <h2 className="section-title fade-up delay-1">
+            A Lifetime of <em>Building</em> in North Dakota
+          </h2>
+          <p className="fade-up delay-2" style={{ maxWidth: 760, marginBottom: 40, color: "hsl(var(--muted-foreground))" }}>
+            I've spent my entire life building businesses, creating jobs, and helping communities across North Dakota.
+          </p>
+          <ol className="timeline fade-up delay-2">
+            {[
+              { name: "Bob Heitkamp Cabinets & Construction", years: "1982–2022", duration: "40 years" },
+              { name: "Blazer Express", years: "1994–2017", duration: "23 years" },
+              { name: "Midwest Applied Technologies", years: "2010–2016", duration: "6 years" },
+              { name: "Beyond Ice Cream", years: "2013–2023", duration: "10 years" },
+              { name: "Poet's Warehouse Liquors", years: "2015–2017", duration: "2 years" },
+              { name: "Executive Director — Marketplace for Kids", years: "2016–2026", duration: "10 years" },
+            ].map((item) => (
+              <li key={item.name} className="timeline-item">
+                <span className="timeline-dot" aria-hidden="true" />
+                <div className="timeline-content">
+                  <h4>{item.name}</h4>
+                  <div className="timeline-meta">
+                    <span>{item.years}</span>
+                    <span className="timeline-sep" aria-hidden="true">•</span>
+                    <span>{item.duration}</span>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+
 
       {/* WHY I'M RUNNING (video placeholder) */}
       <section id="why">

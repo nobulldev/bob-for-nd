@@ -1107,6 +1107,45 @@ const Index = () => {
         </div>
       </section>
 
+      {/* TIMELINE */}
+      <section id="timeline">
+        <div className="container">
+          <span className="section-eyebrow fade-up">
+            <span className="dash" /> Timeline
+          </span>
+          <h2 className="section-title fade-up delay-1">
+            A Lifetime of <em>Building</em> in North Dakota
+          </h2>
+          <p className="fade-up delay-2" style={{ maxWidth: 760, marginBottom: 40, color: "hsl(var(--muted-foreground))" }}>
+            I've spent my entire life building businesses, creating jobs, and helping communities across North Dakota.
+          </p>
+          <ol className="timeline fade-up delay-2">
+            {[
+              { name: "Bob Heitkamp Cabinets & Construction", years: "1982–2022", duration: "40 years" },
+              { name: "Blazer Express", years: "1994–2017", duration: "23 years" },
+              { name: "Midwest Applied Technologies", years: "2010–2016", duration: "6 years" },
+              { name: "Beyond Ice Cream", years: "2013–2023", duration: "10 years" },
+              { name: "Poet's Warehouse Liquors", years: "2015–2017", duration: "2 years" },
+              { name: "Executive Director — Marketplace for Kids", years: "2016–2026", duration: "10 years" },
+            ].map((item) => (
+              <li key={item.name} className="timeline-item">
+                <span className="timeline-dot" aria-hidden="true" />
+                <div className="timeline-content">
+                  <h4>{item.name}</h4>
+                  <div className="timeline-meta">
+                    <span>{item.years}</span>
+                    <span className="timeline-sep" aria-hidden="true">•</span>
+                    <span>{item.duration}</span>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+
+
       {/* WHY I'M RUNNING (video placeholder) */}
       <section id="why">
         <div className="container">

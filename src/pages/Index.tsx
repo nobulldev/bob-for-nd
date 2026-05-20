@@ -1626,7 +1626,7 @@ const Index = () => {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Julie Prochnow - Treasurer</span>
+          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. <br />Some campaign media may include AI-assisted or digitally enhanced content. <br />Julie Prochnow - Treasurer.</span>
           <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
         </div>
       </footer>

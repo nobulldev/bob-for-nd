@@ -251,7 +251,7 @@ section{padding:96px 36px;position:relative}
 .bio p:first-of-type::first-letter{
   font-family:'Playfair Display',serif;font-weight:900;
   color:var(--red);font-size:64px;line-height:.85;
-  float:left;padding:6px 12px 0 0;
+  float:left;padding: 0px 12px 0 0;
 }
 .bio .pull{
   border-left:4px solid var(--gold);

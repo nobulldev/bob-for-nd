@@ -18,6 +18,7 @@ import timeline03Img from "@/assets/timeline-03-midwest.png";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
+import nobullImg from "@/assets/nobull.png";
 
 const STYLES = `
 :root{
@@ -523,6 +524,26 @@ section{padding:96px 36px;position:relative}
 
 /* ---------- Footer ---------- */
 footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
+
+/* ---------- NoBull credit ---------- */
+.nobull-credit{
+  background:var(--navy);
+  padding:24px 28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+.nobull-credit img{height:auto;width:146.82px;display:block}
+.nobull-credit p{
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:400;
+  font-size:14.5px;
+  line-height:23.93px;
+  color:rgba(245,239,228,.78);
+  text-align:center;
+  margin:0;
+}
 .foot-grid{
   max-width:1280px;margin:0 auto;
   display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:46px;
@@ -1630,6 +1651,12 @@ const Index = () => {
           <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
         </div>
       </footer>
+
+      {/* NOBULL CREDIT */}
+      <a href="https://nobull-strategies.com/" target="_blank" rel="noopener noreferrer" className="nobull-credit">
+        <img src={nobullImg} alt="NoBull Strategies" />
+        <p>Created by NoBull Strategies<br />nobull-strategies.com</p>
+      </a>
     </>
   );
 };

@@ -680,15 +680,15 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .amount{padding:12px 18px;font-size:14px}
 }
 /* ---------- Business History ---------- */
-#history{background:var(--cream);padding:90px 0 !important;overflow:hidden;font-family:Arial,sans-serif}
+#history{background:#f7f1e6;padding:90px 0 !important;overflow:hidden;font-family:Arial,sans-serif}
 .history-layout{
   display:flex;max-width:1600px;margin:0 auto;min-height:720px;
-  border:1px solid rgba(3,31,81,.12);background:var(--cream-3);
+  border:1px solid rgba(3,31,81,.12);background:#f3ebdc;
   box-shadow:0 30px 70px rgba(0,0,0,.08);
 }
 .history-side{
   width:390px;min-width:390px;padding:70px 44px;
-  background:var(--cream-3);border-right:1px solid rgba(3,31,81,.12);
+  background:#f3ebdc;border-right:1px solid rgba(3,31,81,.12);
   display:flex;flex-direction:column;box-sizing:border-box;
 }
 .history-side h2{
@@ -697,7 +697,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 }
 .history-side>p{font-size:22px;line-height:1.6;margin:0;color:var(--muted)}
 .history-side-arrows{display:flex;gap:14px;margin-top:34px}
-.history-main{position:relative;flex:1 1 0;min-width:0;background:var(--cream-3)}
+.history-main{position:relative;flex:1 1 0;min-width:0;background:#f3ebdc}
 .history-scroll{height:100%;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
 .history-scroll::-webkit-scrollbar{height:8px}
 .history-scroll::-webkit-scrollbar-track{background:rgba(3,31,81,.08)}
@@ -705,7 +705,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 .history-track{display:flex;height:100%;min-width:max-content}
 .history-card{
   width:360px;padding:70px 36px 38px;border-right:1px solid rgba(3,31,81,.12);
-  position:relative;background:var(--cream-3);
+  position:relative;background:#f3ebdc;
   transition:background .35s,color .35s;
   box-sizing:border-box;display:flex;flex-direction:column;
 }
@@ -713,8 +713,8 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   content:"";position:absolute;top:0;left:0;right:0;height:7px;
   background:transparent;transition:background .35s;
 }
-.history-card:hover{background:var(--red);color:#fff}
-.history-card:hover::before{background:var(--gold)}
+.history-card:hover{background:#c44736;color:#fff}
+.history-card:hover::before{background:#f2c433}
 .history-card:hover h3,.history-card:hover>p,
 .history-card:hover .history-duration,.history-card:hover .history-year{color:#fff}
 .history-year{
@@ -740,13 +740,13 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 .history-image img{width:100%;height:100%;display:block;object-fit:cover}
 .history-arrow{
   width:54px;height:54px;border-radius:50%;
-  border:1px solid rgba(3,31,81,.2);background:var(--cream);
+  border:1px solid rgba(3,31,81,.2);background:#f7f1e6;
   color:var(--navy);cursor:pointer;
   box-shadow:0 12px 28px rgba(0,0,0,.12);
   transition:background .25s,color .25s,border-color .25s;
   display:flex;align-items:center;justify-content:center;padding:0;
 }
-.history-arrow span{display:block;font-size:38px;line-height:1;transform:translateY(-2px)}
+.history-arrow span{display:block;font-size:38px;line-height:1;transform:translateY(-3px)}
 .history-arrow:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 @media(max-width:1200px){
   .history-layout{flex-direction:column}

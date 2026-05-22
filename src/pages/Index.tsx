@@ -782,7 +782,7 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .history-side h2{font-size:42px;margin-bottom:24px}
   .history-side>p{font-size:18px}
   .history-side-arrows{margin-top:28px}
-  .history-main{min-height:560px}
+  .history-main{min-height:720px}
   .history-card{width:300px;padding:48px 26px 28px}
   .history-year{font-size:36px;margin-bottom:30px}
   .history-card h3{font-size:30px}
@@ -1222,7 +1222,7 @@ const Index = () => {
       <section id="history">
         <div className="history-layout">
           <div className="history-side">
-            <h2>BUSINESS HISTORY</h2>
+            <h2>How You Know Me</h2>
             <p>I spent my entire life building businesses, creating jobs, and helping communities across North Dakota.</p>
             <div className="history-side-arrows">
               <button

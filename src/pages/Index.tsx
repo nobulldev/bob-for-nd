@@ -181,6 +181,8 @@ a{color:inherit;text-decoration:none}
 }
 .btn-red{background:var(--red);color:var(--cream);border-color:var(--red)}
 .btn-red:hover{background:#a51a27;border-color:#a51a27}
+.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-gold:hover{background:#e8c030;border-color:#e8c030}
 .btn-outline{background:transparent;color:var(--cream);border-color:var(--cream)}
 .btn-outline:hover{background:var(--cream);color:var(--navy)}
 .btn .arrow{transition:transform .2s}
@@ -368,6 +370,7 @@ section{padding:96px 36px;position:relative}
   padding:30px 28px;display:flex;flex-direction:column;gap:16px;
   transition:background .2s, border-color .2s, transform .2s;
 }
+.action-card{cursor:pointer}
 .action-card:hover{background:rgba(255,255,255,.07);border-color:var(--gold);transform:translateY(-4px)}
 .action-card .icon{
   width:48px;height:48px;background:var(--red);
@@ -515,11 +518,6 @@ section{padding:96px 36px;position:relative}
 #donate h2 em{font-style:italic;color:var(--gold)}
 #donate .blurb{
   max-width:620px;margin:18px auto 0;font-size:17px;color:rgba(245,239,228,.9);
-}
-.donate-embed{
-  margin:36px auto 0;max-width:680px;
-  background:#fff;border-radius:4px;
-  box-shadow:0 24px 60px rgba(0,0,0,.25);
 }
 
 /* ---------- Footer ---------- */
@@ -933,6 +931,7 @@ const ACTIONS = [
   {
     t: "Donate",
     d: "Every contribution helps reach voters, grow the campaign, and share Bob's message across District 25.",
+    hideFromForm: true,
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
@@ -1372,7 +1371,18 @@ const Index = () => {
           </h2>
           <div className="action-cards">
             {ACTIONS.map((a, i) => (
-              <article key={a.t} className={`action-card fade-up delay-${(i % 5) + 1}`}>
+              <article
+                key={a.t}
+                className={`action-card fade-up delay-${(i % 5) + 1}`}
+                onClick={() => {
+                  if (a.hideFromForm) {
+                    window.open("https://secure.actblue.com/donate/bob-heitkamp", "_blank", "noopener,noreferrer");
+                  } else {
+                    setSelectedActions((prev) => prev.includes(a.t) ? prev : [...prev, a.t]);
+                    document.querySelector(".action-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+              >
                 <span className="icon">{a.icon}</span>
                 <h5>{a.t}</h5>
                 <p>{a.d}</p>
@@ -1463,7 +1473,7 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
-                  {ACTIONS.map((a) => {
+                  {ACTIONS.filter((a) => !a.hideFromForm).map((a) => {
                     const active = selectedActions.includes(a.t);
                     return (
                       <button
@@ -1575,17 +1585,15 @@ const Index = () => {
           <p className="blurb">
             Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
           </p>
-          <div className="donate-embed">
-            <iframe
-              src="https://goodchange.app/donate/bob-25"
-              title="Donate to Bob Heitkamp"
-              width="100%"
-              height="1500"
-              frameBorder={0}
-              scrolling="no"
-              style={{ border: "none", display: "block" }}
-            />
-          </div>
+          <a
+            href="https://secure.actblue.com/donate/bob-heitkamp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-gold"
+            style={{ marginTop: "32px", display: "inline-block" }}
+          >
+            Donate Now →
+          </a>
         </div>
       </section>
 

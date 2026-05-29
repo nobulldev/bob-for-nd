@@ -227,7 +227,7 @@ section{padding:96px 36px;position:relative}
   font-size:80px;line-height:.5;font-style:italic;display:block;margin-bottom:18px;
 }
 .quote-card blockquote{
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Inter',system-ui,sans-serif;font-style:italic;
   font-size:24px;line-height:1.4;color:var(--cream);
 }
 .quote-card cite{
@@ -258,7 +258,7 @@ section{padding:96px 36px;position:relative}
 .bio .pull{
   border-left:4px solid var(--gold);
   padding:6px 0 6px 22px;margin:28px 0;
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Inter',system-ui,sans-serif;font-style:italic;
   color:var(--navy);font-size:21px;line-height:1.45;
 }
 .facts{
@@ -378,7 +378,7 @@ section{padding:96px 36px;position:relative}
 }
 .action-card .icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
 .action-card h5{
-  font-family:'Playfair Display',serif;font-weight:800;font-size:22px;color:var(--cream);
+  font-family:'Inter',system-ui,sans-serif;font-weight:800;font-size:22px;color:var(--cream);
 }
 .action-card p{font-size:14.5px;line-height:1.65;color:rgba(245,239,228,.78)}
 
@@ -879,18 +879,6 @@ const HeroStars = () => {
   );
 };
 
-const PRIORITIES = [
-  { n: "01", t: "Strong Communities", d: "Support the local institutions and volunteers that keep our towns strong." },
-  { n: "02", t: "Agriculture & Rural Prosperity", d: "Stand with farmers and strengthen rural economies." },
-  { n: "03", t: "Business Growth", d: "Support local employers and expand opportunity." },
-  {
-    n: "04",
-    t: "Infrastructure & Essential Services",
-    d: "Improve roads, strengthen infrastructure, and expand reliable internet access.",
-  },
-  { n: "05", t: "Opportunity for the Next Generation", d: "Help young people build their future right here at home." },
-];
-
 const ISSUES = [
   {
     t: "Community Leadership & Responsible Government",
@@ -1007,7 +995,7 @@ const MEDIA: { t: string; d: string; note: string; img?: string; href: string; e
 
 const HISTORY = [
   { years: "1982–2022", dur: "40 years", t: "Bob Heitkamp Cabinets & Construction", d: "Construction, cabinetry, and workforce leadership", img: timeline01Img },
-  { years: "1994–2017", dur: "23 years", t: "Blazer Express", d: "Transportation and logistics business", img: timeline02Img },
+  { years: "1994–2017", dur: "23 years", t: "Blazer Express", d: "Gas station/convenience store", img: timeline02Img },
   { years: "2010–2016", dur: "6 years", t: "Midwest Applied Technologies", d: "Technology and applied business operations", img: timeline03Img },
   { years: "2013–2023", dur: "10 years", t: "Beyond Ice Cream", d: "Consumer retail and food business", img: timeline04Img },
   { years: "2015–2017", dur: "2 years", t: "Poet's Warehouse Liquors", d: "Retail and liquor operations", img: timeline05Img },
@@ -1174,7 +1162,7 @@ const Index = () => {
             <span className="dash" /> About Bob
           </span>
           <h2 className="section-title fade-up delay-1">
-            A Leader Shaped by Real <em>Experience</em>, Faith, and Service
+            A Leader Shaped by Real <em>Experience</em>
           </h2>
           <div className="about-grid">
             <aside className="quote-stack fade-up">
@@ -1305,30 +1293,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* PRIORITIES */}
-      <section id="priorities">
-        <div className="container">
-          <div className="priorities-head">
-            <div>
-              <span className="section-eyebrow fade-up">
-                <span className="dash" /> Priorities
-              </span>
-              <h2 className="section-title fade-up delay-1">
-                Priorities for <em>District 25</em>
-              </h2>
-            </div>
-          </div>
-          <div className="cards">
-            {PRIORITIES.map((p, i) => (
-              <article key={p.n} className={`card fade-up delay-${(i % 5) + 1}`}>
-                <h4>{p.t}</h4>
-                <p>{p.d}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ISSUES */}
       <section id="issues">
         <div className="container">
@@ -1357,6 +1321,37 @@ const Index = () => {
               moves District 25 forward.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* DONATE */}
+      <section id="donate">
+        <div className="star-strip top" aria-hidden="true">
+          {Array.from({ length: 22 }).map((_, i) => (
+            <span key={i}>★</span>
+          ))}
+        </div>
+        <div className="star-strip bot" aria-hidden="true">
+          {Array.from({ length: 22 }).map((_, i) => (
+            <span key={i}>★</span>
+          ))}
+        </div>
+        <div className="container fade-up">
+          <h2>
+            Donate to <em>Bob</em>
+          </h2>
+          <p className="blurb">
+            Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
+          </p>
+          <a
+            href="https://secure.actblue.com/donate/bob-heitkamp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-gold"
+            style={{ marginTop: "32px", display: "inline-block" }}
+          >
+            Donate Now →
+          </a>
         </div>
       </section>
 
@@ -1566,37 +1561,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* DONATE */}
-      <section id="donate">
-        <div className="star-strip top" aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => (
-            <span key={i}>★</span>
-          ))}
-        </div>
-        <div className="star-strip bot" aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => (
-            <span key={i}>★</span>
-          ))}
-        </div>
-        <div className="container fade-up">
-          <h2>
-            Donate to <em>Bob</em>
-          </h2>
-          <p className="blurb">
-            Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
-          </p>
-          <a
-            href="https://secure.actblue.com/donate/bob-heitkamp"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-gold"
-            style={{ marginTop: "32px", display: "inline-block" }}
-          >
-            Donate Now →
-          </a>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer>
         <div className="foot-grid">
@@ -1613,9 +1577,6 @@ const Index = () => {
               </li>
               <li>
                 <a href="#issues">Issues</a>
-              </li>
-              <li>
-                <a href="#priorities">Priorities</a>
               </li>
               <li>
                 <a href="#action">Take Action</a>

@@ -351,7 +351,7 @@ section{padding:96px 36px;position:relative}
   display:flex;align-items:center;
 }
 .closing-band p{
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Inter',system-ui,sans-serif;font-style:italic;
   font-size:24px;line-height:1.45;color:var(--cream);
 }
 
@@ -1273,9 +1273,6 @@ const Index = () => {
                 <p>
                   I'll listen carefully, treat people with respect and focus on common-sense solutions that help our
                   communities thrive.
-                </p>
-                <p className="quote-blue bg-secondary-foreground text-white">
-                  I'm running to listen, work hard, and protect the future of our communities.
                 </p>
               </div>
             </div>

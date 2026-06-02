@@ -19,6 +19,8 @@ import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
 import nobullImg from "@/assets/nobull.png";
+import starIcon from "@/assets/icon-star.svg";
+import calendarIcon from "@/assets/icon-calendar.svg";
 
 const STYLES = `
 :root{
@@ -187,6 +189,48 @@ a{color:inherit;text-decoration:none}
 .btn-outline:hover{background:var(--cream);color:var(--navy)}
 .btn .arrow{transition:transform .2s}
 .btn:hover .arrow{transform:translateX(4px)}
+
+/* ---------- Events / See Bob At ---------- */
+#events{background:var(--gold);padding:84px 36px}
+.events-title{
+  font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
+  font-size:clamp(32px,4vw,48px);line-height:1.05;text-align:center;margin:0;
+}
+.events-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  max-width:1440px;margin:48px auto 0;
+}
+.event-card{
+  background:#fff;border-radius:16px;padding:26px 30px 28px;
+  box-shadow:0 1px 2px -1px rgba(0,0,0,.1),0 1px 3px 0 rgba(0,0,0,.1);
+  display:flex;flex-direction:column;
+}
+.event-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:30px}
+.event-date{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-weight:600;font-size:16px;letter-spacing:.03em;color:var(--red);
+}
+.event-date img{width:15px;height:15px;display:block;flex-shrink:0}
+.event-time{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#fdf3d3;color:var(--red);
+  padding:5px 12px;border-radius:999px;
+  font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-weight:600;font-size:14px;letter-spacing:.03em;white-space:nowrap;
+}
+.event-time svg{width:14px;height:14px;stroke:var(--red);fill:none;stroke-width:2;flex-shrink:0}
+.event-divider{height:1px;background:rgba(10,34,64,.12);margin:18px 0}
+.event-name{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Inter',system-ui,sans-serif;font-weight:800;
+  font-size:22px;color:var(--navy);line-height:1.2;
+}
+.event-name img{width:19px;height:18px;display:block;flex-shrink:0}
+@media (max-width:960px){
+  #events{padding:56px 20px}
+  .events-grid{grid-template-columns:1fr;gap:18px}
+}
 
 /* ---------- Section base ---------- */
 section{padding:96px 36px;position:relative}
@@ -1002,6 +1046,12 @@ const HISTORY = [
   { years: "2016–2026", dur: "10 years", t: "Executive Director — Marketplace for Kids", d: "Statewide education and youth leadership organization", img: timeline06Img },
 ];
 
+const EVENTS: { date: string; time?: string; name: string }[] = [
+  { date: "June 5-7, 2026", name: "Blue Goose Days!" },
+  { date: "June 9, 2026", name: "Vote for Bob in the Primary!" },
+  { date: "June 16, 2026", time: "5PM", name: "Crooked Lane Farm Fundraiser" },
+];
+
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
 
 const Index = () => {
@@ -1151,6 +1201,39 @@ const Index = () => {
             <a href="#action" className="btn btn-outline">
               Take Action
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* EVENTS */}
+      <section id="events">
+        <div className="container">
+          <h2 className="events-title fade-up">See Bob at:</h2>
+          <div className="events-grid">
+            {EVENTS.map((ev, i) => (
+              <article className={`event-card fade-up delay-${i + 1}`} key={ev.name}>
+                <div className="event-meta">
+                  <span className="event-date">
+                    <img src={calendarIcon} alt="" aria-hidden="true" />
+                    {ev.date}
+                  </span>
+                  {ev.time && (
+                    <span className="event-time">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 7v5l3 2" />
+                      </svg>
+                      {ev.time}
+                    </span>
+                  )}
+                </div>
+                <div className="event-divider" aria-hidden="true" />
+                <h3 className="event-name">
+                  <img src={starIcon} alt="" aria-hidden="true" />
+                  {ev.name}
+                </h3>
+              </article>
+            ))}
           </div>
         </div>
       </section>

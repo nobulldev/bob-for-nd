@@ -1160,7 +1160,12 @@ const Index = () => {
             <a href="#issues">Issues</a>
             <a href="#action">Take Action</a>
             <a href="#media">Media</a>
-            <a href="#donate" className="donate-btn">
+            <a
+              href="https://secure.actblue.com/donate/bob-heitkamp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="donate-btn"
+            >
               Donate
             </a>
           </nav>

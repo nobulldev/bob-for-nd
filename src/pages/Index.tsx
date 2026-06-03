@@ -14,7 +14,7 @@ import mediaPlatformImg from "@/assets/section-platform.png";
 import videoThumbImg from "@/assets/section-video.png";
 import timeline01Img from "@/assets/timeline-01-cabinets.png";
 import timeline02Img from "@/assets/timeline-02-blazer.png";
-import timeline03Img from "@/assets/timeline-03-midwest.png";
+import timeline03Img from "@/assets/midwest.jpg";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";

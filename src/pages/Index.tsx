@@ -18,7 +18,7 @@ import timeline03Img from "@/assets/midwest.jpg";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
-import nobullImg from "@/assets/nobull.png";
+import nobullImg from "@/assets/nobull.svg";
 import starIcon from "@/assets/icon-star.svg";
 import calendarIcon from "@/assets/icon-calendar.svg";
 
@@ -199,6 +199,10 @@ a{color:inherit;text-decoration:none}
 .events-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
   max-width:1440px;margin:48px auto 0;
+}
+  .events-grid:has(.event-card:only-child) {
+  grid-template-columns: 1fr;
+  justify-items: center;
 }
 .event-card{
   background:#fff;border-radius:16px;padding:26px 30px 28px;
@@ -1046,10 +1050,8 @@ const HISTORY = [
   { years: "2016–2026", dur: "10 years", t: "Executive Director — Marketplace for Kids", d: "Statewide education and youth leadership organization", img: timeline06Img },
 ];
 
-const EVENTS: { date: string; time?: string; name: string }[] = [
-  { date: "June 5-7, 2026", name: "Blue Goose Days!" },
-  { date: "June 9, 2026", name: "Vote for Bob in the Primary!" },
-  { date: "June 16, 2026", time: "5PM", name: "Crooked Lane Farm Fundraiser" },
+const EVENTS: { date: string; time?: string; name: string; location?: string }[] = [
+  { date: "July 4, 2026", name: "250th anniversary of the signing of the Declaration of Independence" },
 ];
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
@@ -1237,6 +1239,9 @@ const Index = () => {
                   <img src={starIcon} alt="" aria-hidden="true" />
                   {ev.name}
                 </h3>
+                <p style={{ marginTop: 8, fontSize: 14, color: "#555" }}>
+                  {ev.location}
+                </p>
               </article>
             ))}
           </div>

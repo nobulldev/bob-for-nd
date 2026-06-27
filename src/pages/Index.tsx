@@ -1052,19 +1052,10 @@ const HISTORY = [
 
 const EVENTS: { date: string; time?: string; name: string; location?: string }[] = [
   {
-    date: "June 25, 2026",
-    name: "ND Rural Health Transformation",
-    location: "Hankinson Community Center, 112 Main Ave S, Hankinson, ND 58041",
-  },
-  {
     date: "July 1, 2026",
     time: "10:00 AM",
     name: "Coffee with the DEMs",
     location: "Dakota Coffee, 1001 2nd Ave N, Wahpeton, ND",
-  },
-  {
-    date: "July 4, 2026",
-    name: "250th anniversary of the signing of the Declaration of Independence",
   },
   {
     date: "July 4, 2026",
@@ -1078,13 +1069,8 @@ const EVENTS: { date: string; time?: string; name: string; location?: string }[]
     name: "Walcott City Meeting",
     location: "Walcott Fire Hall",
   },
-  {
-    date: "July 11, 2026",
-    name: "Chaulkfest Wop",
-    location: "Downtown Wahpeton (4th St & 2nd St)",
-  },
-  {
-    date: "July 12, 2026",
+ /* {
+    date: "July 11-12, 2026",
     name: "Chaulkfest Wop",
     location: "Downtown Wahpeton (4th St & 2nd St)",
   },
@@ -1111,7 +1097,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string }[]
     time: "9:00 AM",
     name: "Lidgerwood Heritage Days Parade",
     location: "Lidgerwood, ND",
-  },
+  },*/
 ];
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";

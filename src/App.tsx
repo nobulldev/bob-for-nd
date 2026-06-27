@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PressResources from "./pages/PressResources.tsx";
+import { CookieBanner } from "@/components/CookieBanner.tsx";
 
 const queryClient = new QueryClient();
 
@@ -21,8 +22,10 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <CookieBanner />
     </TooltipProvider>
   </QueryClientProvider>
 );
 
 export default App;
+

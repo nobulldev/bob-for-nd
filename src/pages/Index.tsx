@@ -19,6 +19,7 @@ import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
 import nobullImg from "@/assets/nobull.svg";
+import paradeBackground from "@/assets/parade-background.png";
 import starIcon from "@/assets/icon-star.svg";
 import calendarIcon from "@/assets/icon-calendar.svg";
 
@@ -209,9 +210,14 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 1px 2px -1px rgba(0,0,0,.1),0 1px 3px 0 rgba(0,0,0,.1);
   display:flex;flex-direction:column;
 }
+.event-card img {
+  max-width: 24px;
+  max-height: 24px;
+  margin-right: 10px;
+}
 .event-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:30px}
 .event-date{
-  display:inline-flex;align-items:center;gap:10px;
+  display:inline-flex;align-items:center;
   font-family:'Oswald',sans-serif;text-transform:uppercase;
   font-weight:600;font-size:16px;letter-spacing:.03em;color:var(--red);
 }
@@ -228,7 +234,7 @@ a{color:inherit;text-decoration:none}
 .event-name{
   display:inline-flex;align-items:center;gap:14px;
   font-family:'Inter',system-ui,sans-serif;font-weight:800;
-  font-size:22px;color:var(--navy);line-height:1.2;
+  font-size:20px;color:var(--navy);line-height:1.2;
 }
 .event-name img{width:19px;height:18px;display:block;flex-shrink:0}
 @media (max-width:960px){
@@ -978,11 +984,11 @@ const ACTIONS = [
     t: "Volunteer",
     d: "Dedicate any amount of time for an activity of your choice: community events, phone calls, door knocking, sign delivery, or administrative help.",
     icon: (
-      <svg viewBox="0 0 24 24" style={{fill:'none',stroke:'none'}}>
+      <svg viewBox="0 0 24 24" style={{ fill: 'none', stroke: 'none' }}>
         <mask id="vol-mask" fill="white">
-          <path d="M16.0377 7.3291C16.0377 6.26824 15.6163 5.25082 14.8661 4.50067C14.116 3.75053 13.0986 3.3291 12.0377 3.3291C10.9768 3.3291 9.95941 3.75053 9.20926 4.50067C8.45912 5.25082 8.03769 6.26824 8.03769 7.3291C8.03769 8.38997 8.45912 9.40738 9.20926 10.1575C9.95941 10.9077 10.9768 11.3291 12.0377 11.3291C13.0986 11.3291 14.116 10.9077 14.8661 10.1575C15.6163 9.40738 16.0377 8.38997 16.0377 7.3291ZM3 21.0004C3 18.6134 3.94821 16.3242 5.63604 14.6364C7.32387 12.9486 9.61305 12.0004 12 12.0004C14.3869 12.0004 16.6761 12.9486 18.364 14.6364C20.0518 16.3242 21 18.6134 21 21.0004"/>
+          <path d="M16.0377 7.3291C16.0377 6.26824 15.6163 5.25082 14.8661 4.50067C14.116 3.75053 13.0986 3.3291 12.0377 3.3291C10.9768 3.3291 9.95941 3.75053 9.20926 4.50067C8.45912 5.25082 8.03769 6.26824 8.03769 7.3291C8.03769 8.38997 8.45912 9.40738 9.20926 10.1575C9.95941 10.9077 10.9768 11.3291 12.0377 11.3291C13.0986 11.3291 14.116 10.9077 14.8661 10.1575C15.6163 9.40738 16.0377 8.38997 16.0377 7.3291ZM3 21.0004C3 18.6134 3.94821 16.3242 5.63604 14.6364C7.32387 12.9486 9.61305 12.0004 12 12.0004C14.3869 12.0004 16.6761 12.9486 18.364 14.6364C20.0518 16.3242 21 18.6134 21 21.0004" />
         </mask>
-        <path d="M16.0377 7.3291H18.0377H16.0377ZM12.0377 3.3291V1.3291V3.3291ZM8.03769 7.3291H6.03769H8.03769ZM12.0377 11.3291V13.3291V11.3291ZM16.0377 7.3291H18.0377C18.0377 5.7378 17.4056 4.21168 16.2803 3.08646L14.8661 4.50067L13.4519 5.91489C13.827 6.28996 14.0377 6.79867 14.0377 7.3291H16.0377ZM14.8661 4.50067L16.2803 3.08646C15.1551 1.96124 13.629 1.3291 12.0377 1.3291V3.3291V5.3291C12.5681 5.3291 13.0768 5.53982 13.4519 5.91489L14.8661 4.50067ZM12.0377 3.3291V1.3291C10.4464 1.3291 8.92027 1.96124 7.79505 3.08646L9.20926 4.50067L10.6235 5.91489C10.9986 5.53982 11.5073 5.3291 12.0377 5.3291V3.3291ZM9.20926 4.50067L7.79505 3.08646C6.66983 4.21168 6.03769 5.7378 6.03769 7.3291H8.03769H10.0377C10.0377 6.79867 10.2484 6.28996 10.6235 5.91489L9.20926 4.50067ZM8.03769 7.3291H6.03769C6.03769 8.9204 6.66983 10.4465 7.79505 11.5717L9.20926 10.1575L10.6235 8.74332C10.2484 8.36824 10.0377 7.85953 10.0377 7.3291H8.03769ZM9.20926 10.1575L7.79505 11.5717C8.92027 12.697 10.4464 13.3291 12.0377 13.3291V11.3291V9.3291C11.5073 9.3291 10.9986 9.11839 10.6235 8.74332L9.20926 10.1575ZM12.0377 11.3291V13.3291C13.629 13.3291 15.1551 12.697 16.2803 11.5717L14.8661 10.1575L13.4519 8.74332C13.0768 9.11839 12.5681 9.3291 12.0377 9.3291V11.3291ZM14.8661 10.1575L16.2803 11.5717C17.4056 10.4465 18.0377 8.9204 18.0377 7.3291H16.0377H14.0377C14.0377 7.85953 13.827 8.36824 13.4519 8.74332L14.8661 10.1575ZM3 21.0004H5C5 19.1439 5.7375 17.3634 7.05025 16.0506L5.63604 14.6364L4.22183 13.2222C2.15893 15.2851 1 18.083 1 21.0004H3ZM5.63604 14.6364L7.05025 16.0506C8.363 14.7379 10.1435 14.0004 12 14.0004V12.0004V10.0004C9.08263 10.0004 6.28474 11.1593 4.22183 13.2222L5.63604 14.6364ZM12 12.0004V14.0004C13.8565 14.0004 15.637 14.7379 16.9497 16.0506L18.364 14.6364L19.7782 13.2222C17.7153 11.1593 14.9174 10.0004 12 10.0004V12.0004ZM18.364 14.6364L16.9497 16.0506C18.2625 17.3634 19 19.1439 19 21.0004H21H23C23 18.083 21.8411 15.2851 19.7782 13.2222L18.364 14.6364Z" style={{fill:'white'}} mask="url(#vol-mask)"/>
+        <path d="M16.0377 7.3291H18.0377H16.0377ZM12.0377 3.3291V1.3291V3.3291ZM8.03769 7.3291H6.03769H8.03769ZM12.0377 11.3291V13.3291V11.3291ZM16.0377 7.3291H18.0377C18.0377 5.7378 17.4056 4.21168 16.2803 3.08646L14.8661 4.50067L13.4519 5.91489C13.827 6.28996 14.0377 6.79867 14.0377 7.3291H16.0377ZM14.8661 4.50067L16.2803 3.08646C15.1551 1.96124 13.629 1.3291 12.0377 1.3291V3.3291V5.3291C12.5681 5.3291 13.0768 5.53982 13.4519 5.91489L14.8661 4.50067ZM12.0377 3.3291V1.3291C10.4464 1.3291 8.92027 1.96124 7.79505 3.08646L9.20926 4.50067L10.6235 5.91489C10.9986 5.53982 11.5073 5.3291 12.0377 5.3291V3.3291ZM9.20926 4.50067L7.79505 3.08646C6.66983 4.21168 6.03769 5.7378 6.03769 7.3291H8.03769H10.0377C10.0377 6.79867 10.2484 6.28996 10.6235 5.91489L9.20926 4.50067ZM8.03769 7.3291H6.03769C6.03769 8.9204 6.66983 10.4465 7.79505 11.5717L9.20926 10.1575L10.6235 8.74332C10.2484 8.36824 10.0377 7.85953 10.0377 7.3291H8.03769ZM9.20926 10.1575L7.79505 11.5717C8.92027 12.697 10.4464 13.3291 12.0377 13.3291V11.3291V9.3291C11.5073 9.3291 10.9986 9.11839 10.6235 8.74332L9.20926 10.1575ZM12.0377 11.3291V13.3291C13.629 13.3291 15.1551 12.697 16.2803 11.5717L14.8661 10.1575L13.4519 8.74332C13.0768 9.11839 12.5681 9.3291 12.0377 9.3291V11.3291ZM14.8661 10.1575L16.2803 11.5717C17.4056 10.4465 18.0377 8.9204 18.0377 7.3291H16.0377H14.0377C14.0377 7.85953 13.827 8.36824 13.4519 8.74332L14.8661 10.1575ZM3 21.0004H5C5 19.1439 5.7375 17.3634 7.05025 16.0506L5.63604 14.6364L4.22183 13.2222C2.15893 15.2851 1 18.083 1 21.0004H3ZM5.63604 14.6364L7.05025 16.0506C8.363 14.7379 10.1435 14.0004 12 14.0004V12.0004V10.0004C9.08263 10.0004 6.28474 11.1593 4.22183 13.2222L5.63604 14.6364ZM12 12.0004V14.0004C13.8565 14.0004 15.637 14.7379 16.9497 16.0506L18.364 14.6364L19.7782 13.2222C17.7153 11.1593 14.9174 10.0004 12 10.0004V12.0004ZM18.364 14.6364L16.9497 16.0506C18.2625 17.3634 19 19.1439 19 21.0004H21H23C23 18.083 21.8411 15.2851 19.7782 13.2222L18.364 14.6364Z" style={{ fill: 'white' }} mask="url(#vol-mask)" />
       </svg>
     ),
   },
@@ -1050,54 +1056,53 @@ const HISTORY = [
   { years: "2016–2026", dur: "10 years", t: "Executive Director — Marketplace for Kids", d: "Statewide education and youth leadership organization", img: timeline06Img },
 ];
 
-const EVENTS: { date: string; time?: string; name: string; location?: string }[] = [
+const EVENTS: { date: string; time?: string; name: string; location?: string; backgroundImage?: string }[] = [
   {
     date: "July 1, 2026",
     time: "10:00 AM",
-    name: "Coffee with the DEMs",
-    location: "Dakota Coffee, 1001 2nd Ave N, Wahpeton, ND",
+    name: "Coffee with the DEMs at Dakota Coffee 1001 2nd Ave N Wahpeton",
   },
   {
     date: "July 4, 2026",
     time: "9:00 AM",
-    name: "Hankinson Parade",
+    name: "Hankinson Parade.",
     location: "Hankinson, ND",
+    backgroundImage: paradeBackground,
   },
   {
     date: "July 7, 2026",
     time: "7:30 PM",
-    name: "Walcott City Meeting",
-    location: "Walcott Fire Hall",
+    name: "Walcott City Meeting, Walcott Fire Hall",
   },
- /* {
-    date: "July 11-12, 2026",
-    name: "Chaulkfest Wop",
-    location: "Downtown Wahpeton (4th St & 2nd St)",
-  },
-  {
-    date: "July 15, 2026",
-    time: "10:00 AM",
-    name: "Coffee with the DEMs",
-    location: "Dakota Coffee, 1001 2nd Ave N, Wahpeton, ND",
-  },
-  {
-    date: "July 18, 2026",
-    time: "10:00 AM",
-    name: "Fairmount Parade",
-    location: "Fairmount, ND",
-  },
-  {
-    date: "July 21, 2026",
-    time: "6:00 PM",
-    name: "Great Bend City Meeting",
-    location: "Fire Hall",
-  },
-  {
-    date: "July 26, 2026",
-    time: "9:00 AM",
-    name: "Lidgerwood Heritage Days Parade",
-    location: "Lidgerwood, ND",
-  },*/
+  /* {
+     date: "July 11-12, 2026",
+     name: "Chaulkfest Wop",
+     location: "Downtown Wahpeton (4th St & 2nd St)",
+   },
+   {
+     date: "July 15, 2026",
+     time: "10:00 AM",
+     name: "Coffee with the DEMs",
+     location: "Dakota Coffee, 1001 2nd Ave N, Wahpeton, ND",
+   },
+   {
+     date: "July 18, 2026",
+     time: "10:00 AM",
+     name: "Fairmount Parade",
+     location: "Fairmount, ND",
+   },
+   {
+     date: "July 21, 2026",
+     time: "6:00 PM",
+     name: "Great Bend City Meeting",
+     location: "Fire Hall",
+   },
+   {
+     date: "July 26, 2026",
+     time: "9:00 AM",
+     name: "Lidgerwood Heritage Days Parade",
+     location: "Lidgerwood, ND",
+   },*/
 ];
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
@@ -1264,7 +1269,7 @@ const Index = () => {
           <h2 className="events-title fade-up">See Bob at:</h2>
           <div className="events-grid">
             {EVENTS.map((ev, i) => (
-              <article className={`event-card fade-up delay-${i + 1}`} key={ev.name}>
+              <article className={`event-card fade-up delay-${i + 1}`} key={ev.name} style={ev.backgroundImage ? { backgroundImage: `url(${ev.backgroundImage})`, backgroundSize: "100px", backgroundPosition: "right bottom", backgroundRepeat: "no-repeat" } : {}}>
                 <div className="event-meta">
                   <span className="event-date">
                     <img src={calendarIcon} alt="" aria-hidden="true" />
@@ -1281,13 +1286,17 @@ const Index = () => {
                   )}
                 </div>
                 <div className="event-divider" aria-hidden="true" />
-                <h3 className="event-name">
+                <div style={{ display: "flex", flexDirection: "row" }}>
                   <img src={starIcon} alt="" aria-hidden="true" />
-                  {ev.name}
-                </h3>
-                <p style={{ marginTop: 8, fontSize: 14, color: "#555" }}>
-                  {ev.location}
-                </p>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h3 className="event-name">
+                      {ev.name}
+                    </h3>
+                    <h3 className="event-name">
+                      {ev.location}
+                    </h3>
+                  </div>
+                </div>
               </article>
             ))}
           </div>

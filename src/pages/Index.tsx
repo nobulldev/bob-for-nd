@@ -888,7 +888,7 @@ const SOCIAL_ICONS = {
 
 const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/profile.php?id=61576634976767",
-  instagram: "https://www.instagram.com/votebob26/",
+  instagram: "https://www.instagram.com/vote4bob26/",
   youtube: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q",
 };
 

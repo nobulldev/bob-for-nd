@@ -1075,22 +1075,23 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     name: "Walcott City Meeting, Walcott Fire Hall",
   },*/
   {
-     date: "July 11-12, 2026",
-     name: "Chaulkfest Wop",
-     location: "Downtown Wahpeton (4th St & 2nd St)",
-   },
-   {
-     date: "July 15, 2026",
-     time: "10:00 AM",
-     name: "Coffee with the DEMs",
-     location: "Dakota Coffee, 1001 2nd Ave N, Wahpeton, ND",
-   },
-   {
-     date: "July 18, 2026",
-     time: "10:00 AM",
-     name: "Fairmount Parade",
-     location: "Fairmount, ND",
-   },/*
+    date: "July 15, 2026",
+    time: "9:00 AM",
+    name: "AI & Data Center Legislative Committee Meeting",
+    location: "Bismarck, ND",
+  },
+  {
+    date: "July 18, 2026",
+    time: "10:00 AM",
+    name: "Flock to Fairmount Parade",
+    location: "Fairmount, ND",
+  },
+  {
+    date: "July 21, 2026",
+    time: "5:30 PM",
+    name: "Great Bend City Council Meeting",
+    location: "Great Bend, ND Fire Hall",
+  },/*
    {
      date: "July 21, 2026",
      time: "6:00 PM",

@@ -1325,7 +1325,7 @@ const Index = () => {
               </div>
             </aside>
             <div className="bio fade-up delay-1">
-              <h3>Meet Bob</h3>
+              <h3>Meet Bobby</h3>
               <p>
                 Bob Heitkamp is a familiar face across the prairies and small towns of North Dakota. A lifelong
                 entrepreneur who started his first business at just sixteen years old, Bob understands the grit,

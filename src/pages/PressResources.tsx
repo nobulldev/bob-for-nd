@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "@/assets/logo.png";
 import mediaPressImg from "@/assets/media-press.png";
-import mediaLogosImg from "@/assets/media-logos.png";
+// import mediaLogosImg from "@/assets/media-logos.png";
 import mediaBioImg from "@/assets/section-bio.png";
 import mediaPlatformImg from "@/assets/section-platform.png";
-import videoThumbImg from "@/assets/section-video.png";
+// import videoThumbImg from "@/assets/section-video.png";
 import bobPhoto01 from "@/assets/bob-photo-01.png";
 import bobPhoto02 from "@/assets/bob-photo-02.png";
 import bobPhoto03 from "@/assets/bob-photo-03.png";
@@ -14,8 +14,11 @@ import bobPhoto06 from "@/assets/bob-photo-06.png";
 import bobPhoto07 from "@/assets/bob-photo-07.png";
 import bobPhoto08 from "@/assets/bob-photo-08.png";
 import bobPhoto10 from "@/assets/bob-photo-10.png";
-import assetLogo from "@/assets/asset-logo.png";
-import assetYardSign from "@/assets/asset-yard-sign.png";
+import pressPhoto09 from "@/assets/09.png";
+import pressPhoto10 from "@/assets/10.png";
+import pressPhoto11 from "@/assets/11.png";
+// import assetLogo from "@/assets/asset-logo.png";
+import yardImage from "@/assets/yard-image.png";
 
 const STYLES = `
 :root{
@@ -211,6 +214,8 @@ type Item = {
   desc: string;
   img?: string;
   isVideo?: boolean;
+  href?: string;
+  download?: boolean;
 };
 
 const PRESS_RELEASES: Item[] = [
@@ -218,6 +223,7 @@ const PRESS_RELEASES: Item[] = [
     title: "Press Releases",
     desc: "Official announcements and statements from the campaign.",
     img: mediaPressImg,
+    href: "https://votebob26.com/assets/presskit/release.pdf",
   },
 ];
 
@@ -231,31 +237,36 @@ const BOB_PHOTO_IMAGES = [
   bobPhoto07,
   bobPhoto08,
   bobPhoto10,
+  pressPhoto09,
+  pressPhoto10,
+  pressPhoto11,
 ];
 
 const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
   title: `Bob Heitkamp Photo ${i + 1}`,
   desc: "Approved photos for media use and supporters.",
   img,
+  href: `https://votebob26.com/assets/presskit/images/${String(i + 1).padStart(2, "0")}.png`,
+  download: true,
 }));
 
-const VIDEOS: Item[] = [
-  { title: "Video 1", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
-  { title: "Video 2", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
-];
+// const VIDEOS: Item[] = [
+//   { title: "Video 1", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
+//   { title: "Video 2", desc: "Speeches, ads, and trail moments from across the district.", img: videoThumbImg, isVideo: true },
+// ];
 
 const LOGOS: Item[] = [
-  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: assetLogo },
-  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: mediaLogosImg },
-  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: assetYardSign },
+  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", href: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", download: true },
+  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: "https://votebob26.com/assets/presskit/pin.png", href: "https://votebob26.com/assets/presskit/pin.png", download: true },
+  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: yardImage, href: "https://votebob26.com/assets/presskit/yard.zip", download: true },
 ];
 
 const BIO: Item[] = [
-  { title: "Bob Heitkamp Bio", desc: "Bob's full biography for press and event organizers.", img: mediaBioImg },
+  { title: "Bob Heitkamp Bio", desc: "Bob's full biography for press and event organizers.", img: mediaBioImg, href: "https://votebob26.com/assets/presskit/bio.pdf" },
 ];
 
 const PLATFORM: Item[] = [
-  { title: "Campaign Platform", desc: "The full platform document outlining priorities for District 25.", img: mediaPlatformImg },
+  { title: "Campaign Platform", desc: "The full platform document outlining priorities for District 25.", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf" },
 ];
 
 const DownloadIcon = () => (
@@ -271,9 +282,15 @@ const Card = ({ item }: { item: Item }) => (
     </div>
     <h5>{item.title}</h5>
     <p>{item.desc}</p>
-    <button type="button" className="download" onClick={() => window.alert(`Download: ${item.title}`)}>
-      Download <DownloadIcon />
-    </button>
+    {item.href ? (
+      <a href={item.href} {...(item.download ? { download: true } : { target: "_blank", rel: "noopener noreferrer" })} className="download">
+        Download <DownloadIcon />
+      </a>
+    ) : (
+      <button type="button" className="download" onClick={() => window.alert(`Download: ${item.title}`)}>
+        Download <DownloadIcon />
+      </button>
+    )}
   </article>
 );
 
@@ -304,7 +321,7 @@ const Group = ({
 
 const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/profile.php?id=61576634976767",
-  instagram: "https://www.instagram.com/votebob26/",
+  instagram: "https://www.instagram.com/vote4bob26/",
   youtube: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q",
 };
 
@@ -346,7 +363,7 @@ const PressResources = () => {
 
           <Group title="Press" emTitle="Releases" items={PRESS_RELEASES} />
           <Group title="Bob Heitkamp" emTitle="Photos" items={BOB_PHOTOS} />
-          <Group title="Videos" items={VIDEOS} />
+          {/* <Group title="Videos" items={VIDEOS} /> */}
           <Group title="Logos &" emTitle="Brand Assets" items={LOGOS} />
           <Group title="Bio" items={BIO} />
           <Group title="Platform" items={PLATFORM} />
@@ -394,7 +411,7 @@ const PressResources = () => {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Julie Prochnow - Treasurer</span>
+          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Some campaign media may include AI-assisted or digitally enhanced content. Julie Prochnow - Treasurer.</span>
           <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
         </div>
       </footer>

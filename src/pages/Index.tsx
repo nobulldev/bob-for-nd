@@ -12,6 +12,16 @@ import mediaLogosImg from "@/assets/media-logos.png";
 import mediaBioImg from "@/assets/section-bio.png";
 import mediaPlatformImg from "@/assets/section-platform.png";
 import videoThumbImg from "@/assets/section-video.png";
+import timeline01Img from "@/assets/timeline-01-cabinets.png";
+import timeline02Img from "@/assets/timeline-02-blazer.png";
+import timeline03Img from "@/assets/midwest.jpg";
+import timeline04Img from "@/assets/timeline-04-icecream.png";
+import timeline05Img from "@/assets/timeline-05-poets.png";
+import timeline06Img from "@/assets/timeline-06-kids.png";
+import nobullImg from "@/assets/nobull.svg";
+import paradeBackground from "@/assets/parade-background.png";
+import starIcon from "@/assets/icon-star.svg";
+import calendarIcon from "@/assets/icon-calendar.svg";
 
 const STYLES = `
 :root{
@@ -174,10 +184,63 @@ a{color:inherit;text-decoration:none}
 }
 .btn-red{background:var(--red);color:var(--cream);border-color:var(--red)}
 .btn-red:hover{background:#a51a27;border-color:#a51a27}
+.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-gold:hover{background:#e8c030;border-color:#e8c030}
 .btn-outline{background:transparent;color:var(--cream);border-color:var(--cream)}
 .btn-outline:hover{background:var(--cream);color:var(--navy)}
 .btn .arrow{transition:transform .2s}
 .btn:hover .arrow{transform:translateX(4px)}
+
+/* ---------- Events / See Bob At ---------- */
+#events{background:var(--gold);padding:84px 36px}
+.events-title{
+  font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
+  font-size:clamp(32px,4vw,48px);line-height:1.05;text-align:center;margin:0;
+}
+.events-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  max-width:1440px;margin:48px auto 0;
+}
+  .events-grid:has(.event-card:only-child) {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+.event-card{
+  background:#fff;border-radius:16px;padding:26px 30px 28px;
+  box-shadow:0 1px 2px -1px rgba(0,0,0,.1),0 1px 3px 0 rgba(0,0,0,.1);
+  display:flex;flex-direction:column;
+}
+.event-card img {
+  max-width: 24px;
+  max-height: 24px;
+  margin-right: 10px;
+}
+.event-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:30px}
+.event-date{
+  display:inline-flex;align-items:center;
+  font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-weight:600;font-size:16px;letter-spacing:.03em;color:var(--red);
+}
+.event-date img{width:15px;height:15px;display:block;flex-shrink:0}
+.event-time{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#fdf3d3;color:var(--red);
+  padding:5px 12px;border-radius:999px;
+  font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-weight:600;font-size:14px;letter-spacing:.03em;white-space:nowrap;
+}
+.event-time svg{width:14px;height:14px;stroke:var(--red);fill:none;stroke-width:2;flex-shrink:0}
+.event-divider{height:1px;background:rgba(10,34,64,.12);margin:18px 0}
+.event-name{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Inter',system-ui,sans-serif;font-weight:800;
+  font-size:20px;color:var(--navy);line-height:1.2;
+}
+.event-name img{width:19px;height:18px;display:block;flex-shrink:0}
+@media (max-width:960px){
+  #events{padding:56px 20px}
+  .events-grid{grid-template-columns:1fr;gap:18px}
+}
 
 /* ---------- Section base ---------- */
 section{padding:96px 36px;position:relative}
@@ -218,7 +281,7 @@ section{padding:96px 36px;position:relative}
   font-size:80px;line-height:.5;font-style:italic;display:block;margin-bottom:18px;
 }
 .quote-card blockquote{
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Inter',system-ui,sans-serif;font-style:italic;
   font-size:24px;line-height:1.4;color:var(--cream);
 }
 .quote-card cite{
@@ -244,12 +307,12 @@ section{padding:96px 36px;position:relative}
 .bio p:first-of-type::first-letter{
   font-family:'Playfair Display',serif;font-weight:900;
   color:var(--red);font-size:64px;line-height:.85;
-  float:left;padding:6px 12px 0 0;
+  float:left;padding: 0px 12px 0 0;
 }
 .bio .pull{
   border-left:4px solid var(--gold);
   padding:6px 0 6px 22px;margin:28px 0;
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Inter',system-ui,sans-serif;font-style:italic;
   color:var(--navy);font-size:21px;line-height:1.45;
 }
 .facts{
@@ -372,7 +435,7 @@ section{padding:96px 36px;position:relative}
   display:flex;align-items:center;
 }
 .closing-band p{
-  font-family:'Playfair Display',serif;font-style:italic;
+  font-family:'Inter',system-ui,sans-serif;font-style:italic;
   font-size:24px;line-height:1.45;color:var(--cream);
 }
 
@@ -391,6 +454,7 @@ section{padding:96px 36px;position:relative}
   padding:30px 28px;display:flex;flex-direction:column;gap:16px;
   transition:background .2s, border-color .2s, transform .2s;
 }
+.action-card{cursor:pointer}
 .action-card:hover{background:rgba(255,255,255,.07);border-color:var(--gold);transform:translateY(-4px)}
 .action-card .icon{
   width:48px;height:48px;background:var(--red);
@@ -398,7 +462,7 @@ section{padding:96px 36px;position:relative}
 }
 .action-card .icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
 .action-card h5{
-  font-family:'Playfair Display',serif;font-weight:800;font-size:22px;color:var(--cream);
+  font-family:'Inter',system-ui,sans-serif;font-weight:800;font-size:22px;color:var(--cream);
 }
 .action-card p{font-size:14.5px;line-height:1.65;color:rgba(245,239,228,.78)}
 
@@ -504,7 +568,7 @@ section{padding:96px 36px;position:relative}
   font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.22em;
   color:var(--red);display:inline-flex;align-items:center;gap:8px;
 }
-.media-card--compact{gap:14px;padding-bottom:22px}
+.media-card--compact{gap:14px;padding-bottom:22px;cursor:pointer}
 .media-card--compact h5{text-align:center}
 .media-cta{margin-top:48px;display:flex;justify-content:center}
 
@@ -539,31 +603,29 @@ section{padding:96px 36px;position:relative}
 #donate .blurb{
   max-width:620px;margin:18px auto 0;font-size:17px;color:rgba(245,239,228,.9);
 }
-.amounts{
-  margin:36px auto 0;display:flex;justify-content:center;flex-wrap:wrap;gap:12px;
-}
-.amount{
-  background:transparent;color:var(--cream);
-  border:1.5px solid rgba(245,239,228,.6);
-  font-family:'Oswald',sans-serif;letter-spacing:.18em;font-size:14px;
-  padding:14px 26px;cursor:pointer;border-radius:2px;
-  transition:background .2s, color .2s, border-color .2s;
-}
-.amount:hover{border-color:var(--gold);color:var(--gold)}
-.amount.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.donate-cta{
-  margin-top:32px;background:var(--cream);color:var(--navy);
-  font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.22em;
-  font-size:14px;padding:18px 42px;border:0;cursor:pointer;border-radius:2px;
-  display:inline-flex;align-items:center;gap:12px;
-  transition:background .2s, color .2s;
-}
-.donate-cta:hover{background:var(--gold);color:var(--navy)}
-.donate-cta .star{color:var(--red)}
-.donate-cta:hover .star{color:var(--navy)}
 
 /* ---------- Footer ---------- */
 footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
+
+/* ---------- NoBull credit ---------- */
+.nobull-credit{
+  background:var(--navy);
+  padding:24px 28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+.nobull-credit img{height:auto;width:146.82px;display:block}
+.nobull-credit p{
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:400;
+  font-size:14.5px;
+  line-height:23.93px;
+  color:rgba(245,239,228,.78);
+  text-align:center;
+  margin:0;
+}
 .foot-grid{
   max-width:1280px;margin:0 auto;
   display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:46px;
@@ -720,6 +782,98 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   #donate{padding:70px 14px}
   .amount{padding:12px 18px;font-size:14px}
 }
+/* ---------- Business History ---------- */
+#history{background:#f7f1e6;padding:90px 0 !important;overflow:hidden;font-family:Arial,sans-serif}
+.history-layout{
+  display:flex;max-width:1600px;margin:0 auto;min-height:720px;
+  border:1px solid rgba(3,31,81,.12);background:#f3ebdc;
+  box-shadow:0 30px 70px rgba(0,0,0,.08);
+}
+.history-side{
+  width:390px;min-width:390px;padding:70px 44px;
+  background:#f3ebdc;border-right:1px solid rgba(3,31,81,.12);
+  display:flex;flex-direction:column;box-sizing:border-box;
+}
+.history-side h2{
+  font-family:'Playfair Display',Georgia,serif;font-size:62px;line-height:.95;
+  margin:0 0 34px;color:var(--navy);font-weight:900;
+}
+.history-side>p{font-size:22px;line-height:1.6;margin:0;color:var(--muted)}
+.history-side-arrows{display:flex;gap:14px;margin-top:34px}
+.history-main{position:relative;flex:1 1 0;min-width:0;background:#f3ebdc}
+.history-scroll{height:100%;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
+.history-scroll::-webkit-scrollbar{height:8px}
+.history-scroll::-webkit-scrollbar-track{background:rgba(3,31,81,.08)}
+.history-scroll::-webkit-scrollbar-thumb{background:var(--navy)}
+.history-track{display:flex;height:100%;min-width:max-content}
+.history-card{
+  width:360px;padding:70px 36px 38px;border-right:1px solid rgba(3,31,81,.12);
+  position:relative;background:#f3ebdc;
+  transition:background .35s,color .35s;
+  box-sizing:border-box;display:flex;flex-direction:column;
+}
+.history-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:7px;
+  background:transparent;transition:background .35s;
+}
+.history-card:hover{background:#c44736;color:#fff}
+.history-card:hover::before{background:#f2c433}
+.history-card:hover h3,.history-card:hover>p,
+.history-card:hover .history-duration,.history-card:hover .history-year{color:#fff}
+.history-year{
+  font-size:46px;font-weight:900;color:var(--navy);
+  margin-bottom:38px;line-height:1;transition:color .35s;
+}
+.history-card h3{
+  font-family:'Playfair Display',Georgia,serif;font-size:36px;line-height:1;
+  margin:0 0 20px;color:var(--navy);transition:color .35s;
+}
+.history-duration{
+  font-size:21px;font-weight:700;margin-bottom:20px;
+  color:var(--red);transition:color .35s;
+}
+.history-card>p{
+  font-size:18px;line-height:1.55;color:var(--muted);
+  margin:0 0 34px;transition:color .35s;
+}
+.history-image{
+  margin-top:auto;width:100%;aspect-ratio:1/1;
+  background:rgba(3,31,81,.08);box-sizing:border-box;overflow:hidden;
+}
+.history-image img{width:100%;height:100%;display:block;object-fit:cover}
+.history-arrow{
+  width:54px;height:54px;border-radius:50%;
+  border:1px solid rgba(3,31,81,.2);background:#f7f1e6;
+  color:var(--navy);cursor:pointer;
+  box-shadow:0 12px 28px rgba(0,0,0,.12);
+  transition:background .25s,color .25s,border-color .25s;
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.history-arrow span{display:block;font-size:38px;line-height:1;transform:translateY(-3px)}
+.history-arrow:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media(max-width:1200px){
+  .history-layout{flex-direction:column}
+  .history-side{width:100%;min-width:100%;padding:50px 30px;border-right:none;border-bottom:1px solid rgba(3,31,81,.12)}
+  .history-side h2{font-size:52px;max-width:900px}
+  .history-side>p{max-width:900px}
+  .history-main{min-height:640px}
+}
+@media(max-width:640px){
+  #history{padding:50px 0 !important}
+  .history-side{padding:35px 24px}
+  .history-side h2{font-size:42px;margin-bottom:24px}
+  .history-side>p{font-size:18px}
+  .history-side-arrows{margin-top:28px}
+  .history-main{min-height:720px}
+  .history-card{width:300px;padding:48px 26px 28px}
+  .history-year{font-size:36px;margin-bottom:30px}
+  .history-card h3{font-size:30px}
+  .history-duration{font-size:19px}
+  .history-card>p{font-size:16px;margin-bottom:28px}
+  .history-arrow{width:44px;height:44px}
+  .history-arrow span{font-size:32px}
+}
+
 /* Wider content + slightly larger text on mobile */
 @media (max-width:960px){
   body{font-size:18px}
@@ -764,7 +918,7 @@ const SOCIAL_ICONS = {
 
 const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/profile.php?id=61576634976767",
-  instagram: "https://www.instagram.com/votebob26/",
+  instagram: "https://www.instagram.com/vote4bob26/",
   youtube: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q",
 };
 
@@ -809,18 +963,6 @@ const HeroStars = () => {
   );
 };
 
-const PRIORITIES = [
-  { n: "01", t: "Strong Communities", d: "Support the local institutions and volunteers that keep our towns strong." },
-  { n: "02", t: "Agriculture & Rural Prosperity", d: "Stand with farmers and strengthen rural economies." },
-  { n: "03", t: "Business Growth", d: "Support local employers and expand opportunity." },
-  {
-    n: "04",
-    t: "Infrastructure & Essential Services",
-    d: "Improve roads, strengthen infrastructure, and expand reliable internet access.",
-  },
-  { n: "05", t: "Opportunity for the Next Generation", d: "Help young people build their future right here at home." },
-];
-
 const ISSUES = [
   {
     t: "Community Leadership & Responsible Government",
@@ -861,6 +1003,7 @@ const ACTIONS = [
   {
     t: "Donate",
     d: "Every contribution helps reach voters, grow the campaign, and share Bob's message across District 25.",
+    hideFromForm: true,
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
@@ -871,8 +1014,11 @@ const ACTIONS = [
     t: "Volunteer",
     d: "Dedicate any amount of time for an activity of your choice: community events, phone calls, door knocking, sign delivery, or administrative help.",
     icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM3 21a9 9 0 0 1 18 0" />
+      <svg viewBox="0 0 24 24" style={{ fill: 'none', stroke: 'none' }}>
+        <mask id="vol-mask" fill="white">
+          <path d="M16.0377 7.3291C16.0377 6.26824 15.6163 5.25082 14.8661 4.50067C14.116 3.75053 13.0986 3.3291 12.0377 3.3291C10.9768 3.3291 9.95941 3.75053 9.20926 4.50067C8.45912 5.25082 8.03769 6.26824 8.03769 7.3291C8.03769 8.38997 8.45912 9.40738 9.20926 10.1575C9.95941 10.9077 10.9768 11.3291 12.0377 11.3291C13.0986 11.3291 14.116 10.9077 14.8661 10.1575C15.6163 9.40738 16.0377 8.38997 16.0377 7.3291ZM3 21.0004C3 18.6134 3.94821 16.3242 5.63604 14.6364C7.32387 12.9486 9.61305 12.0004 12 12.0004C14.3869 12.0004 16.6761 12.9486 18.364 14.6364C20.0518 16.3242 21 18.6134 21 21.0004" />
+        </mask>
+        <path d="M16.0377 7.3291H18.0377H16.0377ZM12.0377 3.3291V1.3291V3.3291ZM8.03769 7.3291H6.03769H8.03769ZM12.0377 11.3291V13.3291V11.3291ZM16.0377 7.3291H18.0377C18.0377 5.7378 17.4056 4.21168 16.2803 3.08646L14.8661 4.50067L13.4519 5.91489C13.827 6.28996 14.0377 6.79867 14.0377 7.3291H16.0377ZM14.8661 4.50067L16.2803 3.08646C15.1551 1.96124 13.629 1.3291 12.0377 1.3291V3.3291V5.3291C12.5681 5.3291 13.0768 5.53982 13.4519 5.91489L14.8661 4.50067ZM12.0377 3.3291V1.3291C10.4464 1.3291 8.92027 1.96124 7.79505 3.08646L9.20926 4.50067L10.6235 5.91489C10.9986 5.53982 11.5073 5.3291 12.0377 5.3291V3.3291ZM9.20926 4.50067L7.79505 3.08646C6.66983 4.21168 6.03769 5.7378 6.03769 7.3291H8.03769H10.0377C10.0377 6.79867 10.2484 6.28996 10.6235 5.91489L9.20926 4.50067ZM8.03769 7.3291H6.03769C6.03769 8.9204 6.66983 10.4465 7.79505 11.5717L9.20926 10.1575L10.6235 8.74332C10.2484 8.36824 10.0377 7.85953 10.0377 7.3291H8.03769ZM9.20926 10.1575L7.79505 11.5717C8.92027 12.697 10.4464 13.3291 12.0377 13.3291V11.3291V9.3291C11.5073 9.3291 10.9986 9.11839 10.6235 8.74332L9.20926 10.1575ZM12.0377 11.3291V13.3291C13.629 13.3291 15.1551 12.697 16.2803 11.5717L14.8661 10.1575L13.4519 8.74332C13.0768 9.11839 12.5681 9.3291 12.0377 9.3291V11.3291ZM14.8661 10.1575L16.2803 11.5717C17.4056 10.4465 18.0377 8.9204 18.0377 7.3291H16.0377H14.0377C14.0377 7.85953 13.827 8.36824 13.4519 8.74332L14.8661 10.1575ZM3 21.0004H5C5 19.1439 5.7375 17.3634 7.05025 16.0506L5.63604 14.6364L4.22183 13.2222C2.15893 15.2851 1 18.083 1 21.0004H3ZM5.63604 14.6364L7.05025 16.0506C8.363 14.7379 10.1435 14.0004 12 14.0004V12.0004V10.0004C9.08263 10.0004 6.28474 11.1593 4.22183 13.2222L5.63604 14.6364ZM12 12.0004V14.0004C13.8565 14.0004 15.637 14.7379 16.9497 16.0506L18.364 14.6364L19.7782 13.2222C17.7153 11.1593 14.9174 10.0004 12 10.0004V12.0004ZM18.364 14.6364L16.9497 16.0506C18.2625 17.3634 19 19.1439 19 21.0004H21H23C23 18.083 21.8411 15.2851 19.7782 13.2222L18.364 14.6364Z" style={{ fill: 'white' }} mask="url(#vol-mask)" />
       </svg>
     ),
   },
@@ -915,24 +1061,89 @@ const ACTIONS = [
   },
 ];
 
-const MEDIA: { t: string; d: string; note: string; img?: string }[] = [
+const MEDIA: { t: string; d: string; note: string; img?: string; href: string; external?: boolean }[] = [
   {
     t: "Press Releases",
     d: "Official announcements and statements from the campaign.",
     note: "Press release thumbnail",
     img: mediaPressImg,
+    href: "https://votebob26.com/assets/presskit/release.pdf",
+    external: true,
   },
-  { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg },
-  { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail", img: videoThumbImg },
-  { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg },
-  { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg },
-  { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg },
+  { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg, href: "/press" },
+  { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail", img: videoThumbImg, href: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q", external: true },
+  { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg, href: "/press" },
+  { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg, href: "https://votebob26.com/assets/presskit/bio.pdf", external: true },
+  { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf", external: true },
 ];
+
+const HISTORY = [
+  { years: "1982–2022", dur: "40 years", t: "Bob Heitkamp Cabinets & Construction", d: "Construction, cabinetry, and workforce leadership", img: timeline01Img },
+  { years: "1994–2017", dur: "23 years", t: "Blazer Express", d: "Gas station/convenience store", img: timeline02Img },
+  { years: "2010–2016", dur: "6 years", t: "Midwest Applied Technologies", d: "Technology and applied business operations", img: timeline03Img },
+  { years: "2013–2023", dur: "10 years", t: "Beyond Ice Cream", d: "Consumer retail and food business", img: timeline04Img },
+  { years: "2015–2017", dur: "2 years", t: "Poet's Warehouse Liquors", d: "Retail and liquor operations", img: timeline05Img },
+  { years: "2016–2026", dur: "10 years", t: "Executive Director — Marketplace for Kids", d: "Statewide education and youth leadership organization", img: timeline06Img },
+];
+
+const EVENTS: { date: string; time?: string; name: string; location?: string; backgroundImage?: string }[] = [
+  /*{
+    date: "July 1, 2026",
+    time: "10:00 AM",
+    name: "Coffee with the DEMs at Dakota Coffee 1001 2nd Ave N Wahpeton",
+  },
+  {
+    date: "July 4, 2026",
+    time: "9:00 AM",
+    name: "Hankinson Parade.",
+    location: "Hankinson, ND",
+    backgroundImage: paradeBackground,
+  },
+  {
+    date: "July 7, 2026",
+    time: "7:30 PM",
+    name: "Walcott City Meeting, Walcott Fire Hall",
+  },*/
+  {
+    date: "July 15, 2026",
+    time: "9:00 AM",
+    name: "AI & Data Center Legislative Committee Meeting",
+    location: "Bismarck, ND",
+  },
+  {
+    date: "July 18, 2026",
+    time: "10:00 AM",
+    name: "Flock to Fairmount Parade",
+    location: "Fairmount, ND",
+  },
+  {
+    date: "July 21, 2026",
+    time: "5:30 PM",
+    name: "Great Bend City Council Meeting",
+    location: "Great Bend, ND Fire Hall",
+  },/*
+   {
+     date: "July 21, 2026",
+     time: "6:00 PM",
+     name: "Great Bend City Meeting",
+     location: "Fire Hall",
+   },
+   {
+     date: "July 26, 2026",
+     time: "9:00 AM",
+     name: "Lidgerwood Heritage Days Parade",
+     location: "Lidgerwood, ND",
+   },*/
+];
+
+const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
 
 const Index = () => {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const candidateRef = useRef<HTMLDivElement>(null);
+  const historyScrollRef = useRef<HTMLDivElement>(null);
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   useEffect(() => {
     // Nav shadow on scroll
@@ -955,14 +1166,6 @@ const Index = () => {
       if (t.tagName === "A") menu?.classList.remove("open");
     };
     menu?.addEventListener("click", closeMenu);
-
-    // Donate amount toggle
-    const amounts = document.querySelectorAll(".amount");
-    const onAmount = (e: Event) => {
-      amounts.forEach((b) => b.classList.remove("active"));
-      (e.currentTarget as HTMLElement).classList.add("active");
-    };
-    amounts.forEach((b) => b.addEventListener("click", onAmount));
 
     // Fade-up observer
     const io = new IntersectionObserver(
@@ -1005,7 +1208,6 @@ const Index = () => {
       window.removeEventListener("mousemove", onMouseMove);
       ham?.removeEventListener("click", onHam);
       menu?.removeEventListener("click", closeMenu);
-      amounts.forEach((b) => b.removeEventListener("click", onAmount));
       io.disconnect();
     };
   }, []);
@@ -1042,7 +1244,12 @@ const Index = () => {
             <a href="#issues">Issues</a>
             <a href="#action">Take Action</a>
             <a href="#media">Media</a>
-            <a href="#donate" className="donate-btn">
+            <a
+              href="https://secure.actblue.com/donate/bob-heitkamp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="donate-btn"
+            >
               Donate
             </a>
           </nav>
@@ -1087,6 +1294,46 @@ const Index = () => {
         </div>
       </section>
 
+      {/* EVENTS */}
+      <section id="events">
+        <div className="container">
+          <h2 className="events-title fade-up">See Bob at:</h2>
+          <div className="events-grid">
+            {EVENTS.map((ev, i) => (
+              <article className={`event-card fade-up delay-${i + 1}`} key={ev.name} style={ev.backgroundImage ? { backgroundImage: `url(${ev.backgroundImage})`, backgroundSize: "100px", backgroundPosition: "right bottom", backgroundRepeat: "no-repeat" } : {}}>
+                <div className="event-meta">
+                  <span className="event-date">
+                    <img src={calendarIcon} alt="" aria-hidden="true" />
+                    {ev.date}
+                  </span>
+                  {ev.time && (
+                    <span className="event-time">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 7v5l3 2" />
+                      </svg>
+                      {ev.time}
+                    </span>
+                  )}
+                </div>
+                <div className="event-divider" aria-hidden="true" />
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <img src={starIcon} alt="" aria-hidden="true" />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h3 className="event-name">
+                      {ev.name}
+                    </h3>
+                    <h3 className="event-name">
+                      {ev.location}
+                    </h3>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT */}
       <section id="about">
         <div className="container">
@@ -1094,7 +1341,7 @@ const Index = () => {
             <span className="dash" /> About Bob
           </span>
           <h2 className="section-title fade-up delay-1">
-            A Leader Shaped by Real <em>Experience</em>, Faith, and Service
+            A Leader Shaped by Real <em>Experience</em>
           </h2>
           <div className="about-grid">
             <aside className="quote-stack fade-up">
@@ -1108,7 +1355,7 @@ const Index = () => {
               </div>
             </aside>
             <div className="bio fade-up delay-1">
-              <h3>Meet Bob</h3>
+              <h3>Meet Bobby</h3>
               <p>
                 Bob Heitkamp is a familiar face across the prairies and small towns of North Dakota. A lifelong
                 entrepreneur who started his first business at just sixteen years old, Bob understands the grit,
@@ -1137,44 +1384,48 @@ const Index = () => {
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <section id="timeline">
-        <div className="container">
-          <span className="section-eyebrow fade-up">
-            <span className="dash" /> Timeline
-          </span>
-          <h2 className="section-title fade-up delay-1">
-            A Lifetime of <em>Building</em> in North Dakota
-          </h2>
-          <p className="fade-up delay-2" style={{ maxWidth: 760, marginBottom: 40, color: "hsl(var(--muted-foreground))" }}>
-            I've spent my entire life building businesses, creating jobs, and helping communities across North Dakota.
-          </p>
-          <ol className="timeline fade-up delay-2">
-            {[
-              { name: "Bob Heitkamp Cabinets & Construction", years: "1982–2022", duration: "40 years" },
-              { name: "Blazer Express", years: "1994–2017", duration: "23 years" },
-              { name: "Midwest Applied Technologies", years: "2010–2016", duration: "6 years" },
-              { name: "Beyond Ice Cream", years: "2013–2023", duration: "10 years" },
-              { name: "Poet's Warehouse Liquors", years: "2015–2017", duration: "2 years" },
-              { name: "Executive Director — Marketplace for Kids", years: "2016–2026", duration: "10 years" },
-            ].map((item) => (
-              <li key={item.name} className="timeline-item">
-                <span className="timeline-dot" aria-hidden="true" />
-                <div className="timeline-content">
-                  <h4>{item.name}</h4>
-                  <div className="timeline-meta">
-                    <span>{item.years}</span>
-                    <span className="timeline-sep" aria-hidden="true">•</span>
-                    <span>{item.duration}</span>
+      {/* BUSINESS HISTORY */}
+      <section id="history">
+        <div className="history-layout">
+          <div className="history-side">
+            <h2>How You Know Me</h2>
+            <p>I spent my entire life building businesses, creating jobs, and helping communities across North Dakota.</p>
+            <div className="history-side-arrows">
+              <button
+                className="history-arrow"
+                aria-label="Scroll left"
+                onClick={() => { if (historyScrollRef.current) historyScrollRef.current.scrollLeft -= 380; }}
+              >
+                <span>‹</span>
+              </button>
+              <button
+                className="history-arrow"
+                aria-label="Scroll right"
+                onClick={() => { if (historyScrollRef.current) historyScrollRef.current.scrollLeft += 380; }}
+              >
+                <span>›</span>
+              </button>
+            </div>
+          </div>
+          <div className="history-main">
+            <div className="history-scroll" ref={historyScrollRef}>
+              <div className="history-track">
+                {HISTORY.map((h) => (
+                  <div key={h.t} className="history-card">
+                    <div className="history-year">{h.years}</div>
+                    <h3>{h.t}</h3>
+                    <div className="history-duration">{h.dur}</div>
+                    <p>{h.d}</p>
+                    <div className="history-image">
+                      <img src={h.img} alt={h.t} loading="lazy" />
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ol>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-
-
 
       {/* WHY I'M RUNNING (video placeholder) */}
       <section id="why">
@@ -1202,9 +1453,6 @@ const Index = () => {
                   I'll listen carefully, treat people with respect and focus on common-sense solutions that help our
                   communities thrive.
                 </p>
-                <p className="quote-blue bg-secondary-foreground text-white">
-                  I'm running to listen, work hard, and protect the future of our communities.
-                </p>
               </div>
             </div>
             <div className="why-video-wrap">
@@ -1217,30 +1465,6 @@ const Index = () => {
                 <span className="video-cap">Campaign Video — Coming Soon</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PRIORITIES */}
-      <section id="priorities">
-        <div className="container">
-          <div className="priorities-head">
-            <div>
-              <span className="section-eyebrow fade-up">
-                <span className="dash" /> Priorities
-              </span>
-              <h2 className="section-title fade-up delay-1">
-                Priorities for <em>District 25</em>
-              </h2>
-            </div>
-          </div>
-          <div className="cards">
-            {PRIORITIES.map((p, i) => (
-              <article key={p.n} className={`card fade-up delay-${(i % 5) + 1}`}>
-                <h4>{p.t}</h4>
-                <p>{p.d}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -1276,6 +1500,37 @@ const Index = () => {
         </div>
       </section>
 
+      {/* DONATE */}
+      <section id="donate">
+        <div className="star-strip top" aria-hidden="true">
+          {Array.from({ length: 22 }).map((_, i) => (
+            <span key={i}>★</span>
+          ))}
+        </div>
+        <div className="star-strip bot" aria-hidden="true">
+          {Array.from({ length: 22 }).map((_, i) => (
+            <span key={i}>★</span>
+          ))}
+        </div>
+        <div className="container fade-up">
+          <h2>
+            Donate to <em>Bob</em>
+          </h2>
+          <p className="blurb">
+            Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
+          </p>
+          <a
+            href="https://secure.actblue.com/donate/bob-heitkamp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-gold"
+            style={{ marginTop: "32px", display: "inline-block" }}
+          >
+            Donate Now →
+          </a>
+        </div>
+      </section>
+
       {/* TAKE ACTION */}
       <section id="action">
         <div className="container">
@@ -1287,7 +1542,18 @@ const Index = () => {
           </h2>
           <div className="action-cards">
             {ACTIONS.map((a, i) => (
-              <article key={a.t} className={`action-card fade-up delay-${(i % 5) + 1}`}>
+              <article
+                key={a.t}
+                className={`action-card fade-up delay-${(i % 5) + 1}`}
+                onClick={() => {
+                  if (a.hideFromForm) {
+                    window.open("https://secure.actblue.com/donate/bob-heitkamp", "_blank", "noopener,noreferrer");
+                  } else {
+                    setSelectedActions((prev) => prev.includes(a.t) ? prev : [...prev, a.t]);
+                    document.querySelector(".action-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+              >
                 <span className="icon">{a.icon}</span>
                 <h5>{a.t}</h5>
                 <p>{a.d}</p>
@@ -1297,70 +1563,119 @@ const Index = () => {
 
           <form
             className="action-form fade-up"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
+              if (selectedActions.length === 0) {
+                alert("Please select at least one way you'd like to help.");
+                return;
+              }
               const form = e.currentTarget;
               const name = (form.elements.namedItem("n") as HTMLInputElement).value.trim();
               const email = (form.elements.namedItem("e") as HTMLInputElement).value.trim();
               const phone = (form.elements.namedItem("p") as HTMLInputElement).value.trim();
               const zip = (form.elements.namedItem("z") as HTMLInputElement).value.trim();
-              if (selectedActions.length === 0) {
-                alert("Please select at least one way you'd like to help.");
-                return;
+              setFormStatus("sending");
+              try {
+                const res = await fetch("https://api.web3forms.com/submit", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json", Accept: "application/json" },
+                  body: JSON.stringify({
+                    access_key: WEB3FORMS_KEY,
+                    subject: `Get Involved — ${name}`,
+                    from_name: name,
+                    name,
+                    email,
+                    phone,
+                    zip_code: zip,
+                    interested_in: selectedActions.join(", "),
+                  }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                  setFormStatus("success");
+                  form.reset();
+                  setSelectedActions([]);
+                } else {
+                  setFormStatus("error");
+                }
+              } catch {
+                setFormStatus("error");
               }
-              const subject = encodeURIComponent(`Get Involved — ${name}`);
-              const body = encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nZIP Code: ${zip}\n\nInterested in:\n- ${selectedActions.join("\n- ")}`,
-              );
-              window.location.href = `mailto:votebob26@gmail.com?subject=${subject}&body=${body}`;
             }}
           >
             <h4>Get Involved</h4>
             <p className="sub">Tell us how you'd like to help and we'll be in touch.</p>
-            <div className="form-grid">
-              <div className="field">
-                <label htmlFor="n">Name *</label>
-                <input id="n" name="n" type="text" placeholder="Your full name" required />
+
+            {formStatus === "success" ? (
+              <div style={{ padding: "32px 0", textAlign: "center" }}>
+                <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, color: "var(--navy)", fontWeight: 800, marginBottom: 10 }}>
+                  Thank you!
+                </p>
+                <p style={{ color: "var(--muted)", fontSize: 16 }}>
+                  We received your message and will be in touch soon.
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  style={{ marginTop: 20, borderColor: "var(--navy)", color: "var(--navy)" }}
+                  onClick={() => setFormStatus("idle")}
+                >
+                  Submit Another
+                </button>
               </div>
-              <div className="field">
-                <label htmlFor="e">Email *</label>
-                <input id="e" name="e" type="email" placeholder="you@example.com" required />
-              </div>
-              <div className="field">
-                <label htmlFor="p">Phone *</label>
-                <input id="p" name="p" type="tel" placeholder="(701) 555-0100" required />
-              </div>
-              <div className="field">
-                <label htmlFor="z">ZIP Code *</label>
-                <input id="z" name="z" type="text" placeholder="58000" required pattern="\d{5}(-\d{4})?" />
-              </div>
-            </div>
-            <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
-              {ACTIONS.map((a) => {
-                const active = selectedActions.includes(a.t);
-                return (
-                  <button
-                    type="button"
-                    key={a.t}
-                    className="chip"
-                    aria-pressed={active}
-                    onClick={() =>
-                      setSelectedActions((prev) =>
-                        prev.includes(a.t) ? prev.filter((x) => x !== a.t) : [...prev, a.t],
-                      )
-                    }
-                  >
-                    <span className="chip-check" aria-hidden="true">{active ? "✓" : ""}</span>
-                    <span>{a.t}</span>
+            ) : (
+              <>
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="n">Name *</label>
+                    <input id="n" name="n" type="text" placeholder="Your full name" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="e">Email *</label>
+                    <input id="e" name="e" type="email" placeholder="you@example.com" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="p">Phone *</label>
+                    <input id="p" name="p" type="tel" placeholder="(701) 555-0100" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="z">ZIP Code *</label>
+                    <input id="z" name="z" type="text" placeholder="58000" required pattern="\d{5}(-\d{4})?" />
+                  </div>
+                </div>
+                <div className="checks" role="group" aria-label="How would you like to help? (select at least one)">
+                  {ACTIONS.filter((a) => !a.hideFromForm).map((a) => {
+                    const active = selectedActions.includes(a.t);
+                    return (
+                      <button
+                        type="button"
+                        key={a.t}
+                        className="chip"
+                        aria-pressed={active}
+                        onClick={() =>
+                          setSelectedActions((prev) =>
+                            prev.includes(a.t) ? prev.filter((x) => x !== a.t) : [...prev, a.t],
+                          )
+                        }
+                      >
+                        <span className="chip-check" aria-hidden="true">{active ? "✓" : ""}</span>
+                        <span>{a.t}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {formStatus === "error" && (
+                  <p style={{ color: "var(--red)", marginTop: 16, fontSize: 14 }}>
+                    Something went wrong. Please try again or email us directly at votebob26@gmail.com.
+                  </p>
+                )}
+                <div className="submit-row">
+                  <button type="submit" className="btn btn-red" disabled={formStatus === "sending"}>
+                    {formStatus === "sending" ? "Sending…" : "Submit"} <span className="arrow">→</span>
                   </button>
-                );
-              })}
-            </div>
-            <div className="submit-row">
-              <button type="submit" className="btn btn-red">
-                Submit <span className="arrow">→</span>
-              </button>
-            </div>
+                </div>
+              </>
+            )}
           </form>
         </div>
       </section>
@@ -1376,16 +1691,29 @@ const Index = () => {
           </h2>
           <div className="media-grid">
             {MEDIA.map((m, i) => (
-              <article key={m.t} className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
-                <div className="ph">
-                  {m.img ? (
-                    <img src={m.img} alt={m.t} loading="lazy" />
-                  ) : (
-                    m.note
-                  )}
-                </div>
-                <h5>{m.t}</h5>
-              </article>
+              m.external ? (
+                <a key={m.t} href={m.href} target="_blank" rel="noopener noreferrer" className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
+                  <div className="ph">
+                    {m.img ? (
+                      <img src={m.img} alt={m.t} loading="lazy" />
+                    ) : (
+                      m.note
+                    )}
+                  </div>
+                  <h5>{m.t}</h5>
+                </a>
+              ) : (
+                <Link key={m.t} to={m.href} className={`media-card media-card--compact fade-up delay-${(i % 5) + 1}`}>
+                  <div className="ph">
+                    {m.img ? (
+                      <img src={m.img} alt={m.t} loading="lazy" />
+                    ) : (
+                      m.note
+                    )}
+                  </div>
+                  <h5>{m.t}</h5>
+                </Link>
+              )
             ))}
           </div>
 
@@ -1409,40 +1737,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* DONATE */}
-      <section id="donate">
-        <div className="star-strip top" aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => (
-            <span key={i}>★</span>
-          ))}
-        </div>
-        <div className="star-strip bot" aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => (
-            <span key={i}>★</span>
-          ))}
-        </div>
-        <div className="container fade-up">
-          <h2>
-            Donate to <em>Bob</em>
-          </h2>
-          <p className="blurb">
-            Your contribution helps reach voters, grow the campaign, and share Bob's message across District 25.
-          </p>
-          <div className="amounts">
-            {["$10", "$25", "$50", "$100", "$200"].map((a) => (
-              <button key={a} className={`amount ${a === "$50" ? "active" : ""}`}>
-                {a}
-              </button>
-            ))}
-          </div>
-          <div>
-            <button className="donate-cta">
-              Donate Now <span className="star">★</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer>
         <div className="foot-grid">
@@ -1459,9 +1753,6 @@ const Index = () => {
               </li>
               <li>
                 <a href="#issues">Issues</a>
-              </li>
-              <li>
-                <a href="#priorities">Priorities</a>
               </li>
               <li>
                 <a href="#action">Take Action</a>
@@ -1501,10 +1792,16 @@ const Index = () => {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. Julie Prochnow - Treasurer</span>
+          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. <br />Some campaign media may include AI-assisted or digitally enhanced content. <br />Julie Prochnow - Treasurer.</span>
           <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
         </div>
       </footer>
+
+      {/* NOBULL CREDIT */}
+      <a href="https://nobull-strategies.com/" target="_blank" rel="noopener noreferrer" className="nobull-credit">
+        <img src={nobullImg} alt="NoBull Strategies" />
+        <p>Created by NoBull Strategies<br />nobull-strategies.com</p>
+      </a>
     </>
   );
 };

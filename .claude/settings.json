@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/timeline/01 cabinets.png\" /Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/src/assets/timeline-01-cabinets.png)",
+      "Bash(cp \"/Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/timeline/02 Blazer Express.png\" /Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/src/assets/timeline-02-blazer.png)",
+      "Bash(cp \"/Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/timeline/03 Midwest Applied Technologies.png\" /Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/src/assets/timeline-03-midwest.png)",
+      "Bash(cp \"/Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/timeline/04 Beyond Ice Cream.png\" /Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/src/assets/timeline-04-icecream.png)",
+      "Bash(cp \"/Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/timeline/05 Poet's Warehouse Liquors.png\" /Users/mateusrodrigues/Codebase/NoBull/bob-for-nd/src/assets/timeline-05-poets.png)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

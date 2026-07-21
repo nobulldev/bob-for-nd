@@ -1139,7 +1139,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     time: "10:00 AM",
     name: "Lidgerwood Heritage Days Parade",
     location: "Lidgerwood, ND",
-  }, 
+  },
 ];
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";

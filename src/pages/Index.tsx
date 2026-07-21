@@ -1103,7 +1103,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     date: "July 7, 2026",
     time: "7:30 PM",
     name: "Walcott City Meeting, Walcott Fire Hall",
-  },*/
+  },
   {
     date: "July 15, 2026",
     time: "9:00 AM",
@@ -1121,19 +1121,25 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     time: "5:30 PM",
     name: "Great Bend City Council Meeting",
     location: "Great Bend, ND Fire Hall",
-  },/*
-   {
-     date: "July 21, 2026",
-     time: "6:00 PM",
-     name: "Great Bend City Meeting",
-     location: "Fire Hall",
-   },
-   {
-     date: "July 26, 2026",
-     time: "9:00 AM",
-     name: "Lidgerwood Heritage Days Parade",
-     location: "Lidgerwood, ND",
-   },*/
+  },*/
+  {
+    date: "July 21, 2026",
+    time: "7:00 PM",
+    name: "Abercrombie City Council Meeting",
+    location: "Abercrombie, ND",
+  },
+  {
+    date: "July 23, 2026",
+    time: "5:00-7:00 PM",
+    name: "BBQ and Silent Auction 5-7 PM",
+    location: "Ten Seven Acres Alpaca Farm",
+  },
+  {
+    date: "July 25, 2026",
+    time: "10:00 AM",
+    name: "Lidgerwood Heritage Days Parade",
+    location: "Lidgerwood, ND",
+  },
 ];
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";

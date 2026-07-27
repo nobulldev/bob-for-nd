@@ -934,7 +934,7 @@ const HeroStars = () => {
 };
 
 const ISSUES = [
-  {
+  /*{
     t: "Community Leadership & Responsible Government",
     p: [
       "Families, farmers, homeowners, and local businesses all feel the pressure when costs keep rising. Bob will support efforts that ease the strain on working families and retirees without shifting that burden onto local businesses or weakening the services communities depend on. Government should respect taxpayers, spend carefully, and focus on the basics people count on every day.",
@@ -965,6 +965,49 @@ const ISSUES = [
     t: "Schools, Opportunity & the Next Generation",
     p: [
       "Bob believes District 25 grows when young people can see a future here, when employers can find workers, and when families can afford to build a life and stay. He supports strong schools, workforce development, job training, housing growth, child care support, and practical policies that help communities recruit and retain the people they need.",
+    ],
+  },*/
+
+  {
+    t: "Lower Costs and Responsible Government",
+    p: [
+      "Families, farmers, homeowners, and local businesses all feel the pressure when costs keep rising.",
+      "Bob will support efforts that ease the strain on working families and retirees without shifting that burden onto local businesses or weakening the services communities depend on. Government should respect taxpayers, spend carefully, and focus on the basics people count on every day."
+    ],
+  },
+  {
+    t: "Business, Manufacturing, and Local Jobs",
+    p: [
+      "Bob has spent his life in business, so he understands what it means to meet payroll, manage costs, serve customers, and keep going when margins are tight.",
+      "He will support policies that help small businesses grow, reduce unnecessary burdens, strengthen the local workforce, and support the manufacturers and agricultural employers that keep this region moving.",
+    ],
+  },
+  {
+    t: "Agriculture and Rural Communities",
+    p: [
+      "Agriculture is the backbone of District 25 and a driving force behind North Dakota's economy. Bob understands that every farm is also a business.",
+      "He will support state investments in rural infrastructure, value-added agriculture, agricultural innovation, and workforce development while making sure rural communities have a strong voice in the decisions that affect them.",
+    ],
+  },
+  {
+    t: "Infrastructure and Essential Services",
+    p: [
+      "Bob believes District 25 deserves fair investment and long-term planning for the services communities depend on every day.",
+      "He supports safe, well-maintained roads and bridges, dependable utilities, reliable digital infrastructure, expanded broadband, rural health care, emergency response, and other essential services that keep farms, families, seniors, workers, schools, and local businesses connected, secure, and prepared for the future.",
+    ],
+  },
+  {
+    t: "Artificial Intelligence and Data Centers",
+    p: [
+      "AI and data centers present both opportunities and important challenges for North Dakota. Bob believes the state can welcome innovation while protecting landowners, communities, taxpayers, and critical resources.",
+      "He is committed to listening to all sides to find practical solutions that support responsible growth. Bob has already drafted legislation to protect North Dakotans from AI abuse and will work to ensure emerging technologies strengthen local communities.",
+    ],
+  },
+  {
+    t: "Schools, Opportunity and the Next Generation",
+    p: [
+      "District 25 grows when young people can see a future here, when employers can find workers, and when families can afford to build a life and stay.",
+      "He supports strong schools, workforce development, job training, housing growth, child care support, and practical policies that help communities recruit and retain the people they need",
     ],
   },
 ];

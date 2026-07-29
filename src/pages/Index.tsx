@@ -1186,7 +1186,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
   {
     date: "July 28, 2026",
     time: "4:00 PM",
-    name: "Red River Communications 75th Anniversary - Wahepton, ND",
+    name: "Red River Communications 75th Anniversary - Wahpeton, ND",
     location: "",
   },
   {

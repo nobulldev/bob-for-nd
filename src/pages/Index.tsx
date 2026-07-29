@@ -1164,7 +1164,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     time: "5:30 PM",
     name: "Great Bend City Council Meeting",
     location: "Great Bend, ND Fire Hall",
-  },*/
+  },
   {
     date: "July 21, 2026",
     time: "7:00 PM",
@@ -1182,6 +1182,24 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     time: "10:00 AM",
     name: "Lidgerwood Heritage Days Parade",
     location: "Lidgerwood, ND",
+  },*/
+  {
+    date: "July 28, 2026",
+    time: "4:00 PM",
+    name: "Red River Communications 75th Anniversary - Wahepton, ND",
+    location: "",
+  },
+  {
+    date: "Aug 1, 2026",
+    time: "10:00 AM",
+    name: "Aber Days Parade - Abercrombie, ND",
+    location: "",
+  },
+  {
+    date: "Aug 3, 2026",
+    time: "07:00 PM",
+    name: "Christine City Council Meeting -",
+    location: "Christine, ND Community Center",
   },
 ];
 

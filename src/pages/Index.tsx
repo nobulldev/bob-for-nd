@@ -1182,11 +1182,11 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     time: "10:00 AM",
     name: "Lidgerwood Heritage Days Parade",
     location: "Lidgerwood, ND",
-  },*/
+  },
   {
     date: "July 28, 2026",
     time: "4:00 PM",
-    name: "Red River Communications 75th Anniversary - Wahpeton, ND",
+    name: "Red River Communications 75th Anniversary - Wahepton, ND",
     location: "",
   },
   {
@@ -1200,6 +1200,24 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     time: "07:00 PM",
     name: "Christine City Council Meeting -",
     location: "Christine, ND Community Center",
+  },*/
+  {
+    date: "Aug 5, 2026",
+    time: "10:00 AM",
+    name: "Coffee with the DEMs at Dakota Coffee 1001 2nd Ave N Wahpeton",
+    location: "",
+  },
+  {
+    date: "Aug 13, 2026",
+    time: "04:00 - 07:00 PM",
+    name: "Ok Tire Round Up Show and Shine Wells Memorial Park",
+    location: "",
+  },
+  {
+    date: "Aug 19, 2026",
+    time: "04:00 - 07:00 PM",
+    name: "Abercrombie Farmers Market",
+    location: "Pavillion Park",
   },
 ];
 

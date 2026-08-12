@@ -5,7 +5,7 @@ declare global {
   }
 }
 
-export const GA_MEASUREMENT_ID = import.meta.env.GA_MEASUREMENT_ID || '';
+export const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
 
 /**
  * Initializes Google Analytics script and dataLayer

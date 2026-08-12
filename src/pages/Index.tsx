@@ -1217,7 +1217,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     date: "Aug 19, 2026",
     time: "04:00 - 07:00 PM",
     name: "Abercrombie Farmers Market",
-    location: "Pavillion Park",
+    location: "Pavillion Park", 
   },
 ];
 

@@ -1202,22 +1202,22 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     location: "Christine, ND Community Center",
   },*/
   {
-    date: "Aug 5, 2026",
-    time: "10:00 AM",
-    name: "Coffee with the DEMs at Dakota Coffee 1001 2nd Ave N Wahpeton",
-    location: "",
+    date: "Aug 12, 2026",
+    time: "06:30 PM",
+    name: "District 25 Democrats Meeting",
+    location: "Twin Town Tavern, Wahpeton",
   },
   {
     date: "Aug 13, 2026",
     time: "04:00 - 07:00 PM",
-    name: "Ok Tire Round Up Show and Shine Wells Memorial Park",
+    name: "Ok Tire Round Up Show and Shine Wells Memorial Park, Wahpeton",
     location: "",
   },
   {
     date: "Aug 19, 2026",
     time: "04:00 - 07:00 PM",
     name: "Abercrombie Farmers Market",
-    location: "Pavillion Park", 
+    location: "Pavillion Park",
   },
 ];
 

@@ -1110,14 +1110,14 @@ const MEDIA: { t: string; d: string; note: string; img?: string; href: string; e
     d: "Official announcements and statements from the campaign.",
     note: "Press release thumbnail",
     img: mediaPressImg,
-    href: "https://votebob26.com/assets/presskit/release.pdf",
+    href: "/assets/presskit/release.pdf",
     external: true,
   },
   { t: "Images", d: "Approved photos for media use and supporters.", note: "Image preview", img: mediaImagesImg, href: "/press" },
   { t: "Videos", d: "Speeches, ads, and trail moments from across the district.", note: "Video thumbnail", img: videoThumbImg, href: "https://www.youtube.com/channel/UCbAtqwDwr7iK8L3yU3Nst0Q", external: true },
   { t: "Logos", d: "Campaign logos and brand assets in multiple formats.", note: "Logo preview", img: mediaLogosImg, href: "/press" },
-  { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg, href: "https://votebob26.com/assets/presskit/bio.pdf", external: true },
-  { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf", external: true },
+  { t: "Bio", d: "Bob's full biography for press and event organizers.", note: "Document preview", img: mediaBioImg, href: "/assets/presskit/bio.pdf", external: true },
+  { t: "Platform", d: "The full platform document outlining priorities for District 25.", note: "Document preview", img: mediaPlatformImg, href: "/assets/presskit/platform.pdf", external: true },
 ];
 
 const HISTORY = [

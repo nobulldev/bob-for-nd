@@ -223,7 +223,7 @@ const PRESS_RELEASES: Item[] = [
     title: "Press Releases",
     desc: "Official announcements and statements from the campaign.",
     img: mediaPressImg,
-    href: "https://votebob26.com/assets/presskit/release.pdf",
+    href: "/assets/presskit/release.pdf",
   },
 ];
 
@@ -246,7 +246,7 @@ const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
   title: `Bob Heitkamp Photo ${i + 1}`,
   desc: "Approved photos for media use and supporters.",
   img,
-  href: `https://votebob26.com/assets/presskit/images/${String(i + 1).padStart(2, "0")}.png`,
+  href: `/assets/presskit/images/${String(i + 1).padStart(2, "0")}.png`,
   download: true,
 }));
 
@@ -256,17 +256,17 @@ const BOB_PHOTOS: Item[] = BOB_PHOTO_IMAGES.map((img, i) => ({
 // ];
 
 const LOGOS: Item[] = [
-  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", href: "https://votebob26.com/assets/asset-logo-DdGL8ny-.png", download: true },
-  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: "https://votebob26.com/assets/presskit/pin.png", href: "https://votebob26.com/assets/presskit/pin.png", download: true },
-  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: yardImage, href: "https://votebob26.com/assets/presskit/yard.zip", download: true },
+  { title: "Logo", desc: "Campaign logo for press, partners, and supporters.", img: "/assets/presskit/logo.png", href: "/assets/presskit/logo.png", download: true },
+  { title: "Pin", desc: "Round icon mark for avatars and small placements.", img: "/assets/presskit/pin.png", href: "/assets/presskit/pin.png", download: true },
+  { title: "Yard Sign", desc: "Approved yard sign artwork in print-ready format.", img: yardImage, href: "/assets/presskit/yard-sign.png", download: true },
 ];
 
 const BIO: Item[] = [
-  { title: "Bob Heitkamp Bio", desc: "Bob's full biography for press and event organizers.", img: mediaBioImg, href: "https://votebob26.com/assets/presskit/bio.pdf" },
+  { title: "Bob Heitkamp Bio", desc: "Bob's full biography for press and event organizers.", img: mediaBioImg, href: "/assets/presskit/bio.pdf" },
 ];
 
 const PLATFORM: Item[] = [
-  { title: "Campaign Platform", desc: "The full platform document outlining priorities for District 25.", img: mediaPlatformImg, href: "https://votebob26.com/assets/presskit/platform.pdf" },
+  { title: "Campaign Platform", desc: "The full platform document outlining priorities for District 25.", img: mediaPlatformImg, href: "/assets/presskit/platform.pdf" },
 ];
 
 const DownloadIcon = () => (

@@ -1203,21 +1203,21 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
   },*/
   {
     date: "Aug 12, 2026",
-    time: "06:30 PM",
-    name: "District 25 Democrats Meeting",
-    location: "Twin Town Tavern, Wahpeton",
+    time: "04:00 - 09:00 PM",
+    name: "District 25 Fundraiser Event!!!",
+    location: "9457 W Ridge Rd. Hankinson, ND",
   },
   {
-    date: "Aug 13, 2026",
-    time: "04:00 - 07:00 PM",
-    name: "Ok Tire Round Up Show and Shine Wells Memorial Park, Wahpeton",
+    date: "Sept 2, 2026",
+    time: "10:00 AM",
+    name: "Coffee with the DEMs at Dakota Coffee",
     location: "",
   },
   {
-    date: "Aug 19, 2026",
-    time: "04:00 - 07:00 PM",
-    name: "Abercrombie Farmers Market",
-    location: "Pavillion Park",
+    date: "Sept 2, 2026",
+    time: "10:00 - 02:00 PM",
+    name: "NDAREC Eletricity Matters",
+    location: "3201 Nyren Drive Mandan, ND",
   },
 ];
 

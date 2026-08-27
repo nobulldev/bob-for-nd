@@ -677,17 +677,31 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   content:"";position:absolute;left:-14px;bottom:-14px;width:60%;height:30%;
   background:var(--navy);z-index:-1;
 }
+.video-embed{
+  position:absolute;inset:0;width:100%;height:100%;border:0;display:block;
+}
+.video-thumb-btn{
+  position:absolute;inset:0;width:100%;height:100%;
+  border:0;padding:0;margin:0;cursor:pointer;background:var(--placeholder);
+  display:block;
+}
+.video-thumb-btn img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+}
 .play-btn{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:84px;height:84px;border-radius:50%;background:var(--red);
   display:flex;align-items:center;justify-content:center;color:var(--cream);
   box-shadow:0 14px 30px rgba(0,0,0,.3);
+  transition:transform .2s, background .2s;
 }
+.video-thumb-btn:hover .play-btn{background:var(--gold);color:var(--navy);transform:translate(-50%,-50%) scale(1.06)}
 .play-btn svg{width:30px;height:30px;margin-left:5px;fill:currentColor}
 .video-cap{
   position:absolute;left:0;right:0;bottom:0;padding:14px 20px;
   background:linear-gradient(to top,rgba(3,31,81,.92),transparent);
   font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;
-  letter-spacing:.22em;color:var(--cream);
+  letter-spacing:.22em;color:var(--cream);text-align:left;
 }
 
 /* ---------- Fade up ---------- */
@@ -915,6 +929,8 @@ const SOCIAL_ICONS = {
     </svg>
   ),
 };
+
+const CAMPAIGN_VIDEO_ID = "bWme1-Gpfuo";
 
 const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/profile.php?id=61576634976767",
@@ -1202,7 +1218,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     location: "Christine, ND Community Center",
   },*/
   {
-    date: "Aug 12, 2026",
+    date: "Aug 27, 2026",
     time: "04:00 - 09:00 PM",
     name: "District 25 Fundraiser Event!!!",
     location: "9457 W Ridge Rd. Hankinson, ND",
@@ -1229,6 +1245,7 @@ const Index = () => {
   const historyScrollRef = useRef<HTMLDivElement>(null);
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [videoPlaying, setVideoPlaying] = useState(false);
 
   useEffect(() => {
     // Nav shadow on scroll
@@ -1541,13 +1558,35 @@ const Index = () => {
               </div>
             </div>
             <div className="why-video-wrap">
-              <div className="video-frame fade-up delay-1" aria-label="Campaign video — coming soon">
-                <span className="play-btn" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-                <span className="video-cap">Campaign Video — Coming Soon</span>
+              <div className="video-frame fade-up delay-1">
+                {videoPlaying ? (
+                  <iframe
+                    className="video-embed"
+                    src={`https://www.youtube-nocookie.com/embed/${CAMPAIGN_VIDEO_ID}?autoplay=1`}
+                    title="Bob's Campaign Video"
+                    allow="accelerator; autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    className="video-thumb-btn"
+                    aria-label="Play campaign video"
+                    onClick={() => setVideoPlaying(true)}
+                  >
+                    <img
+                      src={`https://i.ytimg.com/vi/${CAMPAIGN_VIDEO_ID}/maxresdefault.jpg`}
+                      alt=""
+                      loading="lazy"
+                    />
+                    <span className="play-btn" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                    <span className="video-cap">Watch Bob's Campaign Video</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>

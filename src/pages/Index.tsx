@@ -1219,7 +1219,7 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
   },*/
   {
     date: "Aug 27, 2026",
-    time: "04:00 - 09:00 PM",
+    time: "06:00 - 08:00 PM",
     name: "District 25 Fundraiser Event!!!",
     location: "9457 W Ridge Rd. Hankinson, ND",
   },

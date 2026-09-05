@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import heroBg from "@/assets/hero-bg.png";
 import heroOverlay from "@/assets/hero-overlay.png";
 import candidateImg from "@/assets/candidate.png";
-import logoImg from "@/assets/logo.png";
 import bobQuoteImg from "@/assets/bob-quote.jpg";
 import bobIssuesImg from "@/assets/bob-issues.png";
 import mediaPressImg from "@/assets/media-press.png";
@@ -18,7 +18,6 @@ import timeline03Img from "@/assets/midwest.jpg";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
-import nobullImg from "@/assets/nobull.svg";
 import paradeBackground from "@/assets/parade-background.png";
 import starIcon from "@/assets/icon-star.svg";
 import calendarIcon from "@/assets/icon-calendar.svg";
@@ -48,51 +47,6 @@ body{
 }
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-
-/* ---------- Nav ---------- */
-.nav{
-  position:sticky;top:0;z-index:50;
-  background:var(--navy);
-  transition:box-shadow .25s ease, background .25s ease;
-  border-bottom:1px solid rgba(254,214,72,.18);
-}
-.nav.scrolled{
-  box-shadow:0 6px 22px rgba(0,0,0,.35);
-}
-.nav .wrap{
-  max-width:1440px;margin:0 auto;
-  padding:14px 36px;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
-}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img.brand-logo{
-  height:54px;width:auto;display:block;
-}
-.menu{display:flex;align-items:center;gap:6px}
-.menu a{
-  font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:13px;letter-spacing:.18em;color:var(--cream);
-  padding:10px 14px;position:relative;transition:color .2s;
-}
-.menu a::after{
-  content:"";position:absolute;left:14px;right:14px;bottom:4px;
-  height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;
-  transition:transform .25s ease;
-}
-.menu a:hover{color:var(--gold)}
-.menu a:hover::after{transform:scaleX(1)}
-.menu .donate-btn{
-  margin-left:10px;background:var(--red);color:var(--cream);
-  padding:11px 20px;border-radius:2px;letter-spacing:.18em;
-  transition:background .2s, transform .2s;
-}
-.menu .donate-btn::after{display:none}
-.menu .donate-btn:hover{background:var(--gold);color:var(--navy)}
-.hamburger{
-  display:none;background:transparent;border:0;cursor:pointer;
-  width:42px;height:42px;color:var(--cream);
-}
-.hamburger svg{width:26px;height:26px}
 
 /* ---------- Hero ---------- */
 .hero{
@@ -604,57 +558,6 @@ section{padding:96px 36px;position:relative}
   max-width:620px;margin:18px auto 0;font-size:17px;color:rgba(245,239,228,.9);
 }
 
-/* ---------- Footer ---------- */
-footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
-
-/* ---------- NoBull credit ---------- */
-.nobull-credit{
-  background:var(--navy);
-  padding:24px 28px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-}
-.nobull-credit img{height:auto;width:146.82px;display:block}
-.nobull-credit p{
-  font-family:'Inter',system-ui,sans-serif;
-  font-weight:400;
-  font-size:14.5px;
-  line-height:23.93px;
-  color:rgba(245,239,228,.78);
-  text-align:center;
-  margin:0;
-}
-.foot-grid{
-  max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:46px;
-}
-.foot-brand .foot-logo{
-  height:72px;width:auto;display:block;margin-bottom:18px;
-}
-.foot-brand h4{
-  font-family:'Playfair Display',serif;font-weight:800;font-size:24px;color:var(--cream);
-}
-.foot-brand p{
-  margin-top:10px;font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:12px;letter-spacing:.22em;color:var(--gold);
-}
-.foot-col h5{
-  font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;
-  letter-spacing:.24em;color:var(--gold);margin-bottom:18px;
-}
-.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.foot-col a{color:rgba(245,239,228,.78);font-size:14.5px;transition:color .2s}
-.foot-col a:hover{color:var(--cream)}
-.foot-bottom{
-  max-width:1440px;margin:54px auto 0;padding-top:24px;
-  border-top:1px solid rgba(245,239,228,.15);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
-  font-size:12.5px;color:rgba(245,239,228,.6);
-  font-family:'Oswald',sans-serif;letter-spacing:.18em;text-transform:uppercase;
-}
-
 /* ---------- Why I'm Running (Video) ---------- */
 #why{background:var(--cream-2)}
 .why-grid{
@@ -715,7 +618,6 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
-  .nav .wrap{padding:12px 20px}
   .hero{min-height:auto;padding-bottom:0;display:flex;flex-direction:column;position:relative;overflow:hidden}
   .hero-bg{inset:-20px}
   .hero-content{padding:0;display:contents}
@@ -759,34 +661,19 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .issues-grid{grid-template-columns:1fr;gap:36px}
   .action-cards{grid-template-columns:repeat(2,1fr)}
   .media-grid{grid-template-columns:repeat(2,1fr)}
-  .foot-grid{grid-template-columns:1fr 1fr;gap:36px;padding:0 20px}
   .facts{grid-template-columns:repeat(2,1fr)}
   .fact:nth-child(2){border-right:0}
   .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid rgba(10,34,64,.15)}
-  .menu{
-    display:none;position:absolute;top:100%;left:0;right:0;
-    background:var(--navy);flex-direction:column;align-items:stretch;
-    padding:14px 20px 20px;box-shadow:0 20px 40px -20px rgba(0,0,0,.4);
-    border-top:1px solid rgba(254,214,72,.18);
-  }
-  .menu.open{display:flex}
-  .menu a{padding:14px 6px}
-  .menu a::after{display:none}
-  .menu .donate-btn{margin:8px 0 0;text-align:center}
-  .hamburger{display:inline-flex;align-items:center;justify-content:center}
-  .nav .wrap{position:relative}
   section{padding:72px 20px}
   .closing-band{padding:34px 28px}
   .action-form{padding:32px 24px}
   .form-grid{grid-template-columns:1fr}
   .checks{gap:8px}
-  .foot-bottom{padding-left:20px;padding-right:20px}
 }
 @media (max-width:640px){
   .cards{grid-template-columns:1fr}
   .action-cards{grid-template-columns:1fr}
   .media-grid{grid-template-columns:1fr}
-  .foot-grid{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .fact{border-right:0;border-bottom:1px solid rgba(10,34,64,.15)}
   .fact:last-child{border-bottom:0}
@@ -892,7 +779,6 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
 @media (max-width:960px){
   body{font-size:18px}
   section{padding:72px 12px !important}
-  .nav .wrap{padding:12px 12px}
   .hero-content > .eyebrow,
   .hero-content > h1,
   .hero-content > .tagline{padding-left:12px;padding-right:12px}
@@ -901,13 +787,10 @@ footer{background:var(--navy);color:var(--cream);padding:72px 28px 28px}
   .hero-candidate{width:calc(100% - 24px);margin:18px 12px 0}
   .closing-band{padding:34px 18px}
   .action-form{padding:32px 16px}
-  .foot-grid{padding:0 12px}
-  .foot-bottom{padding-left:12px;padding-right:12px}
   .bio p{font-size:18px}
   .why-text p{font-size:18px}
   #donate .blurb{font-size:18px}
   .quote-blue{font-size:23px;padding:28px 24px}
-  .menu a{font-size:14px}
 }
 
 `;
@@ -1248,27 +1131,6 @@ const Index = () => {
   const [videoPlaying, setVideoPlaying] = useState(false);
 
   useEffect(() => {
-    // Nav shadow on scroll
-    const nav = document.querySelector(".nav");
-    const onScroll = () => {
-      if (!nav) return;
-      if (window.scrollY > 8) nav.classList.add("scrolled");
-      else nav.classList.remove("scrolled");
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    // Hamburger toggle
-    const ham = document.getElementById("hamburger");
-    const menu = document.getElementById("menu");
-    const onHam = () => menu?.classList.toggle("open");
-    ham?.addEventListener("click", onHam);
-    const closeMenu = (e: Event) => {
-      const t = e.target as HTMLElement;
-      if (t.tagName === "A") menu?.classList.remove("open");
-    };
-    menu?.addEventListener("click", closeMenu);
-
     // Fade-up observer
     const io = new IntersectionObserver(
       (entries) => {
@@ -1306,10 +1168,7 @@ const Index = () => {
     if (!isTouch) window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
-      ham?.removeEventListener("click", onHam);
-      menu?.removeEventListener("click", closeMenu);
       io.disconnect();
     };
   }, []);
@@ -1318,50 +1177,7 @@ const Index = () => {
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
-      {/* NAV */}
-      <header className="nav" id="home">
-        <div className="wrap">
-          <a
-            href="#home"
-            className="brand"
-            aria-label="Bob Heitkamp for Senate"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <img src={logoImg} alt="Bob Heitkamp for Senate" className="brand-logo" />
-          </a>
-          <nav id="menu" className="menu" aria-label="Primary">
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-            >
-              Home
-            </a>
-            <a href="#about">About</a>
-            <a href="#issues">Issues</a>
-            <a href="#action">Take Action</a>
-            <a href="#media">Media</a>
-            <a
-              href="https://secure.actblue.com/donate/bob-heitkamp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="donate-btn"
-            >
-              Donate
-            </a>
-          </nav>
-          <button id="hamburger" className="hamburger" aria-label="Toggle menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 6h18M3 12h18M3 18h18" />
-            </svg>
-          </button>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* HERO */}
       <section className="hero">
@@ -1861,71 +1677,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer>
-        <div className="foot-grid">
-          <div className="foot-brand">
-            <img src={logoImg} alt="Bob Heitkamp for Senate" className="foot-logo" />
-            <h4>Bob Heitkamp</h4>
-            <p>Proven Experience · Local Leadership · Forward Together</p>
-          </div>
-          <div className="foot-col">
-            <h5>Campaign</h5>
-            <ul>
-              <li>
-                <a href="#about">About Bob</a>
-              </li>
-              <li>
-                <a href="#issues">Issues</a>
-              </li>
-              <li>
-                <a href="#action">Take Action</a>
-              </li>
-            </ul>
-          </div>
-          <div className="foot-col">
-            <h5>Resources</h5>
-            <ul>
-              <li>
-                <a href="#media">Press Releases</a>
-              </li>
-              <li>
-                <a href="#media">Images & Logos</a>
-              </li>
-              <li>
-                <a href="#media">Bio</a>
-              </li>
-              <li>
-                <a href="#media">Platform</a>
-              </li>
-            </ul>
-          </div>
-          <div className="foot-col">
-            <h5>Follow</h5>
-            <ul>
-              <li>
-                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
-              </li>
-              <li>
-                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-              </li>
-              <li>
-                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="foot-bottom">
-          <span>Paid for by Bob Heitkamp for North Dakota Senate District 25. <br />Some campaign media may include AI-assisted or digitally enhanced content. <br />Julie Prochnow - Treasurer.</span>
-          <span>© {new Date().getFullYear()} Bob Heitkamp for Senate</span>
-        </div>
-      </footer>
-
-      {/* NOBULL CREDIT */}
-      <a href="https://nobull-strategies.com/" target="_blank" rel="noopener noreferrer" className="nobull-credit">
-        <img src={nobullImg} alt="NoBull Strategies" />
-        <p>Created by NoBull Strategies<br />nobull-strategies.com</p>
-      </a>
+      <SiteFooter />
     </>
   );
 };

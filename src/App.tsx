@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PressResources from "./pages/PressResources.tsx";
+import AuctionPage from "./pages/AuctionPage.tsx";
 import { CookieBanner } from "@/components/CookieBanner.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/press" element={<PressResources />} />
+          <Route path="/auction" element={<AuctionPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

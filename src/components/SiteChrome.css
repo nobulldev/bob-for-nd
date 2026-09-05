@@ -1,0 +1,279 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(254, 214, 72, 0.18);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.nav.scrolled {
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+
+.nav .wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand img.brand-logo {
+  width: auto;
+  height: 54px;
+  display: block;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.menu a {
+  position: relative;
+  padding: 10px 14px;
+  color: var(--cream);
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.menu a::after {
+  position: absolute;
+  right: 14px;
+  bottom: 4px;
+  left: 14px;
+  height: 2px;
+  background: var(--gold);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.menu a:hover {
+  color: var(--gold);
+}
+
+.menu a:hover::after {
+  transform: scaleX(1);
+}
+
+.menu .donate-btn {
+  margin-left: 10px;
+  padding: 11px 20px;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--cream);
+  letter-spacing: 0.18em;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.menu .donate-btn::after {
+  display: none;
+}
+
+.menu .donate-btn:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.hamburger {
+  width: 42px;
+  height: 42px;
+  display: none;
+  border: 0;
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+}
+
+.hamburger svg {
+  width: 26px;
+  height: 26px;
+}
+
+footer {
+  padding: 72px 28px 28px;
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.foot-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 46px;
+}
+
+.foot-brand .foot-logo {
+  width: auto;
+  height: 72px;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.foot-brand h4 {
+  color: var(--cream);
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.foot-brand p {
+  margin-top: 10px;
+  color: var(--gold);
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.foot-col h5 {
+  margin-bottom: 18px;
+  color: var(--gold);
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.foot-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.foot-col a {
+  color: rgba(245, 239, 228, 0.78);
+  font-size: 14.5px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.foot-col a:hover {
+  color: var(--cream);
+}
+
+.foot-bottom {
+  max-width: 1440px;
+  margin: 54px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(245, 239, 228, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: rgba(245, 239, 228, 0.6);
+  font-family: "Oswald", sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nobull-credit {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: var(--navy);
+  color: inherit;
+  text-decoration: none;
+}
+
+.nobull-credit img {
+  width: 146.82px;
+  height: auto;
+  display: block;
+}
+
+.nobull-credit p {
+  margin: 0;
+  color: rgba(245, 239, 228, 0.78);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 23.93px;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .nav .wrap {
+    position: relative;
+    padding: 12px;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 20px 20px;
+    border-top: 1px solid rgba(254, 214, 72, 0.18);
+    background: var(--navy);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.4);
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu a {
+    padding: 14px 6px;
+    font-size: 14px;
+  }
+
+  .menu a::after {
+    display: none;
+  }
+
+  .menu .donate-btn {
+    margin: 8px 0 0;
+    text-align: center;
+  }
+
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .foot-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    padding: 0 12px;
+  }
+
+  .foot-bottom {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .foot-grid {
+    grid-template-columns: 1fr;
+  }
+}

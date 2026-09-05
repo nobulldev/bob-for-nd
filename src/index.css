@@ -8,6 +8,17 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    --navy: #031f51;
+    --red: #bf1e2e;
+    --cream: #f5efe4;
+    --cream-2: #faf5ea;
+    --cream-3: #efe6d3;
+    --gold: #D7A421;
+    --ink: #1c1c1c;
+    --muted: #6b6357;
+    --placeholder: #d4d4d4;
+    --placeholder-ink: #7a7a7a;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 

@@ -48,6 +48,7 @@ const guests = [
 
 const featuredItems = [
   {
+    id: "snap-on-tool-kit",
     title: "Snap-on Professional Tool Kit & Storage",
     description:
       "Built for people who take pride in doing the job right. Snap-on is known for premium professional tools, durable equipment, and tool storage designed to perform for years.",
@@ -57,6 +58,7 @@ const featuredItems = [
     image: snapOnToolKitPhoto,
   },
   {
+    id: "property-cleanup",
     title: "Professional Property Cleanup",
     description:
       "Take back your yard and enjoy a clean, safe outdoor space you can be proud of. Professional cleanup can include removing dead trees, clearing overgrown areas, cutting back unwanted vegetation, and hauling away outdoor debris.",
@@ -69,6 +71,7 @@ const featuredItems = [
 
 const liveItems = [
   {
+    id: "dewalt-driver-set",
     title: "DeWalt Drill or Impact Driver Set",
     description: "A powerful, dependable set for home projects, repairs, and demanding jobs. Includes a ½-inch drill, impact driver, two batteries, and charger.",
     value: "$230",
@@ -77,6 +80,7 @@ const liveItems = [
     image: dewaltDrillPhoto,
   },
   {
+    id: "electric-fireplace",
     title: "Electric Fireplace",
     description: "Add instant warmth and atmosphere to your home without the work of a traditional fireplace.",
     value: "$50",
@@ -85,6 +89,7 @@ const liveItems = [
     image: electricFireplacePhoto,
   },
   {
+    id: "pizza-maker",
     title: "Presto Pizza Maker",
     description: "Make hot, crispy pizza at home with a convenient countertop appliance that is easy to use and clean.",
     value: "$85",
@@ -95,6 +100,7 @@ const liveItems = [
 ];
 
 const silentItems: Array<{
+  id: string;
   title: string;
   description: string;
   value: string;
@@ -102,6 +108,7 @@ const silentItems: Array<{
   image: string;
 }> = [
   {
+    id: "jump-starter",
     title: "Cen-Tech Portable Jump Starter",
     description: "Be ready for a dead battery at home or on the road. This portable 750-peak-amp jump starter also includes a work light and 12V and USB power options.",
     value: "$40",
@@ -109,6 +116,7 @@ const silentItems: Array<{
     image: cenTechJumpStarterPhoto,
   },
   {
+    id: "bottle-jack",
     title: "Pittsburgh 20-Ton Hydraulic Bottle Jack",
     description: "Heavy-duty lifting power for vehicles, trailers, equipment, and demanding workshop jobs.",
     value: "$40",
@@ -116,6 +124,7 @@ const silentItems: Array<{
     image: bottleJackPhoto,
   },
   {
+    id: "tongue-wrench",
     title: "Pittsburgh Tongue Wrench",
     description: "A dependable addition to any toolbox for automotive maintenance, equipment repairs, and projects requiring precise tightening.",
     value: "$20",
@@ -123,6 +132,7 @@ const silentItems: Array<{
     image: tongueWrenchPhoto,
   },
   {
+    id: "locking-pliers",
     title: "Pittsburgh Curved Locking Pliers Set",
     description: "A practical locking-pliers set that provides a secure grip for repairs, maintenance, and workshop projects.",
     value: "$10",
@@ -130,6 +140,7 @@ const silentItems: Array<{
     image: lockingPliersPhoto,
   },
   {
+    id: "screwdriver-set",
     title: "Pittsburgh Screwdriver Set",
     description: "A versatile set of everyday screwdrivers for household projects, repairs, workshop tasks, and regular maintenance.",
     value: "$25",
@@ -137,6 +148,7 @@ const silentItems: Array<{
     image: screwdriverSetPhoto,
   },
   {
+    id: "solar-cow",
     title: "Solar Cow",
     description: "Add personality to your garden with this charming reading Highland cow and colorful solar-powered flower light.",
     value: "$15",
@@ -144,6 +156,7 @@ const silentItems: Array<{
     image: solarCowPhoto,
   },
   {
+    id: "metal-dog",
     title: "Decorative Metal Dog",
     description: "A playful metal dog with plenty of personality, ready to bring character and humor to your home, porch, or garden.",
     value: "$15",
@@ -151,6 +164,7 @@ const silentItems: Array<{
     image: decorativeDogPhoto,
   },
   {
+    id: "birdhouse-wind-chime",
     title: "Decorative Birdhouse Wind Chime",
     description: "A cheerful birdhouse topped with a colorful bird and finished with a hanging bell to brighten any porch, patio, or garden.",
     value: "$5",
@@ -279,7 +293,7 @@ const AuctionPage = () => {
 
             <div className="auction-featured-list">
               {featuredItems.map((item) => (
-                <article className="auction-featured" key={item.title}>
+                <a className="auction-featured auction-item-link" href={`/auction/bid?item=${item.id}`} key={item.title}>
                   <AuctionItemImage src={item.image} alt={item.title} />
                   <div className="auction-featured__content">
                     <h3>{item.title}</h3>
@@ -291,13 +305,13 @@ const AuctionPage = () => {
                     </div>
                     <span className="auction-availability">Available online and during the live auction</span>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
 
             <div className="auction-live__grid">
               {liveItems.map((item) => (
-                <article className="auction-live-card" key={item.title}>
+                <a className="auction-live-card auction-item-link" href={`/auction/bid?item=${item.id}`} key={item.title}>
                   <AuctionItemImage src={item.image} alt={item.title} />
                   <div className="auction-live-card__content">
                     <h3>{item.title}</h3>
@@ -308,10 +322,10 @@ const AuctionPage = () => {
                       {item.buyNow ? <Metric label="Reserve" value={item.buyNow} /> : null}
                     </div>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
-            <a className="auction-button auction-button--outline-red" href="#event-support">Preview Items &amp; Bid Online <Arrow /></a>
+            <a className="auction-button auction-button--outline-red" href="/auction/bid">Preview Items &amp; Bid Online <Arrow /></a>
           </div>
         </section>
 
@@ -324,7 +338,7 @@ const AuctionPage = () => {
 
             <div className="auction-silent__grid">
               {silentItems.map((item) => (
-                <article className="auction-silent-card" key={item.title}>
+                <a className="auction-silent-card auction-item-link" href={`/auction/bid?item=${item.id}`} key={item.title}>
                   <AuctionItemImage src={item.image} alt={item.title} />
                   <div className="auction-silent-card__content">
                     <h3>{item.title}</h3>
@@ -335,7 +349,7 @@ const AuctionPage = () => {
                     </div>
                     <span className="auction-availability">Silent Auction or place an online bid ›</span>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           </div>

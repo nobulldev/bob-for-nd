@@ -11,6 +11,53 @@
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
 }
 
+.auction-banner {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: var(--red);
+  color: var(--cream);
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.auction-banner:hover,
+.auction-banner:focus-visible {
+  background: #a81727;
+}
+
+.auction-banner:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: -3px;
+}
+
+.auction-banner__message {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.auction-banner__message strong,
+.auction-banner__cta {
+  font-weight: 700;
+}
+
+.auction-banner__cta {
+  text-transform: none;
+}
+
+.auction-banner__details {
+  white-space: nowrap;
+}
+
 .nav .wrap {
   max-width: 1440px;
   margin: 0 auto;
@@ -273,6 +320,20 @@ footer {
 }
 
 @media (max-width: 640px) {
+  .auction-banner {
+    min-height: 0;
+    padding: 9px 14px;
+  }
+
+  .auction-banner__message {
+    gap: 2px 7px;
+    font-size: 14px;
+  }
+
+  .auction-banner__details {
+    font-size: 12px;
+  }
+
   .foot-grid {
     grid-template-columns: 1fr;
   }

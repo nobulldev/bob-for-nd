@@ -11,6 +11,7 @@
   },
   "include": [
     "api/**/*.ts",
+    "scripts/clear-bids-on-deploy.ts",
     "scripts/clear-bids.ts",
     "scripts/migrate.ts",
     "server/auctionService.ts",

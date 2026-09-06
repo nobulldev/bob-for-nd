@@ -49,9 +49,8 @@ to it.
 ```
 
 `vercel.json` identifies the Vite build, preserves serverless functions under
-`/api`, and sends all remaining routes to the React application. After every
-successful production build, it automatically empties the `bids` table and
-restarts its identity. Preview and Development deployments never clear bids.
+`/api`, and sends all remaining routes to the React application. Deployments do
+not alter or clear existing bid history.
 
 ## Environment
 
@@ -68,16 +67,11 @@ bun run dev          # local API and Vite
 bun run build        # production frontend build
 bun run db:migrate   # initialize/update schema and item catalog
 bun run db:clear-bids # permanently delete all bids
-bun run db:clear-bids-on-deploy # automatic production-deploy cleanup
 bun run start        # serve the production build locally with Bun
 ```
 
-### Automatic production reset
+### Manual bid reset
 
-No special deploy command is required. The Vercel `buildCommand` builds the site
-and then runs `db:clear-bids-on-deploy`. The cleanup only proceeds when
-`VERCEL_ENV=production`; Preview and Development builds skip it automatically.
-
-The production `DATABASE_URL` must be available to the build through the Neon
-integration. Auction items remain in place, the `bids` identity restarts at 1,
-and no future deploy or cold start repopulates the bid table.
+Deployments preserve all existing bids. To intentionally clear the history,
+configure the target Neon `DATABASE_URL` locally and run `bun run db:clear-bids`.
+The command preserves auction items and restarts the bid identity at 1.

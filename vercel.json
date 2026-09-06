@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "bun run build && bun run db:clear-bids-on-deploy",
+  "buildCommand": "bun run build",
   "outputDirectory": "dist",
   "routes": [
     { "handle": "filesystem" },

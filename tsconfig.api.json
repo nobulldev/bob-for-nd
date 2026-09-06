@@ -11,6 +11,8 @@
   },
   "include": [
     "api/**/*.ts",
+    "scripts/clear-bids.ts",
+    "scripts/migrate.ts",
     "server/auctionService.ts",
     "server/vercelHttp.ts",
     "src/data/auctionCatalogData.ts"

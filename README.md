@@ -14,9 +14,9 @@ across phones and computers.
 - Silent-auction bids and every bidder phone number stay out of public API
   responses.
 
-The schema and mock seed data are created idempotently the first time a function
-connects to a new Neon database. They can also be initialized explicitly with
-`bun run db:migrate`.
+The schema and item catalog are created idempotently the first time a function
+connects to a new Neon database. Bid history is never seeded or repopulated.
+The schema can also be initialized explicitly with `bun run db:migrate`.
 
 ## Local development
 
@@ -64,6 +64,22 @@ Never expose this value through a `VITE_` variable or commit `.env.local`.
 ```bash
 bun run dev          # local API and Vite
 bun run build        # production frontend build
-bun run db:migrate   # initialize/update schema and mock data
+bun run db:migrate   # initialize/update schema and item catalog
+bun run db:clear-bids # permanently delete all bids
+bun run deploy:reset-bids # deploy production, then permanently delete all bids
 bun run start        # serve the production build locally with Bun
 ```
+
+### Deploy and reset bid history
+
+`deploy:reset-bids` is intentionally destructive. Before running it, make sure
+that `.env.local` contains the production Neon `DATABASE_URL` and that the
+repository is linked and authenticated with the Vercel CLI. The command deploys
+the seed-free version first and only clears bids after a successful deploy:
+
+```bash
+bun run deploy:reset-bids
+```
+
+The auction items remain in place, the `bids` identity restarts at 1, and no
+future deploy or cold start repopulates the bid table.

@@ -1,6 +1,5 @@
 import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 import {
-  AUCTION_BID_SEEDS,
   AUCTION_CATALOG_DATA,
   type AuctionType,
 } from "../src/data/auctionCatalogData.js";
@@ -63,19 +62,9 @@ const catalogRows = AUCTION_CATALOG_DATA.map((item) => ({
   sort_order: item.sortOrder,
 }));
 
-const seedRows = AUCTION_BID_SEEDS.map((bid) => ({
-  source_key: bid.sourceKey,
-  item_id: bid.itemId,
-  bidder_name: bid.bidder,
-  phone: bid.phone,
-  amount: bid.amount,
-  created_at: bid.createdAt,
-}));
-
 const initialize = async () => {
   const sql = getSql();
   const catalogJson = JSON.stringify(catalogRows);
-  const seedsJson = JSON.stringify(seedRows);
 
   await sql.transaction((tx) => [
     tx`SELECT pg_advisory_xact_lock(741852963)`,
@@ -181,23 +170,6 @@ const initialize = async () => {
         reserve_amount = EXCLUDED.reserve_amount,
         sort_order = EXCLUDED.sort_order
     `,
-    tx`
-      INSERT INTO bids (
-        source_key, item_id, bidder_name, phone, amount, created_at
-      )
-      SELECT
-        bid.source_key, bid.item_id, bid.bidder_name,
-        bid.phone, bid.amount, bid.created_at
-      FROM json_to_recordset(${seedsJson}::json) AS bid(
-        source_key TEXT,
-        item_id TEXT,
-        bidder_name TEXT,
-        phone TEXT,
-        amount INTEGER,
-        created_at TIMESTAMPTZ
-      )
-      ON CONFLICT (source_key) DO NOTHING
-    `,
   ]);
 };
 
@@ -207,6 +179,12 @@ export const ensureAuctionDatabase = async () => {
     throw error;
   });
   return initialization;
+};
+
+export const clearAuctionBids = async () => {
+  await ensureAuctionDatabase();
+  const sql = getSql();
+  await sql`TRUNCATE TABLE bids RESTART IDENTITY`;
 };
 
 export const getAuctionSnapshot = async () => {

@@ -56,6 +56,13 @@
   font-size: 13px;
 }
 
+.auction-bid-demo > svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  color: var(--gold);
+}
+
 .auction-bid-demo strong {
   color: var(--navy);
   font-family: "Oswald", sans-serif;
@@ -121,6 +128,47 @@
 
 .auction-bid-filters button.active::after {
   opacity: 1;
+}
+
+.auction-bid-filters button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.auction-bid-database-state {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid rgba(3, 31, 81, 0.1);
+  background: #fff;
+  color: var(--navy);
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.auction-bid-database-state svg {
+  width: 20px;
+  color: var(--gold);
+  animation: auction-database-spin 0.9s linear infinite;
+}
+
+.auction-bid-database-state--error {
+  color: var(--red);
+}
+
+.auction-bid-database-state--error svg {
+  animation: none;
+  color: var(--red);
+}
+
+@keyframes auction-database-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .auction-bid-layout {
@@ -290,7 +338,7 @@
 
 .auction-bid-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1px;
   margin-top: 25px;
   background: rgba(3, 31, 81, 0.1);
@@ -567,6 +615,19 @@
 
 .auction-bid-form .auction-button svg {
   width: 16px;
+}
+
+.auction-bid-form .auction-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
+.auction-bid-submit-error {
+  margin-top: 15px;
+  color: var(--red);
+  font-size: 11px;
+  line-height: 1.45;
 }
 
 .auction-bid-success {

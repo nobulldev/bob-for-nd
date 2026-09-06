@@ -6,19 +6,7 @@ import trygveHammerPhoto from "@/assets/auction/auction-trygve-hammer-photo.png"
 import vernThompsonPhoto from "@/assets/auction/auction-vern-thompson-photo.png";
 import tracyLayneFossPhoto from "@/assets/auction/auction-tracy-layne-foss-photo.png";
 import jamieSelzlerPhoto from "@/assets/auction/auction-jamie-selzler-photo.png";
-import snapOnToolKitPhoto from "@/assets/auction/Snap-on-Professional-Tool-Kit-&-Storage-photo.jpg";
-import propertyCleanupPhoto from "@/assets/auction/Professional-Property-Cleanup-photo.jpg";
-import dewaltDrillPhoto from "@/assets/auction/DeWalt-Drill-&-Impact-Driver-Set-photo.jpg";
-import electricFireplacePhoto from "@/assets/auction/Electric-Fireplace-photo.jpg";
-import prestoPizzaMakerPhoto from "@/assets/auction/Presto-Pizza-Maker-photo.jpg";
-import cenTechJumpStarterPhoto from "@/assets/auction/Cen-Tech-Portable-Jump-Starter-photo.jpg";
-import bottleJackPhoto from "@/assets/auction/Pittsburgh-20-Ton-Hydraulic-Bottle-Jack-photo.jpg";
-import tongueWrenchPhoto from "@/assets/auction/Pittsburgh-Tongue-Wrench-photo.jpg";
-import lockingPliersPhoto from "@/assets/auction/Pittsburgh-Curved-Locking-Pliers-Set-photo.jpg";
-import screwdriverSetPhoto from "@/assets/auction/Pittsburgh-Screwdriver-Set-photo.jpg";
-import solarCowPhoto from "@/assets/auction/Solar-Cow-photo.jpg";
-import decorativeDogPhoto from "@/assets/auction/Decorative-Metal-Dog-photo.jpg";
-import birdhouseWindChimePhoto from "@/assets/auction/Decorative-Birdhouse-Wind-Chime-photo.jpg";
+import { AUCTION_CATALOG } from "@/data/auctionCatalog";
 import "./AuctionPage.css";
 
 const DONATE_URL = "https://secure.actblue.com/donate/bob-heitkamp";
@@ -46,132 +34,24 @@ const guests = [
   },
 ];
 
-const featuredItems = [
-  {
-    id: "snap-on-tool-kit",
-    title: "Snap-on Professional Tool Kit & Storage",
-    description:
-      "Built for people who take pride in doing the job right. Snap-on is known for premium professional tools, durable equipment, and tool storage designed to perform for years.",
-    value: "$4,000",
-    bid: "$1,800",
-    buyNow: "$2,000",
-    image: snapOnToolKitPhoto,
-  },
-  {
-    id: "property-cleanup",
-    title: "Professional Property Cleanup",
-    description:
-      "Take back your yard and enjoy a clean, safe outdoor space you can be proud of. Professional cleanup can include removing dead trees, clearing overgrown areas, cutting back unwanted vegetation, and hauling away outdoor debris.",
-    value: "$2,000",
-    bid: "$2,500",
-    buyNow: undefined,
-    image: propertyCleanupPhoto,
-  },
-];
+const formatAuctionValue = (value: number) => `$${value.toLocaleString("en-US")}`;
 
-const liveItems = [
-  {
-    id: "dewalt-driver-set",
-    title: "DeWalt Drill or Impact Driver Set",
-    description: "A powerful, dependable set for home projects, repairs, and demanding jobs. Includes a ½-inch drill, impact driver, two batteries, and charger.",
-    value: "$230",
-    bid: "$100",
-    buyNow: "$150",
-    image: dewaltDrillPhoto,
-  },
-  {
-    id: "electric-fireplace",
-    title: "Electric Fireplace",
-    description: "Add instant warmth and atmosphere to your home without the work of a traditional fireplace.",
-    value: "$50",
-    bid: "$100",
-    buyNow: undefined,
-    image: electricFireplacePhoto,
-  },
-  {
-    id: "pizza-maker",
-    title: "Presto Pizza Maker",
-    description: "Make hot, crispy pizza at home with a convenient countertop appliance that is easy to use and clean.",
-    value: "$85",
-    bid: "$85",
-    buyNow: undefined,
-    image: prestoPizzaMakerPhoto,
-  },
-];
+const toLiveItem = (item: (typeof AUCTION_CATALOG)[number]) => ({
+  ...item,
+  value: formatAuctionValue(item.valueAmount ?? 0),
+  bid: formatAuctionValue(item.openingBid),
+  buyNow: item.reserveAmount === null ? undefined : formatAuctionValue(item.reserveAmount),
+});
 
-const silentItems: Array<{
-  id: string;
-  title: string;
-  description: string;
-  value: string;
-  bid: string;
-  image: string;
-}> = [
-  {
-    id: "jump-starter",
-    title: "Cen-Tech Portable Jump Starter",
-    description: "Be ready for a dead battery at home or on the road. This portable 750-peak-amp jump starter also includes a work light and 12V and USB power options.",
-    value: "$40",
-    bid: "$50",
-    image: cenTechJumpStarterPhoto,
-  },
-  {
-    id: "bottle-jack",
-    title: "Pittsburgh 20-Ton Hydraulic Bottle Jack",
-    description: "Heavy-duty lifting power for vehicles, trailers, equipment, and demanding workshop jobs.",
-    value: "$40",
-    bid: "$50",
-    image: bottleJackPhoto,
-  },
-  {
-    id: "tongue-wrench",
-    title: "Pittsburgh Tongue Wrench",
-    description: "A dependable addition to any toolbox for automotive maintenance, equipment repairs, and projects requiring precise tightening.",
-    value: "$20",
-    bid: "$30",
-    image: tongueWrenchPhoto,
-  },
-  {
-    id: "locking-pliers",
-    title: "Pittsburgh Curved Locking Pliers Set",
-    description: "A practical locking-pliers set that provides a secure grip for repairs, maintenance, and workshop projects.",
-    value: "$10",
-    bid: "$20",
-    image: lockingPliersPhoto,
-  },
-  {
-    id: "screwdriver-set",
-    title: "Pittsburgh Screwdriver Set",
-    description: "A versatile set of everyday screwdrivers for household projects, repairs, workshop tasks, and regular maintenance.",
-    value: "$25",
-    bid: "$30",
-    image: screwdriverSetPhoto,
-  },
-  {
-    id: "solar-cow",
-    title: "Solar Cow",
-    description: "Add personality to your garden with this charming reading Highland cow and colorful solar-powered flower light.",
-    value: "$15",
-    bid: "$25",
-    image: solarCowPhoto,
-  },
-  {
-    id: "metal-dog",
-    title: "Decorative Metal Dog",
-    description: "A playful metal dog with plenty of personality, ready to bring character and humor to your home, porch, or garden.",
-    value: "$15",
-    bid: "$25",
-    image: decorativeDogPhoto,
-  },
-  {
-    id: "birdhouse-wind-chime",
-    title: "Decorative Birdhouse Wind Chime",
-    description: "A cheerful birdhouse topped with a colorful bird and finished with a hanging bell to brighten any porch, patio, or garden.",
-    value: "$5",
-    bid: "$10",
-    image: birdhouseWindChimePhoto,
-  },
-];
+const featuredItems = AUCTION_CATALOG.filter((item) => item.featured).map(toLiveItem);
+
+const liveItems = AUCTION_CATALOG.filter((item) => item.type === "Live" && !item.featured).map(toLiveItem);
+
+const silentItems = AUCTION_CATALOG.filter((item) => item.type === "Silent").map((item) => ({
+  ...item,
+  value: formatAuctionValue(item.openingBid),
+  bid: formatAuctionValue(item.reserveAmount ?? item.openingBid),
+}));
 
 const Eyebrow = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
   <div className={`auction-eyebrow${light ? " auction-eyebrow--light" : ""}`}>

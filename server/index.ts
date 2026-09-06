@@ -6,7 +6,7 @@ import {
   saveAuctionBid,
   validateBidInput,
   type BidInput,
-} from "./auctionService";
+} from "./auctionService.js";
 
 const json = (body: unknown, status = 200) =>
   Response.json(body, {

@@ -4,8 +4,8 @@ import {
   saveAuctionBid,
   validateBidInput,
   type BidInput,
-} from "../server/auctionService";
-import { sendJson } from "../server/vercelHttp";
+} from "../server/auctionService.js";
+import { sendJson } from "../server/vercelHttp.js";
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   if (request.method !== "POST") {

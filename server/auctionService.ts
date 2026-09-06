@@ -3,7 +3,7 @@ import {
   AUCTION_BID_SEEDS,
   AUCTION_CATALOG_DATA,
   type AuctionType,
-} from "../src/data/auctionCatalogData";
+} from "../src/data/auctionCatalogData.js";
 
 type Sql = NeonQueryFunction<false, false>;
 

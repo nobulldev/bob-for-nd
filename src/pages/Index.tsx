@@ -1101,22 +1101,22 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
     location: "Christine, ND Community Center",
   },*/
   {
-    date: "Aug 27, 2026",
-    time: "06:00 - 08:00 PM",
-    name: "District 25 Fundraiser Event!!!",
-    location: "9457 W Ridge Rd. Hankinson, ND",
-  },
-  {
-    date: "Sept 2, 2026",
+    date: "Sept 16, 2026",
     time: "10:00 AM",
-    name: "Coffee with the DEMs at Dakota Coffee",
-    location: "",
+    name: "Coffee with the Dems",
+    location: "Dakota Coffee Wahpeton, ND",
   },
   {
-    date: "Sept 2, 2026",
-    time: "10:00 - 02:00 PM",
-    name: "NDAREC Eletricity Matters",
-    location: "3201 Nyren Drive Mandan, ND",
+    date: "Sept 17, 2026",
+    time: "05:00 - 07:00 PM",
+    name: "BOB'S DINNER & AUCTION",
+    location: "MANTADOR VFW",
+  },
+  {
+    date: "Sept 23, 2026",
+    time: "08:00 - 04:00 PM",
+    name: "ND Governor's Workforce Summit",
+    location: "Bismark, ND",
   },
 ];
 

@@ -1115,8 +1115,8 @@ const EVENTS: { date: string; time?: string; name: string; location?: string; ba
   {
     date: "Sept 23, 2026",
     time: "08:00 - 04:00 PM",
-    name: "ND Governor's Workforce Summit",
-    location: "Bismark, ND",
+    name: "ND Governor's Workforce Summit Bismark, ND",
+    location: "",
   },
 ];
 

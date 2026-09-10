@@ -103,4 +103,18 @@ describe("AuctionBidPage", () => {
     expect(screen.queryByRole("heading", { name: "Bid history" })).not.toBeInTheDocument();
     expect(screen.getByText("Minimum $40")).toBeInTheDocument();
   });
+
+  it("scrolls to the top when an auction item is selected", async () => {
+    render(
+      <MemoryRouter initialEntries={["/auction/bid"]}>
+        <AuctionBidPage />
+      </MemoryRouter>,
+    );
+
+    const jumpStarter = await screen.findByRole("button", { name: /Cen-Tech Portable Jump Starter/i });
+    vi.mocked(window.scrollTo).mockClear();
+    fireEvent.click(jumpStarter);
+
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
+  });
 });

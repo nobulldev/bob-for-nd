@@ -121,19 +121,20 @@ const AuctionBidPage = () => {
     [filter, items],
   );
 
-  const chooseItem = (itemId: string) => {
+  const chooseItem = (itemId: string, scrollToTop = true) => {
     setSelectedId(itemId);
     setAmount("");
     setErrors({});
     setSuccessMessage("");
     setSubmitError("");
+    if (scrollToTop) window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const chooseFilter = (nextFilter: "All" | AuctionType) => {
     setFilter(nextFilter);
     const nextItems = items.filter((item) => nextFilter === "All" || item.type === nextFilter);
     if (!nextItems.some((item) => item.id === selectedId) && nextItems.length > 0) {
-      chooseItem(nextItems[0].id);
+      chooseItem(nextItems[0].id, false);
     }
   };
 

@@ -38,7 +38,7 @@ const formatAuctionValue = (value: number) => `$${value.toLocaleString("en-US")}
 
 const toLiveItem = (item: (typeof AUCTION_CATALOG)[number]) => ({
   ...item,
-  value: formatAuctionValue(item.valueAmount ?? 0),
+  value: item.valueAmount === null ? undefined : formatAuctionValue(item.valueAmount),
   bid: formatAuctionValue(item.openingBid),
   buyNow: item.reserveAmount === null ? undefined : formatAuctionValue(item.reserveAmount),
 });
@@ -49,8 +49,8 @@ const liveItems = AUCTION_CATALOG.filter((item) => item.type === "Live" && !item
 
 const silentItems = AUCTION_CATALOG.filter((item) => item.type === "Silent").map((item) => ({
   ...item,
-  value: formatAuctionValue(item.openingBid),
-  bid: formatAuctionValue(item.reserveAmount ?? item.openingBid),
+  bid: formatAuctionValue(item.openingBid),
+  reserve: item.reserveAmount === null ? undefined : formatAuctionValue(item.reserveAmount),
 }));
 
 const Eyebrow = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
@@ -179,7 +179,7 @@ const AuctionPage = () => {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="auction-metrics">
-                      <Metric label="Value" value={item.value} />
+                      {item.value ? <Metric label="Value" value={item.value} /> : null}
                       <Metric label="Opening Bid" value={item.bid} />
                       {item.buyNow ? <Metric label="Reserve" value={item.buyNow} /> : null}
                     </div>
@@ -197,7 +197,7 @@ const AuctionPage = () => {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="auction-metrics">
-                      <Metric label="Value" value={item.value} />
+                      {item.value ? <Metric label="Value" value={item.value} /> : null}
                       <Metric label="Opening Bid" value={item.bid} />
                       {item.buyNow ? <Metric label="Reserve" value={item.buyNow} /> : null}
                     </div>
@@ -224,8 +224,8 @@ const AuctionPage = () => {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="auction-metrics">
-                      <Metric label="Minimum bid" value={item.value} />
-                      <Metric label="Reserve" value={item.bid} />
+                      <Metric label="Minimum bid" value={item.bid} />
+                      {item.reserve ? <Metric label="Reserve" value={item.reserve} /> : null}
                     </div>
                     <span className="auction-availability">Silent Auction or place an online bid ›</span>
                   </div>

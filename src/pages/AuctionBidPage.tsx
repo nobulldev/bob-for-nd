@@ -20,7 +20,9 @@ import {
 import "./AuctionPage.css";
 import "./AuctionBidPage.css";
 
-type FormErrors = Partial<Record<"amount" | "name" | "phone", string>>;
+type FormErrors = Partial<Record<"amount" | "name" | "email" | "phone", string>>;
+
+const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en-US", {
@@ -50,6 +52,7 @@ const AuctionBidPage = () => {
   const [filter, setFilter] = useState<"All" | AuctionType>("All");
   const [amount, setAmount] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -147,6 +150,9 @@ const AuctionBidPage = () => {
     if (name.trim().length < 2) {
       nextErrors.name = "Enter your full name.";
     }
+    if (!isValidEmail(email) || email.length > 254) {
+      nextErrors.email = "Enter a valid email address.";
+    }
     if (phone.replace(/\D/g, "").length < 10) {
       nextErrors.phone = "Enter a valid phone number with area code.";
     }
@@ -161,6 +167,7 @@ const AuctionBidPage = () => {
       const snapshot = await saveAuctionBid({
         itemId: selectedItem.id,
         bidder: name,
+        email,
         phone,
         amount: numericAmount,
       });
@@ -168,8 +175,8 @@ const AuctionBidPage = () => {
       setAmount("");
       setSuccessMessage(
         isSilentAuction
-          ? `Your ${formatCurrency(numericAmount)} sealed bid has been recorded.`
-          : `Your ${formatCurrency(numericAmount)} bid is now leading this item.`,
+          ? `Your ${formatCurrency(numericAmount)} sealed bid has been recorded. Thank you for your support!`
+          : `Your ${formatCurrency(numericAmount)} bid is now leading this item. Thank you for your support!`,
       );
     } catch (error) {
       console.error("Unable to save bid.", error);
@@ -313,10 +320,12 @@ const AuctionBidPage = () => {
                         </>
                       ) : (
                         <>
-                          <span>
-                            <small>Value</small>
-                            <strong>{formatCurrency(selectedItem.valueAmount ?? 0)}</strong>
-                          </span>
+                          {selectedItem.valueAmount !== null ? (
+                            <span>
+                              <small>Value</small>
+                              <strong>{formatCurrency(selectedItem.valueAmount)}</strong>
+                            </span>
+                          ) : null}
                           <span>
                             <small>Opening bid</small>
                             <strong>{formatCurrency(selectedItem.openingBid)}</strong>
@@ -406,13 +415,29 @@ const AuctionBidPage = () => {
                           {errors.name ? <small className="auction-bid-error" id="bid-name-error">{errors.name}</small> : null}
                         </label>
                         <label className="auction-bid-field">
+                          <span>Email address</span>
+                          <input
+                            type="email"
+                            autoComplete="email"
+                            required
+                            maxLength={254}
+                            value={email}
+                            aria-invalid={Boolean(errors.email)}
+                            aria-describedby={errors.email ? "bid-email-error" : "bid-contact-note"}
+                            placeholder="you@example.com"
+                            onChange={(event) => setEmail(event.target.value)}
+                          />
+                          {errors.email ? <small className="auction-bid-error" id="bid-email-error">{errors.email}</small> : null}
+                        </label>
+                        <label className="auction-bid-field">
                           <span>Phone number</span>
                           <input
                             type="tel"
                             autoComplete="tel"
+                            required
                             value={phone}
                             aria-invalid={Boolean(errors.phone)}
-                            aria-describedby={errors.phone ? "bid-phone-error" : "bid-phone-note"}
+                            aria-describedby={errors.phone ? "bid-phone-error" : "bid-contact-note"}
                             placeholder="(701) 555-0123"
                             onChange={(event) => setPhone(event.target.value)}
                           />
@@ -421,9 +446,9 @@ const AuctionBidPage = () => {
                       </div>
 
                       <div className="auction-bid-form__footer">
-                        <p id="bid-phone-note">
+                        <p id="bid-contact-note">
                           <ShieldCheck aria-hidden="true" />
-                          Your phone number is kept private and used only to contact you if you win.
+                          Your email and phone number are kept private and used only to contact you about your bid.
                         </p>
                         <button className="auction-button auction-button--red" type="submit" disabled={isSubmitting}>
                           {isSubmitting ? "Saving…" : "Place Bid"} <Gavel aria-hidden="true" />

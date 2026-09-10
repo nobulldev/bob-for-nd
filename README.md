@@ -41,16 +41,20 @@ to it.
 3. Open the project's **Storage** tab and create or connect a Neon database.
 4. Confirm that the integration added `DATABASE_URL` to Production, Preview,
    and Development environments.
-5. Redeploy the project.
+5. Redeploy the project. The deployment build runs the idempotent Neon catalog
+   synchronization before building the frontend.
 6. Open `/api/health`; a successful connection returns:
 
 ```json
 { "status": "ok", "database": "neon" }
 ```
 
-`vercel.json` identifies the Vite build, preserves serverless functions under
-`/api`, and sends all remaining routes to the React application. Deployments do
-not alter or clear existing bid history.
+`vercel.json` runs `bun run deploy:build`, which creates or updates the auction
+schema and catalog before the Vite build. Catalog records are upserted by ID, so
+the command can run on every deployment without duplicating items. It does not
+alter or clear existing bid history. If `DATABASE_URL` is unavailable or Neon
+cannot be synchronized, the deployment fails instead of publishing a site with
+an outdated catalog.
 
 ## Environment
 
@@ -65,6 +69,7 @@ Never expose this value through a `VITE_` variable or commit `.env.local`.
 ```bash
 bun run dev          # local API and Vite
 bun run build        # production frontend build
+bun run deploy:build # sync Neon catalog, then build for deployment
 bun run db:migrate   # initialize/update schema and item catalog
 bun run db:clear-bids # permanently delete all bids
 bun run start        # serve the production build locally with Bun

@@ -27,6 +27,7 @@ type BidRow = {
 export type BidInput = {
   itemId?: unknown;
   bidder?: unknown;
+  email?: unknown;
   phone?: unknown;
   amount?: unknown;
 };
@@ -86,19 +87,27 @@ const initialize = async () => {
         source_key TEXT UNIQUE,
         item_id TEXT NOT NULL REFERENCES auction_items(id) ON DELETE CASCADE,
         bidder_name TEXT NOT NULL,
+        email TEXT NOT NULL,
         phone TEXT NOT NULL,
         amount INTEGER NOT NULL CHECK (amount > 0),
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `,
+    tx`ALTER TABLE bids ADD COLUMN IF NOT EXISTS email TEXT`,
+    tx`UPDATE bids SET email = 'legacy-bid-' || id || '@invalid.local' WHERE email IS NULL`,
+    tx`ALTER TABLE bids ALTER COLUMN email SET NOT NULL`,
     tx`
       CREATE INDEX IF NOT EXISTS bids_item_amount_idx
       ON bids (item_id, amount DESC, created_at DESC)
     `,
     tx`
+      DROP FUNCTION IF EXISTS place_auction_bid(TEXT, TEXT, TEXT, INTEGER)
+    `,
+    tx`
       CREATE OR REPLACE FUNCTION place_auction_bid(
         p_item_id TEXT,
         p_bidder_name TEXT,
+        p_email TEXT,
         p_phone TEXT,
         p_amount INTEGER
       )
@@ -136,8 +145,8 @@ const initialize = async () => {
           RETURN;
         END IF;
 
-        INSERT INTO bids (item_id, bidder_name, phone, amount)
-        VALUES (p_item_id, p_bidder_name, p_phone, p_amount);
+        INSERT INTO bids (item_id, bidder_name, email, phone, amount)
+        VALUES (p_item_id, p_bidder_name, p_email, p_phone, p_amount);
 
         RETURN QUERY SELECT TRUE, required_bid;
       END;
@@ -252,6 +261,7 @@ export const getAuctionSnapshot = async () => {
 export const validateBidInput = (body: BidInput) => {
   if (typeof body.itemId !== "string" || body.itemId.length > 100) return "Invalid auction item.";
   if (typeof body.bidder !== "string" || body.bidder.trim().length < 2 || body.bidder.length > 100) return "Enter a valid full name.";
+  if (typeof body.email !== "string" || body.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim())) return "Enter a valid email address.";
   if (typeof body.phone !== "string" || body.phone.replace(/\D/g, "").length < 10 || body.phone.length > 30) return "Enter a valid phone number.";
   if (typeof body.amount !== "number" || !Number.isInteger(body.amount) || body.amount <= 0 || body.amount > 10_000_000) return "Enter a valid whole-dollar bid.";
   return null;
@@ -267,6 +277,7 @@ export const saveAuctionBid = async (input: Required<BidInput>) => {
     FROM place_auction_bid(
       ${String(input.itemId)},
       ${String(input.bidder).trim()},
+      ${String(input.email).trim().toLowerCase()},
       ${String(input.phone).trim()},
       ${Number(input.amount)}
     )

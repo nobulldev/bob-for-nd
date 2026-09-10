@@ -51,6 +51,7 @@ export const loadAuctionDatabase = async (): Promise<AuctionDatabaseSnapshot> =>
 export const saveAuctionBid = async (input: {
   itemId: string;
   bidder: string;
+  email: string;
   phone: string;
   amount: number;
 }): Promise<AuctionDatabaseSnapshot> => {

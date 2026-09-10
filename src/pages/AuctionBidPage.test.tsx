@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { saveAuctionBid } from "@/lib/auctionApi";
 import AuctionBidPage from "./AuctionBidPage";
 
 vi.mock("@/lib/auctionApi", () => {
@@ -33,7 +34,7 @@ vi.mock("@/lib/auctionApi", () => {
 
   return {
     loadAuctionDatabase: vi.fn(async () => ({ items: createItems() })),
-    saveAuctionBid: vi.fn(async (input: { bidder: string; amount: number }) => {
+    saveAuctionBid: vi.fn(async (input: { bidder: string; email: string; phone: string; amount: number }) => {
       const items = createItems();
       items[0].bids.unshift({
         id: 2,
@@ -63,12 +64,15 @@ describe("AuctionBidPage", () => {
 
     fireEvent.change(screen.getByLabelText("Bid amount"), { target: { value: "2201" } });
     fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Alex Morgan" } });
+    fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "alex@example.com" } });
     fireEvent.change(screen.getByLabelText("Phone number"), { target: { value: "701-555-0198" } });
     fireEvent.click(screen.getByRole("button", { name: /Place Bid/i }));
 
     expect(await screen.findByText("You're the high bidder!")).toBeInTheDocument();
+    expect(screen.getByText(/Thank you for your support!/i)).toBeInTheDocument();
     expect(screen.getAllByText("Alex Morgan").length).toBeGreaterThan(0);
     expect(screen.getAllByText("$2,201").length).toBeGreaterThan(0);
+    expect(saveAuctionBid).toHaveBeenCalledWith(expect.objectContaining({ email: "alex@example.com" }));
   });
 
   it("validates all bid fields before accepting a bid", async () => {
@@ -82,6 +86,7 @@ describe("AuctionBidPage", () => {
 
     expect(screen.getByText("Enter a whole-dollar bid of at least $2,201.")).toBeInTheDocument();
     expect(screen.getByText("Enter your full name.")).toBeInTheDocument();
+    expect(screen.getByText("Enter a valid email address.")).toBeInTheDocument();
     expect(screen.getByText("Enter a valid phone number with area code.")).toBeInTheDocument();
   });
 

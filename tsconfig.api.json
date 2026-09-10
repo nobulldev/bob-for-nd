@@ -12,6 +12,7 @@
   "include": [
     "api/**/*.ts",
     "scripts/clear-bids.ts",
+    "scripts/deploy.ts",
     "scripts/migrate.ts",
     "server/auctionService.ts",
     "server/vercelHttp.ts",

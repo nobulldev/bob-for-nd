@@ -299,12 +299,21 @@
 }
 
 .auction-bid-detail {
-  position: sticky;
-  top: 104px;
+  position: static;
   overflow: hidden;
   border: 1px solid rgba(3, 31, 81, 0.1);
   background: #fff;
   box-shadow: 0 18px 45px rgba(3, 31, 81, 0.09);
+}
+
+/* Keep the detail panel pinned only when it fits comfortably in the viewport.
+   A sticky element taller than the viewport fights the page scroll and can
+   leave the bid form difficult to reach on laptops and zoomed displays. */
+@media (min-width: 961px) and (min-height: 1050px) {
+  .auction-bid-detail {
+    position: sticky;
+    top: 104px;
+  }
 }
 
 .auction-bid-detail__image {
@@ -679,9 +688,6 @@
     min-height: 120px;
   }
 
-  .auction-bid-detail {
-    position: static;
-  }
 }
 
 @media (max-width: 640px) {

@@ -8,7 +8,7 @@ vi.mock("@/lib/auctionApi", () => {
   const createItems = () => [
     {
       id: "snap-on-tool-kit",
-      title: "Snap-on Professional Tool Kit & Storage",
+      title: "Snap-on Professional Storage",
       description: "Tools",
       type: "Live" as const,
       image: "/tools.jpg",

@@ -100,14 +100,14 @@ const AuctionPage = () => {
             <div className="auction-hero__event" aria-label="Event details">
               <div className="auction-hero__date">
                 <strong>THURSDAY, SEPTEMBER 17 | 5–7 PM</strong>
-                <span>Live auction begins at 6:30 PM</span>
+                <span>Live auction 6:30–7:00 PM</span>
+                <span className="auction-hero__call">Call 701-640-4018</span>
               </div>
               <div className="auction-hero__venue">
                 <strong>Mantador VFW Post #9317</strong>
                 <span>301 Main Street, Mantador, ND 58058</span>
               </div>
             </div>
-
             <p className="auction-hero__description">
               Enjoy Bob&apos;s pulled pork, brats, tacos in a bag, and special deals on refreshments all while helping elect a proven local leader to represent all of us in Bismarck.
             </p>
@@ -168,7 +168,8 @@ const AuctionPage = () => {
           <div className="auction-container">
             <Eyebrow>Live Auction</Eyebrow>
             <h2>Bid Big <em>for Bob!</em></h2>
-            <p className="auction-section__micro">Live auction begins at 6:30 PM</p>
+            <p className="auction-section__micro">Live auction: 6:30–7:00 PM</p>
+            <span className="auction-live__call">Call 701-640-4018 to join the live auction</span>
             <p className="auction-section__intro auction-section__intro--dark">Every winning bid helps Bob reach voters, organize supporters, and run a strong campaign for the North Dakota State Senate.</p>
 
             <div className="auction-featured-list">
@@ -265,7 +266,8 @@ const AuctionPage = () => {
             <p>Join your friends and neighbors for an evening dedicated to creating a stronger future for North Dakota.</p>
             <div className="auction-cta__rule" />
             <strong>Thursday, September 17 | 5–7 PM</strong>
-            <strong>Live auction begins at 6:30 PM</strong>
+            <strong>Live auction 6:30–7:00 PM</strong>
+            <span className="auction-cta__call">Call 701-640-4018</span>
             <address>Mantador VFW Post #9317<br />301 Main Street, Mantador, ND 58058</address>
             <div className="auction-cta__rule auction-cta__rule--short" />
             <a className="auction-button auction-button--gold" href={DONATE_URL} target="_blank" rel="noopener noreferrer">Donate <strong>★</strong></a>

@@ -263,7 +263,7 @@
   line-height: 1.3;
 }
 
-.auction-hero__date span {
+.auction-hero__date span:not(.auction-hero__call) {
   margin-top: 7px;
   color: var(--red);
   font-family: "Oswald", sans-serif;
@@ -277,6 +277,16 @@
   margin-top: 4px;
   color: rgba(245, 239, 228, 0.78);
   font-size: 12px;
+}
+
+.auction-hero__call {
+  margin-top: 8px;
+  color: var(--navy);
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: center;
 }
 
 .auction-hero__description {
@@ -445,6 +455,16 @@
 /* Live auction */
 .auction-live {
   background: var(--cream-2);
+}
+
+.auction-live__call {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--red);
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .auction-featured-list {
@@ -814,6 +834,14 @@
   font-size: 12px;
   font-style: normal;
   line-height: 1.65;
+}
+
+.auction-cta__call {
+  color: var(--cream);
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .auction-cta__hashtag {

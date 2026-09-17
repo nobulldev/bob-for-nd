@@ -110,11 +110,7 @@ const AuctionBidPage = () => {
   const selectedItem = items.find((item) => item.id === selectedId) ?? items[0];
   const currentBid = selectedItem?.bids[0];
   const isSilentAuction = selectedItem?.type === "Silent";
-  const minimumNextBid = selectedItem
-    ? isSilentAuction
-      ? selectedItem.openingBid
-      : Math.max(selectedItem.openingBid, (currentBid?.amount ?? 0) + 1)
-    : 0;
+  const minimumNextBid = selectedItem?.minimumBid ?? 0;
 
   const filteredItems = useMemo(
     () => items.filter((item) => filter === "All" || item.type === filter),
@@ -286,7 +282,7 @@ const AuctionBidPage = () => {
                           ) : (
                             <span className="auction-bid-card__current">
                               <small>Minimum bid</small>
-                              <b>{formatCurrency(item.openingBid)}</b>
+                              <b>{formatCurrency(item.minimumBid)}</b>
                             </span>
                           )}
                         </span>
@@ -310,7 +306,7 @@ const AuctionBidPage = () => {
                         <>
                           <span>
                             <small>Minimum bid</small>
-                            <strong>{formatCurrency(selectedItem.openingBid)}</strong>
+                            <strong>{formatCurrency(selectedItem.minimumBid)}</strong>
                           </span>
                           {selectedItem.reserveAmount !== null ? (
                             <span>

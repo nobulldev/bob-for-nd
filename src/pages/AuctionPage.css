@@ -467,6 +467,43 @@
   letter-spacing: 0.04em;
 }
 
+.auction-database-state {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 50px;
+  border: 1px solid rgba(3, 31, 81, 0.1);
+  background: #fff;
+  color: var(--navy);
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.auction-database-state svg {
+  width: 20px;
+  color: var(--gold);
+  animation: auction-database-spin 0.9s linear infinite;
+}
+
+.auction-database-state--error {
+  color: var(--red);
+}
+
+.auction-database-state--error svg {
+  animation: none;
+  color: var(--red);
+}
+
+@keyframes auction-database-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .auction-featured-list {
   display: grid;
   gap: 25px;

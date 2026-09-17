@@ -13,6 +13,7 @@ type ItemRow = {
   type: AuctionType;
   valueAmount: number | null;
   openingBid: number;
+  minimumBid: number;
   reserveAmount: number | null;
 };
 
@@ -115,14 +116,13 @@ const initialize = async () => {
       LANGUAGE plpgsql
       AS $$
       DECLARE
-        item_type TEXT;
         item_opening_bid INTEGER;
         required_bid INTEGER;
       BEGIN
         PERFORM pg_advisory_xact_lock(hashtext(p_item_id));
 
-        SELECT auction_type, opening_bid
-          INTO item_type, item_opening_bid
+        SELECT opening_bid
+          INTO item_opening_bid
         FROM auction_items
         WHERE id = p_item_id;
 
@@ -131,14 +131,10 @@ const initialize = async () => {
           RETURN;
         END IF;
 
-        IF item_type = 'Live' THEN
-          SELECT GREATEST(item_opening_bid, COALESCE(MAX(amount), 0) + 1)
-            INTO required_bid
-          FROM bids
-          WHERE item_id = p_item_id;
-        ELSE
-          required_bid := item_opening_bid;
-        END IF;
+        SELECT GREATEST(item_opening_bid, COALESCE(MAX(amount), 0) + 1)
+          INTO required_bid
+        FROM bids
+        WHERE item_id = p_item_id;
 
         IF p_amount < required_bid THEN
           RETURN QUERY SELECT FALSE, required_bid;
@@ -203,15 +199,26 @@ export const getAuctionSnapshot = async () => {
   const [rawItems, rawBids] = await Promise.all([
     sql`
       SELECT
-        id,
-        title,
-        description,
-        auction_type AS "type",
-        value_amount AS "valueAmount",
-        opening_bid AS "openingBid",
-        reserve_amount AS "reserveAmount"
-      FROM auction_items
-      ORDER BY sort_order
+        i.id,
+        i.title,
+        i.description,
+        i.auction_type AS "type",
+        i.value_amount AS "valueAmount",
+        i.opening_bid AS "openingBid",
+        GREATEST(i.opening_bid, COALESCE(MAX(b.amount), 0) + 1) AS "minimumBid",
+        i.reserve_amount AS "reserveAmount"
+      FROM auction_items i
+      LEFT JOIN bids b ON b.item_id = i.id
+      GROUP BY
+        i.id,
+        i.title,
+        i.description,
+        i.auction_type,
+        i.value_amount,
+        i.opening_bid,
+        i.reserve_amount,
+        i.sort_order
+      ORDER BY i.sort_order
     `,
     sql`
       SELECT
@@ -252,6 +259,7 @@ export const getAuctionSnapshot = async () => {
       ...item,
       valueAmount: item.valueAmount === null ? null : Number(item.valueAmount),
       openingBid: Number(item.openingBid),
+      minimumBid: Number(item.minimumBid),
       reserveAmount: item.reserveAmount === null ? null : Number(item.reserveAmount),
       bids: bidsByItem.get(item.id) ?? [],
     })),

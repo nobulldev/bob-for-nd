@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Database, LoaderCircle } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import heroBackground from "@/assets/auction/auction-hero-background-image.jpg";
 import starIcon from "@/assets/auction/auction-star-icon.svg";
@@ -7,6 +8,7 @@ import vernThompsonPhoto from "@/assets/auction/auction-vern-thompson-photo.png"
 import tracyLayneFossPhoto from "@/assets/auction/auction-tracy-layne-foss-photo.png";
 import jamieSelzlerPhoto from "@/assets/auction/auction-jamie-selzler-photo.png";
 import { AUCTION_CATALOG } from "@/data/auctionCatalog";
+import { loadAuctionDatabase, type StoredAuctionItem } from "@/lib/auctionApi";
 import "./AuctionPage.css";
 
 const DONATE_URL = "https://secure.actblue.com/donate/bob-heitkamp";
@@ -36,22 +38,9 @@ const guests = [
 
 const formatAuctionValue = (value: number) => `$${value.toLocaleString("en-US")}`;
 
-const toLiveItem = (item: (typeof AUCTION_CATALOG)[number]) => ({
-  ...item,
-  value: item.valueAmount === null ? undefined : formatAuctionValue(item.valueAmount),
-  bid: formatAuctionValue(item.openingBid),
-  buyNow: item.reserveAmount === null ? undefined : formatAuctionValue(item.reserveAmount),
-});
-
-const featuredItems = AUCTION_CATALOG.filter((item) => item.featured).map(toLiveItem);
-
-const liveItems = AUCTION_CATALOG.filter((item) => item.type === "Live" && !item.featured).map(toLiveItem);
-
-const silentItems = AUCTION_CATALOG.filter((item) => item.type === "Silent").map((item) => ({
-  ...item,
-  bid: formatAuctionValue(item.openingBid),
-  reserve: item.reserveAmount === null ? undefined : formatAuctionValue(item.reserveAmount),
-}));
+const featuredItemIds = new Set(
+  AUCTION_CATALOG.filter((item) => item.featured).map((item) => item.id),
+);
 
 const Eyebrow = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
   <div className={`auction-eyebrow${light ? " auction-eyebrow--light" : ""}`}>
@@ -75,13 +64,72 @@ const Metric = ({ label, value }: { label: string; value: string }) => (
   </span>
 );
 
+const AuctionDatabaseState = ({ error }: { error?: string }) => (
+  <div
+    className={`auction-database-state${error ? " auction-database-state--error" : ""}`}
+    role={error ? "alert" : "status"}
+  >
+    {error ? <Database aria-hidden="true" /> : <LoaderCircle aria-hidden="true" />}
+    <strong>{error ?? "Loading auction items\u2026"}</strong>
+  </div>
+);
+
 const AuctionPage = () => {
+  const [items, setItems] = useState<StoredAuctionItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [databaseError, setDatabaseError] = useState("");
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const previousTitle = document.title;
     document.title = "Come Hungry. Leave Ready. | Bob Heitkamp Auction";
-    return () => { document.title = previousTitle; };
+    let active = true;
+
+    const synchronizeAuction = async (initialLoad = false) => {
+      try {
+        const snapshot = await loadAuctionDatabase();
+        if (!active) return;
+        setItems(snapshot.items);
+        setDatabaseError("");
+      } catch (error) {
+        if (!active) return;
+        console.error("Unable to load the auction database.", error);
+        if (initialLoad) {
+          setDatabaseError("The auction items could not be loaded. Refresh the page to try again.");
+        }
+      } finally {
+        if (active && initialLoad) setIsLoading(false);
+      }
+    };
+
+    void synchronizeAuction(true);
+    const synchronizationInterval = window.setInterval(() => {
+      if (document.visibilityState === "visible") void synchronizeAuction();
+    }, 10_000);
+    const synchronizeWhenVisible = () => {
+      if (document.visibilityState === "visible") void synchronizeAuction();
+    };
+    document.addEventListener("visibilitychange", synchronizeWhenVisible);
+
+    return () => {
+      active = false;
+      window.clearInterval(synchronizationInterval);
+      document.removeEventListener("visibilitychange", synchronizeWhenVisible);
+      document.title = previousTitle;
+    };
   }, []);
+
+  const { featuredItems, liveItems, silentItems } = useMemo(() => ({
+    featuredItems: items.filter((item) => item.type === "Live" && featuredItemIds.has(item.id)),
+    liveItems: items.filter((item) => item.type === "Live" && !featuredItemIds.has(item.id)),
+    silentItems: items.filter((item) => item.type === "Silent"),
+  }), [items]);
+
+  const auctionDatabaseState = isLoading
+    ? <AuctionDatabaseState />
+    : databaseError
+      ? <AuctionDatabaseState error={databaseError} />
+      : null;
 
   return (
     <>
@@ -172,40 +220,54 @@ const AuctionPage = () => {
             <span className="auction-live__call">Call 701-640-4018 to join the live auction</span>
             <p className="auction-section__intro auction-section__intro--dark">Every winning bid helps Bob reach voters, organize supporters, and run a strong campaign for the North Dakota State Senate.</p>
 
-            <div className="auction-featured-list">
-              {featuredItems.map((item) => (
+            {auctionDatabaseState ?? <>
+              <div className="auction-featured-list">
+                {featuredItems.map((item) => {
+                  const currentBid = item.bids[0];
+                  return (
                 <a className="auction-featured auction-item-link" href={`/auction/bid?item=${item.id}`} key={item.title}>
                   <AuctionItemImage src={item.image} alt={item.title} />
                   <div className="auction-featured__content">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="auction-metrics">
-                      {item.value ? <Metric label="Value" value={item.value} /> : null}
-                      <Metric label="Opening Bid" value={item.bid} />
-                      {item.buyNow ? <Metric label="Reserve" value={item.buyNow} /> : null}
+                      {item.valueAmount !== null ? <Metric label="Value" value={formatAuctionValue(item.valueAmount)} /> : null}
+                      <Metric
+                        label={currentBid ? "Current Bid" : "Opening Bid"}
+                        value={formatAuctionValue(currentBid?.amount ?? item.openingBid)}
+                      />
+                      {item.reserveAmount !== null ? <Metric label="Reserve" value={formatAuctionValue(item.reserveAmount)} /> : null}
                     </div>
                     <span className="auction-availability">Available online and during the live auction</span>
                   </div>
                 </a>
-              ))}
-            </div>
+                  );
+                })}
+              </div>
 
-            <div className="auction-live__grid">
-              {liveItems.map((item) => (
+              <div className="auction-live__grid">
+                {liveItems.map((item) => {
+                  const currentBid = item.bids[0];
+                  return (
                 <a className="auction-live-card auction-item-link" href={`/auction/bid?item=${item.id}`} key={item.title}>
                   <AuctionItemImage src={item.image} alt={item.title} />
                   <div className="auction-live-card__content">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="auction-metrics">
-                      {item.value ? <Metric label="Value" value={item.value} /> : null}
-                      <Metric label="Opening Bid" value={item.bid} />
-                      {item.buyNow ? <Metric label="Reserve" value={item.buyNow} /> : null}
+                      {item.valueAmount !== null ? <Metric label="Value" value={formatAuctionValue(item.valueAmount)} /> : null}
+                      <Metric
+                        label={currentBid ? "Current Bid" : "Opening Bid"}
+                        value={formatAuctionValue(currentBid?.amount ?? item.openingBid)}
+                      />
+                      {item.reserveAmount !== null ? <Metric label="Reserve" value={formatAuctionValue(item.reserveAmount)} /> : null}
                     </div>
                   </div>
                 </a>
-              ))}
-            </div>
+                  );
+                })}
+              </div>
+            </>}
             <a className="auction-button auction-button--outline-red" href="/auction/bid">Preview Items &amp; Bid Online <Arrow /></a>
           </div>
         </section>
@@ -217,7 +279,7 @@ const AuctionPage = () => {
             <p className="auction-section__micro">Find something you love. Place your bid. Support Bob.</p>
             <p className="auction-section__intro auction-section__intro--dark">Bid throughout the evening on tools, equipment, gifts, and fun finds. Items are shown in order of value. Online bids can be made up to 12 noon Sept. 17, 2026.</p>
 
-            <div className="auction-silent__grid">
+            {auctionDatabaseState ?? <div className="auction-silent__grid">
               {silentItems.map((item) => (
                 <a className="auction-silent-card auction-item-link" href={`/auction/bid?item=${item.id}`} key={item.title}>
                   <AuctionItemImage src={item.image} alt={item.title} />
@@ -225,14 +287,14 @@ const AuctionPage = () => {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="auction-metrics">
-                      <Metric label="Minimum bid" value={item.bid} />
-                      {item.reserve ? <Metric label="Reserve" value={item.reserve} /> : null}
+                      <Metric label="Minimum bid" value={formatAuctionValue(item.minimumBid)} />
+                      {item.reserveAmount !== null ? <Metric label="Reserve" value={formatAuctionValue(item.reserveAmount)} /> : null}
                     </div>
                     <span className="auction-availability">Silent Auction or place an online bid ›</span>
                   </div>
                 </a>
               ))}
-            </div>
+            </div>}
           </div>
         </section>
 

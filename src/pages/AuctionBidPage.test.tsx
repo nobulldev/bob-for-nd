@@ -14,6 +14,7 @@ vi.mock("@/lib/auctionApi", () => {
       image: "/tools.jpg",
       valueAmount: 4000,
       openingBid: 1800,
+      minimumBid: 2201,
       reserveAmount: 2000,
       bids: [
         { id: 1, bidder: "Sarah M.", amount: 2200, createdAt: "2026-09-05T18:42:00-05:00" },
@@ -27,6 +28,7 @@ vi.mock("@/lib/auctionApi", () => {
       image: "/jump-starter.jpg",
       valueAmount: null,
       openingBid: 40,
+      minimumBid: 40,
       reserveAmount: 50,
       bids: [],
     },
@@ -34,14 +36,20 @@ vi.mock("@/lib/auctionApi", () => {
 
   return {
     loadAuctionDatabase: vi.fn(async () => ({ items: createItems() })),
-    saveAuctionBid: vi.fn(async (input: { bidder: string; email: string; phone: string; amount: number }) => {
+    saveAuctionBid: vi.fn(async (input: { itemId: string; bidder: string; email: string; phone: string; amount: number }) => {
       const items = createItems();
-      items[0].bids.unshift({
-        id: 2,
-        bidder: input.bidder,
-        amount: input.amount,
-        createdAt: "2026-09-05T19:00:00-05:00",
-      });
+      const item = items.find((candidate) => candidate.id === input.itemId);
+      if (item) {
+        item.minimumBid = input.amount + 1;
+        if (item.type === "Live") {
+          item.bids.unshift({
+            id: 2,
+            bidder: input.bidder,
+            amount: input.amount,
+            createdAt: "2026-09-05T19:00:00-05:00",
+          });
+        }
+      }
       return { items };
     }),
   };
@@ -102,6 +110,16 @@ describe("AuctionBidPage", () => {
     expect(screen.queryByText("Current bid")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Bid history" })).not.toBeInTheDocument();
     expect(screen.getByText("Minimum $40")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Bid amount"), { target: { value: "40" } });
+    fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Alex Morgan" } });
+    fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "alex@example.com" } });
+    fireEvent.change(screen.getByLabelText("Phone number"), { target: { value: "701-555-0198" } });
+    fireEvent.click(screen.getByRole("button", { name: /Place Bid/i }));
+
+    expect(await screen.findByText("Minimum $41")).toBeInTheDocument();
+    expect(screen.queryByText("Alex Morgan")).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Bid history" })).not.toBeInTheDocument();
   });
 
   it("scrolls to the top when an auction item is selected", async () => {

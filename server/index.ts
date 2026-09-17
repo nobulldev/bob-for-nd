@@ -2,11 +2,18 @@ import { resolve, sep } from "node:path";
 import {
   AuctionBidError,
   ensureAuctionDatabase,
+  getAdminAuctionSnapshot,
   getAuctionSnapshot,
   saveAuctionBid,
   validateBidInput,
   type BidInput,
 } from "./auctionService.js";
+import {
+  authenticateAdminCredentials,
+  clearAdminCookie,
+  createAdminCookie,
+  isAdminRequest,
+} from "./adminAuth.js";
 
 const json = (body: unknown, status = 200) =>
   Response.json(body, {
@@ -48,6 +55,8 @@ Bun.serve({
   hostname: "0.0.0.0",
   async fetch(request) {
     const url = new URL(request.url);
+    const secureRequest = url.protocol === "https:"
+      || request.headers.get("x-forwarded-proto") === "https";
 
     if (url.pathname === "/api/health" && request.method === "GET") {
       try {
@@ -62,6 +71,54 @@ Bun.serve({
     if (url.pathname === "/api/auction" && request.method === "GET") {
       try {
         return json(await getAuctionSnapshot());
+      } catch (error) {
+        console.error(error);
+        return json({ error: "Unable to load auction data." }, 500);
+      }
+    }
+
+    if (url.pathname === "/api/admin-auth") {
+      if (request.method === "GET") {
+        if (!isAdminRequest(request.headers.get("cookie") ?? undefined)) {
+          return json({ authenticated: false }, 401);
+        }
+        return json({ authenticated: true });
+      }
+
+      if (request.method === "DELETE") {
+        const response = json({ authenticated: false });
+        response.headers.set("Set-Cookie", clearAdminCookie(secureRequest));
+        return response;
+      }
+
+      if (request.method === "POST") {
+        const contentLength = Number(request.headers.get("content-length") ?? 0);
+        if (contentLength > 2048) return json({ error: "Request body is too large." }, 413);
+
+        try {
+          const body = await request.json() as { email?: unknown; password?: unknown };
+          if (!authenticateAdminCredentials(body.email, body.password)) {
+            return json({ error: "Invalid email or password." }, 401);
+          }
+
+          const response = json({ authenticated: true });
+          response.headers.set("Set-Cookie", createAdminCookie(secureRequest));
+          return response;
+        } catch {
+          return json({ error: "Invalid request." }, 400);
+        }
+      }
+
+      return json({ error: "Method not allowed." }, 405);
+    }
+
+    if (url.pathname === "/api/admin-auction" && request.method === "GET") {
+      if (!isAdminRequest(request.headers.get("cookie") ?? undefined)) {
+        return json({ error: "Authentication required." }, 401);
+      }
+
+      try {
+        return json(await getAdminAuctionSnapshot());
       } catch (error) {
         console.error(error);
         return json({ error: "Unable to load auction data." }, 500);

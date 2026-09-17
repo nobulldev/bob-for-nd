@@ -21,6 +21,8 @@ type BidRow = {
   id: string | number;
   itemId: string;
   bidder: string;
+  email?: string;
+  phone?: string;
   amount: number;
   createdAt: string | Date;
 };
@@ -248,6 +250,85 @@ export const getAuctionSnapshot = async () => {
     itemBids.push({
       id: Number(bid.id),
       bidder: bid.bidder,
+      amount: Number(bid.amount),
+      createdAt: new Date(bid.createdAt).toISOString(),
+    });
+    bidsByItem.set(bid.itemId, itemBids);
+  }
+
+  return {
+    items: items.map((item) => ({
+      ...item,
+      valueAmount: item.valueAmount === null ? null : Number(item.valueAmount),
+      openingBid: Number(item.openingBid),
+      minimumBid: Number(item.minimumBid),
+      reserveAmount: item.reserveAmount === null ? null : Number(item.reserveAmount),
+      bids: bidsByItem.get(item.id) ?? [],
+    })),
+  };
+};
+
+export const getAdminAuctionSnapshot = async () => {
+  await ensureAuctionDatabase();
+  const sql = getSql();
+
+  const [rawItems, rawBids] = await Promise.all([
+    sql`
+      SELECT
+        i.id,
+        i.title,
+        i.description,
+        i.auction_type AS "type",
+        i.value_amount AS "valueAmount",
+        i.opening_bid AS "openingBid",
+        GREATEST(i.opening_bid, COALESCE(MAX(b.amount), 0) + 1) AS "minimumBid",
+        i.reserve_amount AS "reserveAmount"
+      FROM auction_items i
+      LEFT JOIN bids b ON b.item_id = i.id
+      GROUP BY
+        i.id,
+        i.title,
+        i.description,
+        i.auction_type,
+        i.value_amount,
+        i.opening_bid,
+        i.reserve_amount,
+        i.sort_order
+      ORDER BY i.sort_order
+    `,
+    sql`
+      SELECT
+        b.id,
+        b.item_id AS "itemId",
+        b.bidder_name AS bidder,
+        b.email,
+        b.phone,
+        b.amount,
+        b.created_at AS "createdAt"
+      FROM bids b
+      INNER JOIN auction_items i ON i.id = b.item_id
+      ORDER BY i.sort_order, b.amount ASC, b.created_at ASC
+    `,
+  ]);
+
+  const items = rawItems as unknown as ItemRow[];
+  const bids = rawBids as unknown as BidRow[];
+  const bidsByItem = new Map<string, Array<{
+    id: number;
+    bidder: string;
+    email: string;
+    phone: string;
+    amount: number;
+    createdAt: string;
+  }>>();
+
+  for (const bid of bids) {
+    const itemBids = bidsByItem.get(bid.itemId) ?? [];
+    itemBids.push({
+      id: Number(bid.id),
+      bidder: bid.bidder,
+      email: bid.email ?? "",
+      phone: bid.phone ?? "",
       amount: Number(bid.amount),
       createdAt: new Date(bid.createdAt).toISOString(),
     });

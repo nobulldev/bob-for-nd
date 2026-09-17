@@ -15,6 +15,7 @@
     "scripts/deploy.ts",
     "scripts/migrate.ts",
     "server/auctionService.ts",
+    "server/adminAuth.ts",
     "server/vercelHttp.ts",
     "src/data/auctionCatalogData.ts"
   ]

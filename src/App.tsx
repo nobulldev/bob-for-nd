@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import PressResources from "./pages/PressResources.tsx";
 import AuctionPage from "./pages/AuctionPage.tsx";
 import AuctionBidPage from "./pages/AuctionBidPage.tsx";
+import AdminPage from "./pages/AdminPage.tsx";
 import { CookieBanner } from "@/components/CookieBanner.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/press" element={<PressResources />} />
           <Route path="/auction" element={<AuctionPage />} />
           <Route path="/auction/bid" element={<AuctionBidPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

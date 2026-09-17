@@ -15,6 +15,7 @@ type ItemRow = {
   openingBid: number;
   minimumBid: number;
   reserveAmount: number | null;
+  isOpen: boolean;
 };
 
 type BidRow = {
@@ -81,6 +82,7 @@ const initialize = async () => {
         value_amount INTEGER,
         opening_bid INTEGER NOT NULL CHECK (opening_bid >= 0),
         reserve_amount INTEGER,
+        is_open BOOLEAN NOT NULL DEFAULT TRUE,
         sort_order INTEGER NOT NULL
       )
     `,
@@ -96,6 +98,7 @@ const initialize = async () => {
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `,
+    tx`ALTER TABLE auction_items ADD COLUMN IF NOT EXISTS is_open BOOLEAN NOT NULL DEFAULT TRUE`,
     tx`ALTER TABLE bids ADD COLUMN IF NOT EXISTS email TEXT`,
     tx`UPDATE bids SET email = 'legacy-bid-' || id || '@invalid.local' WHERE email IS NULL`,
     tx`ALTER TABLE bids ALTER COLUMN email SET NOT NULL`,
@@ -107,6 +110,9 @@ const initialize = async () => {
       DROP FUNCTION IF EXISTS place_auction_bid(TEXT, TEXT, TEXT, INTEGER)
     `,
     tx`
+      DROP FUNCTION IF EXISTS place_auction_bid(TEXT, TEXT, TEXT, TEXT, INTEGER)
+    `,
+    tx`
       CREATE OR REPLACE FUNCTION place_auction_bid(
         p_item_id TEXT,
         p_bidder_name TEXT,
@@ -114,22 +120,28 @@ const initialize = async () => {
         p_phone TEXT,
         p_amount INTEGER
       )
-      RETURNS TABLE (saved BOOLEAN, minimum_bid INTEGER)
+      RETURNS TABLE (saved BOOLEAN, minimum_bid INTEGER, item_is_open BOOLEAN)
       LANGUAGE plpgsql
       AS $$
       DECLARE
         item_opening_bid INTEGER;
         required_bid INTEGER;
+        auction_is_open BOOLEAN;
       BEGIN
         PERFORM pg_advisory_xact_lock(hashtext(p_item_id));
 
-        SELECT opening_bid
-          INTO item_opening_bid
+        SELECT opening_bid, is_open
+          INTO item_opening_bid, auction_is_open
         FROM auction_items
         WHERE id = p_item_id;
 
         IF NOT FOUND THEN
-          RETURN QUERY SELECT FALSE, NULL::INTEGER;
+          RETURN QUERY SELECT FALSE, NULL::INTEGER, NULL::BOOLEAN;
+          RETURN;
+        END IF;
+
+        IF NOT auction_is_open THEN
+          RETURN QUERY SELECT FALSE, item_opening_bid, FALSE;
           RETURN;
         END IF;
 
@@ -139,14 +151,14 @@ const initialize = async () => {
         WHERE item_id = p_item_id;
 
         IF p_amount < required_bid THEN
-          RETURN QUERY SELECT FALSE, required_bid;
+          RETURN QUERY SELECT FALSE, required_bid, TRUE;
           RETURN;
         END IF;
 
         INSERT INTO bids (item_id, bidder_name, email, phone, amount)
         VALUES (p_item_id, p_bidder_name, p_email, p_phone, p_amount);
 
-        RETURN QUERY SELECT TRUE, required_bid;
+        RETURN QUERY SELECT TRUE, required_bid, TRUE;
       END;
       $$
     `,
@@ -208,7 +220,8 @@ export const getAuctionSnapshot = async () => {
         i.value_amount AS "valueAmount",
         i.opening_bid AS "openingBid",
         GREATEST(i.opening_bid, COALESCE(MAX(b.amount), 0) + 1) AS "minimumBid",
-        i.reserve_amount AS "reserveAmount"
+        i.reserve_amount AS "reserveAmount",
+        i.is_open AS "isOpen"
       FROM auction_items i
       LEFT JOIN bids b ON b.item_id = i.id
       GROUP BY
@@ -219,6 +232,7 @@ export const getAuctionSnapshot = async () => {
         i.value_amount,
         i.opening_bid,
         i.reserve_amount,
+        i.is_open,
         i.sort_order
       ORDER BY i.sort_order
     `,
@@ -282,7 +296,8 @@ export const getAdminAuctionSnapshot = async () => {
         i.value_amount AS "valueAmount",
         i.opening_bid AS "openingBid",
         GREATEST(i.opening_bid, COALESCE(MAX(b.amount), 0) + 1) AS "minimumBid",
-        i.reserve_amount AS "reserveAmount"
+        i.reserve_amount AS "reserveAmount",
+        i.is_open AS "isOpen"
       FROM auction_items i
       LEFT JOIN bids b ON b.item_id = i.id
       GROUP BY
@@ -293,6 +308,7 @@ export const getAdminAuctionSnapshot = async () => {
         i.value_amount,
         i.opening_bid,
         i.reserve_amount,
+        i.is_open,
         i.sort_order
       ORDER BY i.sort_order
     `,
@@ -347,6 +363,30 @@ export const getAdminAuctionSnapshot = async () => {
   };
 };
 
+export const setAuctionItemOpen = async (itemId: unknown, isOpen: unknown) => {
+  if (typeof itemId !== "string" || itemId.length === 0 || itemId.length > 100) {
+    throw new AuctionBidError("Invalid auction item.", 400);
+  }
+  if (typeof isOpen !== "boolean") {
+    throw new AuctionBidError("Invalid auction status.", 400);
+  }
+
+  await ensureAuctionDatabase();
+  const sql = getSql();
+  const updated = await sql`
+    UPDATE auction_items
+    SET is_open = ${isOpen}
+    WHERE id = ${itemId}
+    RETURNING id
+  ` as unknown as Array<{ id: string }>;
+
+  if (updated.length === 0) {
+    throw new AuctionBidError("Auction item not found.", 404);
+  }
+
+  return getAdminAuctionSnapshot();
+};
+
 export const validateBidInput = (body: BidInput) => {
   if (typeof body.itemId !== "string" || body.itemId.length > 100) return "Invalid auction item.";
   if (typeof body.bidder !== "string" || body.bidder.trim().length < 2 || body.bidder.length > 100) return "Enter a valid full name.";
@@ -362,7 +402,8 @@ export const saveAuctionBid = async (input: Required<BidInput>) => {
   const result = await sql`
     SELECT
       saved,
-      minimum_bid AS "minimumBid"
+      minimum_bid AS "minimumBid",
+      item_is_open AS "itemIsOpen"
     FROM place_auction_bid(
       ${String(input.itemId)},
       ${String(input.bidder).trim()},
@@ -370,11 +411,14 @@ export const saveAuctionBid = async (input: Required<BidInput>) => {
       ${String(input.phone).trim()},
       ${Number(input.amount)}
     )
-  ` as unknown as Array<{ saved: boolean; minimumBid: number | null }>;
+  ` as unknown as Array<{ saved: boolean; minimumBid: number | null; itemIsOpen: boolean | null }>;
 
   const outcome = result[0];
   if (!outcome || outcome.minimumBid === null) {
     throw new AuctionBidError("Auction item not found.", 404);
+  }
+  if (!outcome.itemIsOpen) {
+    throw new AuctionBidError("This auction item is closed.", 409);
   }
   if (!outcome.saved) {
     throw new AuctionBidError(`Bid must be at least ${Number(outcome.minimumBid)}.`, 409);

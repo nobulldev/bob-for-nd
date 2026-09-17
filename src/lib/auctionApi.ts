@@ -17,6 +17,7 @@ export type StoredAuctionItem = {
   openingBid: number;
   minimumBid: number;
   reserveAmount: number | null;
+  isOpen: boolean;
   bids: StoredBid[];
 };
 

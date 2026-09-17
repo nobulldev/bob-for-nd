@@ -306,6 +306,33 @@
   box-shadow: 0 18px 45px rgba(3, 31, 81, 0.09);
 }
 
+.auction-bid-card__closed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: #77736d;
+  font-family: "Oswald", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.auction-bid-card__closed svg {
+  width: 14px;
+  height: 14px;
+}
+
+.auction-bid-card--closed:not(.auction-bid-card--selected) {
+  background: #f4f1eb;
+}
+
+.auction-bid-card--closed .auction-bid-card__image img {
+  filter: grayscale(0.65);
+  opacity: 0.78;
+}
+
 /* Keep the detail panel pinned only when it fits comfortably in the viewport.
    A sticky element taller than the viewport fights the page scroll and can
    leave the bid form difficult to reach on laptops and zoomed displays. */
@@ -521,6 +548,38 @@
 .auction-bid-form {
   padding: 24px;
   background: var(--cream-2);
+}
+
+.auction-bid-closed {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 30px;
+  padding: 22px 24px;
+  border-left: 4px solid #77736d;
+  background: #efede8;
+  color: #6f6b64;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.auction-bid-closed > img {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.auction-bid-closed span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.auction-bid-closed strong {
+  color: var(--navy);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 17px;
 }
 
 .auction-bid-field {

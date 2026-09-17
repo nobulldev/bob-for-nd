@@ -19,6 +19,7 @@ export type AdminAuctionItem = {
   openingBid: number;
   minimumBid: number;
   reserveAmount: number | null;
+  isOpen: boolean;
   bids: AdminBid[];
 };
 
@@ -27,6 +28,13 @@ type ApiAdminAuctionItem = Omit<AdminAuctionItem, "image">;
 export type AdminAuctionSnapshot = {
   items: AdminAuctionItem[];
 };
+
+const attachImages = (items: ApiAdminAuctionItem[]): AdminAuctionItem[] =>
+  items.map((item) => {
+    const catalogItem = getAuctionCatalogItem(item.id);
+    if (!catalogItem) throw new Error(`Auction item ${item.id} has no image mapping.`);
+    return { ...item, image: catalogItem.image };
+  });
 
 const parseJson = async (response: Response) => {
   const payload = await response.json().catch(() => ({}));
@@ -70,11 +78,31 @@ export const loadAdminAuction = async (): Promise<AdminAuctionSnapshot> => {
     cache: "no-store",
   });
   const payload = await parseJson(response) as { items: ApiAdminAuctionItem[] };
-  return {
-    items: payload.items.map((item) => {
-      const catalogItem = getAuctionCatalogItem(item.id);
-      if (!catalogItem) throw new Error(`Auction item ${item.id} has no image mapping.`);
-      return { ...item, image: catalogItem.image };
-    }),
-  };
+  return { items: attachImages(payload.items) };
+};
+
+export const closeAdminAuctionItem = async (itemId: string): Promise<AdminAuctionSnapshot> => {
+  const response = await fetch("/api/admin-auction", {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ itemId, isOpen: false }),
+  });
+  const payload = await parseJson(response) as { items: ApiAdminAuctionItem[] };
+  return { items: attachImages(payload.items) };
+};
+
+export const reopenAdminAuctionItem = async (itemId: string): Promise<AdminAuctionSnapshot> => {
+  const response = await fetch("/api/admin-auction", {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ itemId, isOpen: true }),
+  });
+  const payload = await parseJson(response) as { items: ApiAdminAuctionItem[] };
+  return { items: attachImages(payload.items) };
 };

@@ -10,17 +10,21 @@ import {
   LogOut,
   Mail,
   Phone,
+  RotateCcw,
   Search,
   ShieldCheck,
   TrendingUp,
   Users,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
+import closeAuctionIcon from "@/assets/auction/close-auction-icon.png";
 import {
   checkAdminSession,
+  closeAdminAuctionItem,
   loadAdminAuction,
   loginAdmin,
   logoutAdmin,
+  reopenAdminAuctionItem,
   type AdminAuctionItem,
 } from "@/lib/adminAuctionApi";
 import "./AdminPage.css";
@@ -116,7 +120,12 @@ const StatCard = ({ icon, label, value }: {
   </article>
 );
 
-const AuctionItemCard = ({ item }: { item: AdminAuctionItem }) => {
+const AuctionItemCard = ({ item, updating, onClose, onReopen }: {
+  item: AdminAuctionItem;
+  updating: boolean;
+  onClose: (item: AdminAuctionItem) => void;
+  onReopen: (item: AdminAuctionItem) => void;
+}) => {
   const latestBid = item.bids.at(-1);
   const descendingBidProgression = item.bids
     .map((bid, index) => ({
@@ -132,10 +141,19 @@ const AuctionItemCard = ({ item }: { item: AdminAuctionItem }) => {
         <img src={item.image} alt="" />
         <div className="admin-item__identity">
           <span className={`admin-type admin-type--${item.type.toLowerCase()}`}>{item.type}</span>
+          {item.isOpen === false ? (
+            <span className="admin-type admin-type--closed">
+              Closed <span aria-hidden="true">✓</span>
+            </span>
+          ) : null}
           <h2>{item.title}</h2>
           <p>{item.bids.length === 1 ? "1 bid" : `${item.bids.length} bids`}</p>
-          <span className={`admin-item__mobile-value${latestBid ? "" : " admin-item__mobile-value--empty"}`}>
-            {latestBid ? `Current bid ${formatCurrency(latestBid.amount)}` : "No bids yet"}
+          <span className={`admin-item__mobile-value${latestBid || item.isOpen === false ? "" : " admin-item__mobile-value--empty"}`}>
+            {item.isOpen === false
+              ? "Closed"
+              : latestBid
+                ? `Current bid ${formatCurrency(latestBid.amount)}`
+                : "No bids yet"}
           </span>
         </div>
         <div className="admin-item__metric">
@@ -148,13 +166,46 @@ const AuctionItemCard = ({ item }: { item: AdminAuctionItem }) => {
             {latestBid?.bidder ?? "No bids yet"}
           </strong>
         </div>
-        <ChevronDown className="admin-item__chevron" aria-hidden="true" />
+        <span className="admin-item__actions">
+          {item.isOpen !== false ? (
+            <button
+              className="admin-item__close"
+              type="button"
+              aria-label={`Close ${item.title}`}
+              title="Close auction item"
+              disabled={updating}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                onClose(item);
+              }}
+            >
+              <img src={closeAuctionIcon} alt="" />
+            </button>
+          ) : (
+            <button
+              className="admin-item__rollback"
+              type="button"
+              aria-label={`Reopen ${item.title}`}
+              title="Reopen auction item"
+              disabled={updating}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                onReopen(item);
+              }}
+            >
+              <RotateCcw aria-hidden="true" />
+            </button>
+          )}
+          <ChevronDown className="admin-item__chevron" aria-hidden="true" />
+        </span>
       </summary>
 
       <div className="admin-item__details">
         <div className="admin-item__facts">
           <span><small>Opening bid</small><strong>{formatCurrency(item.openingBid)}</strong></span>
-          <span><small>Next minimum</small><strong>{formatCurrency(item.minimumBid)}</strong></span>
+          <span><small>Next minimum</small><strong>{item.isOpen === false ? "Closed" : formatCurrency(item.minimumBid)}</strong></span>
           <span><small>Reserve</small><strong>{item.reserveAmount === null ? "None" : formatCurrency(item.reserveAmount)}</strong></span>
           <span><small>Item value</small><strong>{item.valueAmount === null ? "Not listed" : formatCurrency(item.valueAmount)}</strong></span>
         </div>
@@ -219,6 +270,7 @@ const AdminDashboard = ({ onLogout }: { onLogout: () => void }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
+  const [updatingItemId, setUpdatingItemId] = useState<string | null>(null);
   const refreshInFlight = useRef(false);
 
   const refresh = async (initial = false) => {
@@ -284,6 +336,36 @@ const AdminDashboard = ({ onLogout }: { onLogout: () => void }) => {
       return sort === "bid-newest" ? rightTime - leftTime : leftTime - rightTime;
     });
   }, [filter, items, search, sort]);
+
+  const closeItem = async (item: AdminAuctionItem) => {
+    if (!window.confirm(`Close “${item.title}”? This item will stop accepting bids.`)) return;
+
+    setUpdatingItemId(item.id);
+    setError("");
+    try {
+      const snapshot = await closeAdminAuctionItem(item.id);
+      setItems(snapshot.items);
+      setUpdatedAt(new Date());
+    } catch (closeError) {
+      setError(closeError instanceof Error ? closeError.message : "Unable to close auction item.");
+    } finally {
+      setUpdatingItemId(null);
+    }
+  };
+
+  const reopenItem = async (item: AdminAuctionItem) => {
+    setUpdatingItemId(item.id);
+    setError("");
+    try {
+      const snapshot = await reopenAdminAuctionItem(item.id);
+      setItems(snapshot.items);
+      setUpdatedAt(new Date());
+    } catch (reopenError) {
+      setError(reopenError instanceof Error ? reopenError.message : "Unable to reopen auction item.");
+    } finally {
+      setUpdatingItemId(null);
+    }
+  };
 
   return (
     <main className="admin-dashboard">
@@ -374,7 +456,15 @@ const AdminDashboard = ({ onLogout }: { onLogout: () => void }) => {
           <div className="admin-state"><Search aria-hidden="true" /><strong>No matching items found.</strong></div>
         ) : (
           <section className="admin-items" aria-label="Auction items">
-            {filteredItems.map((item) => <AuctionItemCard item={item} key={item.id} />)}
+            {filteredItems.map((item) => (
+              <AuctionItemCard
+                item={item}
+                updating={updatingItemId === item.id}
+                onClose={(selectedItem) => void closeItem(selectedItem)}
+                onReopen={(selectedItem) => void reopenItem(selectedItem)}
+                key={item.id}
+              />
+            ))}
           </section>
         )}
       </div>

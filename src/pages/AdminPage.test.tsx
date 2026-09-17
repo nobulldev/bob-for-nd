@@ -5,6 +5,8 @@ import { loginAdmin } from "@/lib/adminAuctionApi";
 
 vi.mock("@/lib/adminAuctionApi", () => ({
   checkAdminSession: vi.fn(async () => true),
+  closeAdminAuctionItem: vi.fn(async () => ({ items: [] })),
+  reopenAdminAuctionItem: vi.fn(async () => ({ items: [] })),
   loginAdmin: vi.fn(async () => undefined),
   logoutAdmin: vi.fn(async () => undefined),
   loadAdminAuction: vi.fn(async () => ({
@@ -19,6 +21,7 @@ vi.mock("@/lib/adminAuctionApi", () => ({
         openingBid: 40,
         minimumBid: 76,
         reserveAmount: 50,
+        isOpen: true,
         bids: [
           {
             id: 10,

@@ -17,6 +17,7 @@ vi.mock("@/lib/auctionApi", () => ({
         openingBid: 1800,
         minimumBid: 2751,
         reserveAmount: 3000,
+        isOpen: true,
         bids: [
           { id: 1, bidder: "Database Bidder", amount: 2750, createdAt: "2026-09-17T12:00:00Z" },
         ],
@@ -31,6 +32,7 @@ vi.mock("@/lib/auctionApi", () => ({
         openingBid: 40,
         minimumBid: 91,
         reserveAmount: 100,
+        isOpen: true,
         bids: [],
       },
     ],

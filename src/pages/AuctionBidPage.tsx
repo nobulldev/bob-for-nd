@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import closedGavelIcon from "@/assets/auction/auction-closed-gavel-icon.png";
 import type { AuctionType } from "@/data/auctionCatalog";
 import {
   loadAuctionDatabase,
@@ -110,6 +111,7 @@ const AuctionBidPage = () => {
   const selectedItem = items.find((item) => item.id === selectedId) ?? items[0];
   const currentBid = selectedItem?.bids[0];
   const isSilentAuction = selectedItem?.type === "Silent";
+  const isAuctionOpen = selectedItem?.isOpen !== false;
   const minimumNextBid = selectedItem?.minimumBid ?? 0;
 
   const filteredItems = useMemo(
@@ -137,6 +139,10 @@ const AuctionBidPage = () => {
   const submitBid = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!selectedItem) return;
+    if (!isAuctionOpen) {
+      setSubmitError("This auction item is closed and is no longer accepting bids.");
+      return;
+    }
 
     const numericAmount = Number(amount);
     const nextErrors: FormErrors = {};
@@ -255,7 +261,7 @@ const AuctionBidPage = () => {
                     const selected = selectedId === item.id;
                     return (
                       <button
-                        className={`auction-bid-card${selected ? " auction-bid-card--selected" : ""}`}
+                        className={`auction-bid-card${selected ? " auction-bid-card--selected" : ""}${item.isOpen === false ? " auction-bid-card--closed" : ""}`}
                         key={item.id}
                         type="button"
                         aria-pressed={selected}
@@ -263,11 +269,13 @@ const AuctionBidPage = () => {
                       >
                         <span className="auction-bid-card__image">
                           <img src={item.image} alt="" loading="lazy" />
-                          <small>{item.type} auction</small>
+                          <small>{item.isOpen === false ? "Closed" : `${item.type} auction`}</small>
                         </span>
                         <span className="auction-bid-card__body">
                           <strong>{item.title}</strong>
-                          {item.type === "Live" ? (
+                          {item.isOpen === false ? (
+                            <span className="auction-bid-card__closed"><Gavel aria-hidden="true" /> Closed</span>
+                          ) : item.type === "Live" ? (
                             <>
                               <span className="auction-bid-card__current">
                                 <small>Current bid</small>
@@ -295,7 +303,7 @@ const AuctionBidPage = () => {
                 <article className="auction-bid-detail" aria-live="polite">
                   <div className="auction-bid-detail__image">
                     <img src={selectedItem.image} alt={selectedItem.title} />
-                    <span>{selectedItem.type} auction</span>
+                    <span>{isAuctionOpen ? `${selectedItem.type} auction` : "Closed"}</span>
                   </div>
                   <div className="auction-bid-detail__content">
                     <span className="auction-bid-kicker">Selected item</span>
@@ -372,7 +380,15 @@ const AuctionBidPage = () => {
                       </>
                     ) : null}
 
-                    <form className="auction-bid-form" onSubmit={submitBid} noValidate>
+                    {!isAuctionOpen ? (
+                      <div className="auction-bid-closed" role="status">
+                        <img src={closedGavelIcon} alt="" />
+                        <span>
+                          <strong>Bidding is complete for this item</strong>
+                          Thank you for supporting Bob! This lot is no longer accepting bids, but you can still review its final bid activity above.
+                        </span>
+                      </div>
+                    ) : <form className="auction-bid-form" onSubmit={submitBid} noValidate>
                       <div className="auction-bid-subheading">
                         <h3>Place your bid</h3>
                         <span>Minimum {formatCurrency(minimumNextBid)}</span>
@@ -462,7 +478,7 @@ const AuctionBidPage = () => {
                           </span>
                         </div>
                       ) : null}
-                    </form>
+                    </form>}
                   </div>
                 </article>
               </div>

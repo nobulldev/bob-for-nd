@@ -5,6 +5,7 @@ import {
   getAdminAuctionSnapshot,
   getAuctionSnapshot,
   saveAuctionBid,
+  setAuctionItemOpen,
   validateBidInput,
   type BidInput,
 } from "./auctionService.js";
@@ -112,14 +113,23 @@ Bun.serve({
       return json({ error: "Method not allowed." }, 405);
     }
 
-    if (url.pathname === "/api/admin-auction" && request.method === "GET") {
+    if (url.pathname === "/api/admin-auction" && (request.method === "GET" || request.method === "PATCH")) {
       if (!isAdminRequest(request.headers.get("cookie") ?? undefined)) {
         return json({ error: "Authentication required." }, 401);
       }
 
       try {
+        if (request.method === "PATCH") {
+          const contentLength = Number(request.headers.get("content-length") ?? 0);
+          if (contentLength > 2048) return json({ error: "Request body is too large." }, 413);
+          const body = await request.json() as { itemId?: unknown; isOpen?: unknown };
+          return json(await setAuctionItemOpen(body.itemId, body.isOpen));
+        }
         return json(await getAdminAuctionSnapshot());
       } catch (error) {
+        if (error instanceof AuctionBidError) {
+          return json({ error: error.message }, error.statusCode);
+        }
         console.error(error);
         return json({ error: "Unable to load auction data." }, 500);
       }

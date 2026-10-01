@@ -11,6 +11,8 @@
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
 }
 
+/* Legacy September 2026 auction banner styles. The banner markup and auction
+   routes are disabled, but these styles are preserved with the old page code.
 .auction-banner {
   padding: 10px;
   display: flex;
@@ -57,6 +59,7 @@
 .auction-banner__details {
   white-space: nowrap;
 }
+*/
 
 .nav .wrap {
   max-width: 1440px;
@@ -320,6 +323,7 @@ footer {
 }
 
 @media (max-width: 640px) {
+  /* Legacy auction banner responsive styles.
   .auction-banner {
     min-height: 0;
     padding: 9px 14px;
@@ -333,6 +337,7 @@ footer {
   .auction-banner__details {
     font-size: 12px;
   }
+  */
 
   .foot-grid {
     grid-template-columns: 1fr;

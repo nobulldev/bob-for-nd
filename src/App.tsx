@@ -6,9 +6,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PressResources from "./pages/PressResources.tsx";
-import AuctionPage from "./pages/AuctionPage.tsx";
-import AuctionBidPage from "./pages/AuctionBidPage.tsx";
-import AdminPage from "./pages/AdminPage.tsx";
+// Legacy auction pages (September 2026): source files are intentionally kept for
+// context, but their imports and routes are disabled so the pages are unreachable.
+// import AuctionPage from "./pages/AuctionPage.tsx";
+// import AuctionBidPage from "./pages/AuctionBidPage.tsx";
+// import AdminPage from "./pages/AdminPage.tsx";
 import { CookieBanner } from "@/components/CookieBanner.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -23,9 +25,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/press" element={<PressResources />} />
+          {/* Legacy auction routes are intentionally disabled. Their page code is
+              preserved in src/pages for historical context.
           <Route path="/auction" element={<AuctionPage />} />
           <Route path="/auction/bid" element={<AuctionBidPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

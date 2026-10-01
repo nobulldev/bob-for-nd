@@ -35,6 +35,7 @@ export const SiteHeader = () => {
 
   return (
     <header className={`nav${scrolled ? " scrolled" : ""}`} id={onHomePage ? "home" : undefined}>
+      {/* Legacy September 2026 auction banner. Kept as dead code for context.
       <a className="auction-banner" href="/auction" aria-label="Live and silent auction September 17 — view auction details and bid online">
         <span className="auction-banner__message">
           <strong>Live &amp; Silent Auction Sept. 17</strong>
@@ -42,6 +43,7 @@ export const SiteHeader = () => {
           <span className="auction-banner__cta">Bid online here before the event <span aria-hidden="true">›</span></span>
         </span>
       </a>
+      */}
       <div className="wrap">
         <a href={onHomePage ? "#home" : "/"} className="brand" aria-label="Bob Heitkamp for Senate" onClick={handleHomeClick}>
           <img src={logoImg} alt="Bob Heitkamp for Senate" className="brand-logo" />
@@ -52,7 +54,9 @@ export const SiteHeader = () => {
           <a href={sectionHref("issues")} onClick={() => setMenuOpen(false)}>Issues</a>
           <a href={sectionHref("action")} onClick={() => setMenuOpen(false)}>Take Action</a>
           <a href={sectionHref("media")} onClick={() => setMenuOpen(false)}>Media</a>
+          {/* Legacy auction navigation link; route is intentionally disabled.
           <a href="/auction" onClick={() => setMenuOpen(false)}>Auctions</a>
+          */}
           <a
             href="https://secure.actblue.com/donate/bob-heitkamp"
             target="_blank"

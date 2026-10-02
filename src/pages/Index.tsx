@@ -18,9 +18,6 @@ import timeline03Img from "@/assets/midwest.jpg";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
-import paradeBackground from "@/assets/parade-background.png";
-import starIcon from "@/assets/icon-star.svg";
-import calendarIcon from "@/assets/icon-calendar.svg";
 
 const STYLES = `
 :root{
@@ -144,57 +141,6 @@ a{color:inherit;text-decoration:none}
 .btn-outline:hover{background:var(--cream);color:var(--navy)}
 .btn .arrow{transition:transform .2s}
 .btn:hover .arrow{transform:translateX(4px)}
-
-/* ---------- Events / See Bob At ---------- */
-#events{background:var(--gold);padding:84px 36px}
-.events-title{
-  font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
-  font-size:clamp(32px,4vw,48px);line-height:1.05;text-align:center;margin:0;
-}
-.events-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
-  max-width:1440px;margin:48px auto 0;
-}
-  .events-grid:has(.event-card:only-child) {
-  grid-template-columns: 1fr;
-  justify-items: center;
-}
-.event-card{
-  background:#fff;border-radius:16px;padding:26px 30px 28px;
-  box-shadow:0 1px 2px -1px rgba(0,0,0,.1),0 1px 3px 0 rgba(0,0,0,.1);
-  display:flex;flex-direction:column;
-}
-.event-card img {
-  max-width: 24px;
-  max-height: 24px;
-  margin-right: 10px;
-}
-.event-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:30px}
-.event-date{
-  display:inline-flex;align-items:center;
-  font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-weight:600;font-size:16px;letter-spacing:.03em;color:var(--red);
-}
-.event-date img{width:15px;height:15px;display:block;flex-shrink:0}
-.event-time{
-  display:inline-flex;align-items:center;gap:7px;
-  background:#fdf3d3;color:var(--red);
-  padding:5px 12px;border-radius:999px;
-  font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-weight:600;font-size:14px;letter-spacing:.03em;white-space:nowrap;
-}
-.event-time svg{width:14px;height:14px;stroke:var(--red);fill:none;stroke-width:2;flex-shrink:0}
-.event-divider{height:1px;background:rgba(10,34,64,.12);margin:18px 0}
-.event-name{
-  display:inline-flex;align-items:center;gap:14px;
-  font-family:'Inter',system-ui,sans-serif;font-weight:800;
-  font-size:20px;color:var(--navy);line-height:1.2;
-}
-.event-name img{width:19px;height:18px;display:block;flex-shrink:0}
-@media (max-width:960px){
-  #events{padding:56px 20px}
-  .events-grid{grid-template-columns:1fr;gap:18px}
-}
 
 /* ---------- Section base ---------- */
 section{padding:96px 36px;position:relative}
@@ -1028,98 +974,6 @@ const HISTORY = [
   { years: "2016–2026", dur: "10 years", t: "Executive Director — Marketplace for Kids", d: "Statewide education and youth leadership organization", img: timeline06Img },
 ];
 
-const EVENTS: { date: string; time?: string; name: string; location?: string; backgroundImage?: string }[] = [
-  /*{
-    date: "July 1, 2026",
-    time: "10:00 AM",
-    name: "Coffee with the DEMs at Dakota Coffee 1001 2nd Ave N Wahpeton",
-  },
-  {
-    date: "July 4, 2026",
-    time: "9:00 AM",
-    name: "Hankinson Parade.",
-    location: "Hankinson, ND",
-    backgroundImage: paradeBackground,
-  },
-  {
-    date: "July 7, 2026",
-    time: "7:30 PM",
-    name: "Walcott City Meeting, Walcott Fire Hall",
-  },
-  {
-    date: "July 15, 2026",
-    time: "9:00 AM",
-    name: "AI & Data Center Legislative Committee Meeting",
-    location: "Bismarck, ND",
-  },
-  {
-    date: "July 18, 2026",
-    time: "10:00 AM",
-    name: "Flock to Fairmount Parade",
-    location: "Fairmount, ND",
-  },
-  {
-    date: "July 21, 2026",
-    time: "5:30 PM",
-    name: "Great Bend City Council Meeting",
-    location: "Great Bend, ND Fire Hall",
-  },
-  {
-    date: "July 21, 2026",
-    time: "7:00 PM",
-    name: "Abercrombie City Council Meeting",
-    location: "Abercrombie, ND",
-  },
-  {
-    date: "July 23, 2026",
-    time: "5:00-7:00 PM",
-    name: "BBQ and Silent Auction 5-7 PM",
-    location: "Ten Seven Acres Alpaca Farm",
-  },
-  {
-    date: "July 25, 2026",
-    time: "10:00 AM",
-    name: "Lidgerwood Heritage Days Parade",
-    location: "Lidgerwood, ND",
-  },
-  {
-    date: "July 28, 2026",
-    time: "4:00 PM",
-    name: "Red River Communications 75th Anniversary - Wahepton, ND",
-    location: "",
-  },
-  {
-    date: "Aug 1, 2026",
-    time: "10:00 AM",
-    name: "Aber Days Parade - Abercrombie, ND",
-    location: "",
-  },
-  {
-    date: "Aug 3, 2026",
-    time: "07:00 PM",
-    name: "Christine City Council Meeting -",
-    location: "Christine, ND Community Center",
-  },*/
-  {
-    date: "Sept 16, 2026",
-    time: "10:00 AM",
-    name: "Coffee with the Dems",
-    location: "Dakota Coffee Wahpeton, ND",
-  },
-  {
-    date: "Sept 17, 2026",
-    time: "05:00 - 07:00 PM",
-    name: "BOB'S DINNER & AUCTION",
-    location: "MANTADOR VFW",
-  },
-  {
-    date: "Sept 23, 2026",
-    time: "08:00 - 04:00 PM",
-    name: "ND Governor's Workforce Summit Bismark, ND",
-    location: "",
-  },
-];
-
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
 
 const Index = () => {
@@ -1208,46 +1062,6 @@ const Index = () => {
             <a href="#action" className="btn btn-outline">
               Take Action
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* EVENTS */}
-      <section id="events">
-        <div className="container">
-          <h2 className="events-title fade-up">See Bob at:</h2>
-          <div className="events-grid">
-            {EVENTS.map((ev, i) => (
-              <article className={`event-card fade-up delay-${i + 1}`} key={ev.name} style={ev.backgroundImage ? { backgroundImage: `url(${ev.backgroundImage})`, backgroundSize: "100px", backgroundPosition: "right bottom", backgroundRepeat: "no-repeat" } : {}}>
-                <div className="event-meta">
-                  <span className="event-date">
-                    <img src={calendarIcon} alt="" aria-hidden="true" />
-                    {ev.date}
-                  </span>
-                  {ev.time && (
-                    <span className="event-time">
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="12" r="9" />
-                        <path d="M12 7v5l3 2" />
-                      </svg>
-                      {ev.time}
-                    </span>
-                  )}
-                </div>
-                <div className="event-divider" aria-hidden="true" />
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <img src={starIcon} alt="" aria-hidden="true" />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <h3 className="event-name">
-                      {ev.name}
-                    </h3>
-                    <h3 className="event-name">
-                      {ev.location}
-                    </h3>
-                  </div>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </section>

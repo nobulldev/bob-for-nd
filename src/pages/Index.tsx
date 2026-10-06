@@ -18,6 +18,7 @@ import timeline03Img from "@/assets/midwest.jpg";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
+import voteBandBackground from "@/assets/vote-band-background.jpg";
 
 const STYLES = `
 :root{
@@ -161,11 +162,8 @@ section{padding:96px 36px;position:relative}
 /* ---------- Vote countdown ---------- */
 .vote-band{
   padding:83px 36px;overflow:hidden;isolation:isolate;
-  background:linear-gradient(100deg,#ffd95a 0%,var(--gold) 45%,#fcc93c 100%);
+  background:var(--gold) url(${voteBandBackground}) center/cover no-repeat;
 }
-.vote-band::before,.vote-band::after{content:"";position:absolute;inset:0;z-index:-1}
-.vote-band::before{background:#f8d354;clip-path:polygon(42% 0,66% 0,72% 100%,38% 100%)}
-.vote-band::after{background:linear-gradient(160deg,#fbbd3c,#f0c24f);clip-path:polygon(66% 0,100% 0,100% 100%,72% 100%)}
 .vote-band-inner{display:flex;align-items:center;justify-content:space-between;gap:40px; max-width: 1024px;}
 .vote-band-title{
   font-family:'Playfair Display',serif;font-weight:900;color:var(--navy);
@@ -647,7 +645,6 @@ section{padding:96px 36px;position:relative}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .vote-band{padding:48px 20px}
   .vote-band-inner{flex-direction:column;align-items:flex-start;gap:32px}
-  .vote-band::before,.vote-band::after{display:none}
   .vote-steps{grid-template-columns:1fr;gap:20px;margin-top:44px}
   .vote-step{min-height:0;padding:28px 24px}
   .vote-plan-lede{font-size:17px}

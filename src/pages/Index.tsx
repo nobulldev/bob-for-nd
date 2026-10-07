@@ -1186,7 +1186,7 @@ const Index = () => {
             <a href="https://vote.nd.gov/myvotinginfo" target="_blank" rel="noopener noreferrer" className="btn btn-red">
               Find My Polling Place
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+            <a href="https://maps.sos.nd.gov/absentee/Default.aspx" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
               Request an Absentee Ballot
             </a>
           </div>

@@ -18,6 +18,7 @@ import timeline03Img from "@/assets/midwest.jpg";
 import timeline04Img from "@/assets/timeline-04-icecream.png";
 import timeline05Img from "@/assets/timeline-05-poets.png";
 import timeline06Img from "@/assets/timeline-06-kids.png";
+import voteBandBackground from "@/assets/vote-band-background.jpg";
 
 const STYLES = `
 :root{
@@ -157,6 +158,54 @@ section{padding:96px 36px;position:relative}
   margin:18px 0 0;max-width:880px;
 }
 .section-title em{font-style:italic;color:var(--red);font-weight:800}
+
+/* ---------- Vote countdown ---------- */
+.vote-band{
+  padding:83px 36px;overflow:hidden;isolation:isolate;
+  background:var(--gold) url(${voteBandBackground}) center/cover no-repeat;
+}
+.vote-band-inner{display:flex;align-items:center;justify-content:space-between;gap:40px; max-width: 1024px;}
+.vote-band-title{
+  font-family:'Playfair Display',serif;font-weight:900;color:var(--navy);
+  font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-.01em;
+}
+.vote-band-title em{font-style:italic;color:var(--red)}
+.vote-count{
+  background-color: var(--gold);
+  flex-shrink:0;min-width:170px;padding:32px 40px;text-align:center;
+  border:3px solid #fff;box-shadow:6px 6px 0 #fff;
+}
+.vote-count-num{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-family:'Oswald',sans-serif;font-weight:700;color:var(--navy);
+  font-size:50px;line-height:1;text-transform:uppercase;
+  padding-bottom:12px;border-bottom:2px solid var(--navy);
+}
+.vote-count-num .star{color:var(--red);font-size:20px}
+.vote-count-word{font-size:34px;white-space:nowrap}
+.vote-count-label{
+  display:block;margin-top:10px;font-family:'Oswald',sans-serif;text-transform:uppercase;
+  color:var(--navy);font-size:11px;letter-spacing:.18em;
+}
+
+/* ---------- Vote plan ---------- */
+#vote-plan{background:var(--navy);color:var(--cream);text-align:center; padding: 112px 36px}
+.vote-plan-title{
+  font-family:'Playfair Display',serif;font-weight:900;text-transform:uppercase;
+  font-size:clamp(34px,4.4vw,58px);line-height:1.05;letter-spacing:-.01em;
+}
+.vote-plan-lede{max-width:880px;margin:28px auto 0;font-size:19px;line-height:1.65}
+.vote-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px;text-align:left}
+.vote-step{background:var(--cream-2);color:var(--ink);padding:40px;border-radius:2px;min-height:300px}
+.vote-step-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.vote-step-num{
+  flex-shrink:0;width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;background:var(--red);color:var(--cream);
+  font-family:'Oswald',sans-serif;font-weight:600;font-size:22px;
+}
+.vote-step h3{font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);font-size:24px;line-height:1.3}
+.vote-step p{font-size:16px;line-height:1.65}
+.vote-plan-cta{display:flex;justify-content:center;gap:24px;margin-top:64px;flex-wrap:wrap}
 
 /* ---------- About ---------- */
 #about{background:var(--cream-2)}
@@ -594,6 +643,13 @@ section{padding:96px 36px;position:relative}
   .cta-row{flex-wrap:nowrap}
   .cta-row .btn{flex:1;justify-content:center;padding:14px 14px;font-size:11.5px;letter-spacing:.14em;white-space:nowrap}
   .about-grid{grid-template-columns:1fr;gap:40px}
+  .vote-band{padding:48px 20px}
+  .vote-band-inner{flex-direction:column;align-items:flex-start;gap:32px}
+  .vote-steps{grid-template-columns:1fr;gap:20px;margin-top:44px}
+  .vote-step{min-height:0;padding:28px 24px}
+  .vote-plan-lede{font-size:17px}
+  .vote-plan-cta{flex-direction:column;align-items:stretch;margin-top:44px}
+  .vote-plan-cta .btn{white-space:normal}
   .quote-stack{position:static}
   .why-grid{grid-template-columns:1fr;gap:24px}
   .why-grid .why-text{display:contents}
@@ -976,6 +1032,27 @@ const HISTORY = [
 
 const WEB3FORMS_KEY = "0a519a1e-3432-4f6d-b41c-687968737c88";
 
+const VOTE_STEPS = [
+  {
+    t: "Choose how you'll vote",
+    d: "In person on November 3. Or vote by absentee ballot, available now from your county auditor.",
+  },
+  { t: "Bring your ID", d: "A North Dakota driver's license, non-driver ID or tribal ID works." },
+  {
+    t: "Voting by mail? Don't wait.",
+    d: "Your ballot has to reach the county auditor by the time polls close on November 3. You can't turn it in at a polling place on Election Day, so mail it early, use a county drop box, or hand it to the auditor.",
+  },
+];
+
+// Calendar date in Central time, compared as UTC dates so DST can't skew the count.
+const daysUntilElection = () => {
+  const [y, m, d] = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Chicago" })
+    .format(new Date())
+    .split("-")
+    .map(Number);
+  return (Date.UTC(2026, 10, 3) - Date.UTC(y, m - 1, d)) / 86400000;
+};
+
 const Index = () => {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const candidateRef = useRef<HTMLDivElement>(null);
@@ -983,6 +1060,7 @@ const Index = () => {
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [videoPlaying, setVideoPlaying] = useState(false);
+  const daysLeft = daysUntilElection();
 
   useEffect(() => {
     // Fade-up observer
@@ -1042,25 +1120,74 @@ const Index = () => {
         <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
           <span className="eyebrow fade-up">
-            <span className="dash" /> <Star className="star" /> North Dakota · Dist 25 <Star className="star" />{" "}
+            <span className="dash" /> <Star className="star" /> District 25 <Star className="star" />{" "}
             <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">
             <span className="name">Bob Heitkamp</span>
-            <em>for State Senate</em>
+            <em>for North Dakota<br />State Senate</em>
           </h1>
-          <span className="tagline fade-up delay-2 in px-0">Proven Experience · Local Leadership · Forward Together</span>
-          <p className="lede fade-up delay-3 font-semibold">
+          <span className="tagline fade-up delay-2 in px-0">Lower Costs. Stronger Businesses. Safer Future.</span>
+          {/* <p className="lede fade-up delay-3 font-semibold">
             A lifetime of building businesses, helping people, and serving our community. Your neighbor, ready to
             represent District 25 with experienced leadership and a strong voice for local families, farms, and small
             towns.
-          </p>
-          <div className="cta-row fade-up delay-4">
+          </p> */}
+          <div className="cta-row fade-up delay-4 pt-[74px]">
             <a href="#donate" className="btn btn-red">
               Donate <span className="arrow">→</span>
             </a>
             <a href="#action" className="btn btn-outline">
-              Take Action
+              Vote Nov 3 <span className="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* VOTE COUNTDOWN */}
+      <section className="vote-band">
+        <div className="container vote-band-inner">
+          <h2 className="vote-band-title fade-up">
+            Send Bob to <em>Bismarck</em>
+            <br />
+            on November 3rd.
+          </h2>
+          <div className="vote-count fade-up delay-1">
+            <div className={`vote-count-num${daysLeft > 0 ? "" : " vote-count-word"}`}>
+              <Star className="star" />
+              <span>{daysLeft > 0 ? daysLeft : daysLeft === 0 ? "Today!" : "Thank you!"}</span>
+              <Star className="star" />
+            </div>
+            {daysLeft > 0 && <span className="vote-count-label">Days to vote for Bob</span>}
+          </div>
+        </div>
+      </section>
+
+      {/* VOTE PLAN */}
+      <section id="vote-plan">
+        <div className="container">
+          <h2 className="vote-plan-title fade-up">Make Your Plan to Vote</h2>
+          <p className="vote-plan-lede fade-up delay-1">
+            Election Day is Tuesday, November 3. North Dakota has no voter registration, so if you are a U.S. citizen,
+            18 or older, and meet North Dakota's 30-day residency requirement, you can vote.
+          </p>
+          <div className="vote-steps">
+            {VOTE_STEPS.map((s, i) => (
+              <div key={s.t} className={`vote-step fade-up delay-${i + 1}`}>
+                <div className="vote-step-head">
+                  <span className="vote-step-num">{i + 1}</span>
+                  <h3>{s.t}</h3>
+                </div>
+                <p>{s.d}</p>
+              </div>
+            ))}
+          </div>
+          <div className="vote-plan-cta fade-up">
+            <a href="https://vote.nd.gov/myvotinginfo" target="_blank" rel="noopener noreferrer" className="btn btn-red">
+              Find My Polling Place
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+              Request an Absentee Ballot
             </a>
           </div>
         </div>
@@ -1117,7 +1244,7 @@ const Index = () => {
       </section>
 
       {/* BUSINESS HISTORY */}
-      <section id="history">
+      {/* <section id="history">
         <div className="history-layout">
           <div className="history-side">
             <h2>How You Know Me</h2>
@@ -1157,7 +1284,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* WHY I'M RUNNING (video placeholder) */}
       <section id="why">

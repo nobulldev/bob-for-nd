@@ -94,11 +94,11 @@ a{color:inherit;text-decoration:none}
 .hero-content > *{pointer-events:auto}
 .eyebrow{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
-  color:var(--gold);font-size:13px;letter-spacing:.28em;
+  color:var(--gold);font-size:clamp(16px,1.5vw,22px);letter-spacing:.16em;
   display:inline-flex;align-items:center;gap:12px;
 }
 .eyebrow .dash{width:36px;height:2px;background:var(--gold)}
-.eyebrow .star{color:var(--gold);font-size:14px}
+.eyebrow .star{color:var(--gold);font-size:16px}
 
 .hero h1{
   font-family:'Playfair Display',serif;
@@ -115,7 +115,7 @@ a{color:inherit;text-decoration:none}
 }
 .tagline{
   font-family:'Oswald',sans-serif;text-transform:uppercase;
-  font-size:15px;letter-spacing:.22em;color:var(--cream);
+  font-size:clamp(20px,1.8vw,26px);letter-spacing:.2em;color:var(--cream);
   display:inline-block;position:relative;padding-bottom:10px;
 }
 .tagline::after{
@@ -620,8 +620,9 @@ section{padding:96px 36px;position:relative}
   .hero-content > .eyebrow,
   .hero-content > h1,
   .hero-content > .tagline{padding-left:20px;padding-right:20px}
-  .hero-content > .eyebrow{order:1;margin-top:-56px;padding-top:0;white-space:nowrap;font-size:11px;letter-spacing:.18em;flex-wrap:nowrap}
-  .hero-content > .eyebrow .dash{width:18px;flex-shrink:0}
+  .hero-content > .eyebrow{order:1;margin-top:-56px;padding-top:0;font-size:15px;letter-spacing:.12em;line-height:1.35}
+  .hero-content > .eyebrow .dash,
+  .hero-content > .eyebrow .star{display:none}
   .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
   .hero-content > .tagline{order:3;margin:14px 0 0;width:100%;max-width:100%;padding:0 20px;display:block}
   .hero-content > .tagline::after{display:none}
@@ -1120,14 +1121,14 @@ const Index = () => {
         <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
           <span className="eyebrow fade-up">
-            <span className="dash" /> <Star className="star" /> District 25 <Star className="star" />{" "}
-            <span className="dash" />
+            <span className="dash" /> <Star className="star" /> District 25 Deserves a Senator Who Shows Up.{" "}
+            <Star className="star" /> <span className="dash" />
           </span>
           <h1 className="fade-up delay-1">
             <span className="name">Bob Heitkamp</span>
-            <em>for North Dakota<br />State Senate</em>
+            <em>for State Senate</em>
           </h1>
-          <span className="tagline fade-up delay-2 in px-0">Lower Costs. Stronger Businesses. Safer Future.</span>
+          <span className="tagline fade-up delay-2 in px-0">Your Neighbor. Your Voice.</span>
           {/* <p className="lede fade-up delay-3 font-semibold">
             A lifetime of building businesses, helping people, and serving our community. Your neighbor, ready to
             represent District 25 with experienced leadership and a strong voice for local families, farms, and small

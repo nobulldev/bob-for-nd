@@ -189,16 +189,9 @@ section{padding:96px 36px;position:relative}
 }
 
 /* ---------- Endorsement (strip + video) ---------- */
-#endorsement{padding:0 !important;background:#000}
-.endorse-strip{
-  position:relative;background:var(--red);color:var(--cream);text-align:center;
-  padding:52px 28px 30px;
-}
-.endorse-strip .star-strip{top:12px}
-.endorse-strip p{
-  max-width:1100px;margin:0 auto;font-size:clamp(17px,1.6vw,22px);line-height:1.4;font-weight:500;
-}
-.endorse-strip strong{font-weight:800}
+#endorsement{padding:0 !important;background:#000;scroll-margin-top:80px}
+.endorse-strip{background:var(--red);padding:12px 0}
+.endorse-strip .star-strip{position:static}
 .endorse-video{position:relative;width:100%;aspect-ratio:16/9}
 
 /* ---------- Vote plan ---------- */
@@ -1149,8 +1142,8 @@ const Index = () => {
             towns.
           </p> */}
           <div className="cta-row fade-up delay-4 pt-[74px]">
-            <a href="#donate" className="btn btn-red">
-              Donate <span className="arrow">→</span>
+            <a href="#endorsement" className="btn btn-red">
+              Endorsements <span className="arrow">→</span>
             </a>
             <a href="#action" className="btn btn-outline">
               Vote Nov 3 <span className="arrow">→</span>
@@ -1180,15 +1173,12 @@ const Index = () => {
 
       {/* ENDORSEMENT */}
       <section id="endorsement" aria-label="Heidi Heitkamp endorsement">
-        <div className="endorse-strip">
-          <div className="star-strip" aria-hidden="true">
+        <div className="endorse-strip" aria-hidden="true">
+          <div className="star-strip">
             {Array.from({ length: 22 }).map((_, i) => (
               <span key={i}>★</span>
             ))}
           </div>
-          <p>
-            <strong>Heidi Heitkamp</strong>, former US Senator endorses cousin Bob Heitkamp for state senate
-          </p>
         </div>
         <div className="endorse-video">
           <iframe

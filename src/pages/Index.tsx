@@ -122,6 +122,19 @@ a{color:inherit;text-decoration:none}
   content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
   background:var(--gold);opacity:.85;border-radius:1px;
 }
+.hero-thanks{
+  max-width:670px;margin:26px 0 24px;color:var(--cream);
+  text-shadow:0 4px 30px rgba(0,0,0,.4);
+}
+.hero-thanks p{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+  font-size:clamp(24px,2.4vw,34px);line-height:1.35;
+}
+.hero-thanks p + p{margin-top:18px;color:var(--gold)}
+.hero-thanks-sign{
+  display:block;margin-top:22px;font-family:'Oswald',sans-serif;text-transform:uppercase;
+  font-size:14px;letter-spacing:.2em;color:var(--cream);
+}
 .lede{
   margin-top:26px;max-width:560px;color:rgba(245,239,228,.92);
   font-size:18px;line-height:1.7;
@@ -630,6 +643,7 @@ section{padding:96px 36px;position:relative}
   .hero-content > .eyebrow .dash,
   .hero-content > .eyebrow .star{display:none}
   .hero-content > h1{order:2;margin-top:10px;margin-bottom:14px}
+  .hero-content > .hero-thanks{order:2;margin:14px 0 4px;padding:0 12px}
   .hero-content > .tagline{order:3;margin:14px 0 0;width:100%;max-width:100%;padding:0 20px;display:block}
   .hero-content > .tagline::after{display:none}
   .hero-candidate{
@@ -1052,15 +1066,6 @@ const VOTE_STEPS = [
   },
 ];
 
-// Calendar date in Central time, compared as UTC dates so DST can't skew the count.
-const daysUntilElection = () => {
-  const [y, m, d] = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Chicago" })
-    .format(new Date())
-    .split("-")
-    .map(Number);
-  return (Date.UTC(2026, 10, 3) - Date.UTC(y, m - 1, d)) / 86400000;
-};
-
 const Index = () => {
   const heroBgRef = useRef<HTMLDivElement>(null);
   const candidateRef = useRef<HTMLDivElement>(null);
@@ -1068,7 +1073,6 @@ const Index = () => {
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [videoPlaying, setVideoPlaying] = useState(false);
-  const daysLeft = daysUntilElection();
 
   useEffect(() => {
     // Fade-up observer
@@ -1127,47 +1131,19 @@ const Index = () => {
         </div>
         <img src={heroOverlay} alt="" className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
-          <span className="eyebrow fade-up">
-            <span className="dash" /> <Star className="star" /> District 25 Deserves a Senator Who Shows Up.{" "}
-            <Star className="star" /> <span className="dash" />
-          </span>
-          <h1 className="fade-up delay-1">
-            <span className="name">Bob Heitkamp</span>
-            <em>for State Senate</em>
-          </h1>
-          <span className="tagline fade-up delay-2 in px-0">Your Neighbor. Your Voice.</span>
+          <div className="hero-thanks fade-up delay-1">
+            <p>
+              To our volunteers, donors, friends and neighbors thank you for your time, energy and encouragement;
+              <br/>it meant so much to me.
+            </p>
+            <p>My dedication to our community continues.</p>
+            <span className="hero-thanks-sign">— Bob Heitkamp</span>
+          </div>
           {/* <p className="lede fade-up delay-3 font-semibold">
             A lifetime of building businesses, helping people, and serving our community. Your neighbor, ready to
             represent District 25 with experienced leadership and a strong voice for local families, farms, and small
             towns.
           </p> */}
-          <div className="cta-row fade-up delay-4 pt-[74px]">
-            <a href="#endorsement" className="btn btn-red">
-              Endorsements <span className="arrow">→</span>
-            </a>
-            <a href="#action" className="btn btn-outline">
-              Vote Nov 3 <span className="arrow">→</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* VOTE COUNTDOWN */}
-      <section className="vote-band">
-        <div className="container vote-band-inner">
-          <h2 className="vote-band-title fade-up">
-            Send Bob to <em>Bismarck</em>
-            <br />
-            on November 3rd.
-          </h2>
-          <div className="vote-count fade-up delay-1">
-            <div className={`vote-count-num${daysLeft > 0 ? "" : " vote-count-word"}`}>
-              <Star className="star" />
-              <span>{daysLeft > 0 ? daysLeft : daysLeft === 0 ? "Today!" : "Thank you!"}</span>
-              <Star className="star" />
-            </div>
-            {daysLeft > 0 && <span className="vote-count-label">Days to vote for Bob</span>}
-          </div>
         </div>
       </section>
 
